@@ -13,8 +13,6 @@ public class Marco extends JFrame {
         add(panelJuego);//Añade Panel al Marco
         setVisible(true);//Lo hace visible
 
-
-
     }
 
 

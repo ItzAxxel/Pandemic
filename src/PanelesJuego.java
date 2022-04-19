@@ -1,7 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.ImageProducer;
-import java.io.*;
 
 
 public class PanelesJuego extends JPanel {
@@ -11,9 +9,15 @@ public class PanelesJuego extends JPanel {
 
     PanelesJuego () {
 
-        Fondo = new MenuPrincipal(getToolkit().createImage((ImageProducer) new File("Pantalla_Menu.png")));
-        setLayout( new CardLayout());
+        setLayout(new CardLayout());
+        createUIComponents();
+
     }
 
+    // Imagenes
+
+    private void createUIComponents() {
+        MenuPrincipal = new PanelPersonalizado(getToolkit().createImage("../assets/Pantalla_Menu.png"));
+    }
 
 }
