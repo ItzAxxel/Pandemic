@@ -1,8 +1,12 @@
-public class Main {
-    public static void main (String [] args) {
+import java.io.IOException;
 
-        Marco Ventana = new Marco();
+public class Main {
+    public static void main(String[] args) throws IOException {
+
+        MenusDeJuego menu = new MenusDeJuego();
+
 
 
     }
 }
+
