@@ -1,10 +1,8 @@
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
 
@@ -24,29 +22,32 @@ public class MenusDeJuego {
     JPanel panelMenuPausa = new JPanel();
     JPanel panelConfiguracion = new JPanel();
 
-
     //LOS JBUTTONS DEL JUEGO
 
-    JButton buttonPartidaNueva = new JButton("Partida Nueva");
-    JButton buttonConfiguracion = new JButton("Configuración");
-    JButton buttonCargarPartida = new JButton("Cargar Partida");
-    JButton buttonInformacion = new JButton("Información");
-    JButton buttonAutores = new JButton("Autores");
-    JButton buttonReglas = new JButton("Reglas");
-    JButton buttonVolverMenu = new JButton("Volver");
-    JButton buttonVolverInfoA = new JButton("Volver");
-    JButton buttonVolverR = new JButton("Volver");
-    JButton buttonVolverC = new JButton("Volver");
-    JButton buttonPausa = new JButton("||");
-    JButton buttonSalir = new JButton("Salir");
-    JButton buttonGuardarPartida = new JButton("Guardar Partida");
-    JButton buttonContinuarPartida = new JButton("Continuar");
-    JButton buttonSalirMenu = new JButton("Salir");
+    JButton buttonPartidaNueva;
+    JButton buttonConfiguracion;
+    JButton buttonCargarPartida;
+    JButton buttonInformacion;
+    JButton buttonAutores;
+    JButton buttonReglas;
+    JButton buttonVolverMenu;
+    JButton buttonVolverInfoA;
+    JButton buttonVolverR;
+    JButton buttonVolverC;
+    JButton buttonPausa;
+    JButton buttonSalir;
+    JButton buttonGuardarPartida;
+    JButton buttonContinuarPartida;
+    JButton buttonSalirMenu;
+    JButton buttonAumento;
+    JButton buttonReduccion;
 
     //SE CREA UN OBJETO ES UN MANAGER DE LAYOUTS, EN ESTE CASO CARDLAYOUT
     CardLayout cl = new CardLayout();
 
-    public MenusDeJuego() throws IOException {
+
+    public MenusDeJuego() throws IOException, FontFormatException {
+
 
         //SE ESTABLECE EL TIPO DE LAYOUT EN EL PANEL DE CONTENIDO
         panelCont.setLayout(cl);
@@ -58,40 +59,23 @@ public class MenusDeJuego {
 
         //Botones en el JLabel que producen cambios entre Cards de JPanels
 
+        //Creamos los botones con la funcion crearBoton() [Ver linea 429]
+
+        buttonPartidaNueva = crearBoton(100, 300, 387, 73, "Nueva Partida");
         fondoMenu.add(buttonPartidaNueva);//Se añade el botón al label FondoMenu
-        buttonPartidaNueva.setBounds(100, 300, 387, 73);//Se establece su posición y tamaño
-        buttonPartidaNueva.setBackground(Color.decode("#312E2E"));
-        buttonPartidaNueva.setForeground(Color.WHITE);
-        buttonPartidaNueva.setFont(new Font("Arial", Font.BOLD, 50));
-        buttonPartidaNueva.setBorder(null);
 
+
+        buttonCargarPartida = crearBoton(100, 400, 387, 73, "Cargar Partida");
         fondoMenu.add(buttonCargarPartida);//Se añade el botón al label FondoMenu
-        buttonCargarPartida.setBounds(100, 400, 387, 73);//Se establece su posición y tamaño
-        buttonCargarPartida.setBackground(Color.decode("#312E2E"));
-        buttonCargarPartida.setForeground(Color.WHITE);
-        buttonCargarPartida.setFont(new Font("Arial", Font.BOLD, 50));
-        buttonCargarPartida.setBorder(null);
 
+        buttonConfiguracion = crearBoton(100, 500, 387, 73, "Configuración");
         fondoMenu.add(buttonConfiguracion);//Se añade el botón al label FondoMenu
-        buttonConfiguracion.setBounds(100, 500, 387, 73);//Se establece su posición y tamaño
-        buttonConfiguracion.setBackground(Color.decode("#312E2E"));
-        buttonConfiguracion.setForeground(Color.WHITE);
-        buttonConfiguracion.setFont(new Font("Arial", Font.BOLD, 50));
-        buttonConfiguracion.setBorder(null);
 
+        buttonInformacion = crearBoton(100, 600, 387, 73, "Información");
         fondoMenu.add(buttonInformacion);//Se añade el botón al label FondoMenu
-        buttonInformacion.setBounds(100, 600, 387, 73);//Se establece su posición y tamaño
-        buttonInformacion.setBackground(Color.decode("#312E2E"));
-        buttonInformacion.setForeground(Color.WHITE);
-        buttonInformacion.setFont(new Font("Arial", Font.BOLD, 50));
-        buttonInformacion.setBorder(null);
 
+        buttonSalir = crearBoton(100, 700, 387, 73, "Salir");
         fondoMenu.add(buttonSalir);//Se añade el botón al label FondoMenu
-        buttonSalir.setBounds(100, 700, 387, 73);//Se establece su posición y tamaño
-        buttonSalir.setBackground(Color.decode("#312E2E"));
-        buttonSalir.setForeground(Color.WHITE);
-        buttonSalir.setFont(new Font("Arial", Font.BOLD, 50));
-        buttonSalir.setBorder(null);
 
 
         panelMenu.add(fondoMenu);
@@ -102,46 +86,21 @@ public class MenusDeJuego {
 
         JLabel fondoMenuMapaJugable = new JLabel(new ImageIcon(Objects.requireNonNull(getClass().getResource("assets/Mapa_Jugable.png"))));//Imagen de FONDO
         fondoMenuMapaJugable.setLayout(null);//Ningún Layout en Especial
+        buttonPausa = crearBoton(0, 0, 100, 80, "||");
         fondoMenuMapaJugable.add(buttonPausa);
-        buttonPausa.setBounds(0, 0, 100, 80);//Se establece su posición y tamaño
-        buttonPausa.setBackground(Color.decode("#312E2E"));
-        buttonPausa.setForeground(Color.WHITE);
-        buttonPausa.setFont(new Font("Arial", Font.BOLD, 50));
-        buttonPausa.setBorder(null);
+
         panelMapaJugable.add(fondoMenuMapaJugable);
 
         //ELEMENTOS MENÚ PAUSA
 
         JLabel fondoMenuPausa = new JLabel(new ImageIcon(Objects.requireNonNull(getClass().getResource("assets/MapaPausa.png"))));
         fondoMenuPausa.setLayout(null);//Ningún Layout en Especial
+        buttonGuardarPartida = crearBoton(750, 450, 387, 73, "Guardar Partida");
+        buttonContinuarPartida = crearBoton(750, 550, 387, 73, "Continuar");
+        buttonSalirMenu = crearBoton(750, 650, 387, 73, "Salir");
         fondoMenuPausa.add(buttonGuardarPartida);
         fondoMenuPausa.add(buttonContinuarPartida);
         fondoMenuPausa.add(buttonSalirMenu);
-
-        buttonGuardarPartida.setBounds(750, 450, 387, 73);
-        buttonGuardarPartida.setForeground(Color.WHITE);
-        buttonGuardarPartida.setOpaque(false);
-        buttonGuardarPartida.setContentAreaFilled(false);
-        buttonGuardarPartida.setBorderPainted(false);
-        buttonGuardarPartida.setFont(new Font("Arial", Font.BOLD, 50));
-        buttonGuardarPartida.setBorder(null);
-
-        buttonContinuarPartida.setBounds(750, 550, 387, 73);
-        buttonContinuarPartida.setOpaque(false);
-        buttonContinuarPartida.setContentAreaFilled(false);
-        buttonContinuarPartida.setBorderPainted(false);
-        buttonContinuarPartida.setForeground(Color.WHITE);
-        buttonContinuarPartida.setFont(new Font("Arial", Font.BOLD, 50));
-        buttonContinuarPartida.setBorder(null);
-
-        buttonSalirMenu.setBounds(750, 650, 387, 73);
-        buttonSalirMenu.setOpaque(false);
-        buttonSalirMenu.setContentAreaFilled(false);
-        buttonSalirMenu.setBorderPainted(false);
-        buttonSalirMenu.setForeground(Color.WHITE);
-        buttonSalirMenu.setFont(new Font("Arial", Font.BOLD, 50));
-        buttonSalirMenu.setBorder(null);
-
 
         panelMenuPausa.add(fondoMenuPausa);
 
@@ -150,15 +109,14 @@ public class MenusDeJuego {
         JLabel fondoMenuConfiguracion = new JLabel(new ImageIcon(Objects.requireNonNull(getClass().getResource("assets/Configuracion.png"))));
         fondoMenuConfiguracion.setLayout(null);//Ningún Layout en Especial
 
+        buttonVolverC = crearBoton(800, 800, 387, 73, "Volver");
         fondoMenuConfiguracion.add(buttonVolverC);
-        buttonVolverC.setBounds(800, 800, 387, 73);
-        buttonVolverC.setOpaque(false);
-        buttonVolverC.setContentAreaFilled(false);
-        buttonVolverC.setBorderPainted(false);
-        buttonVolverC.setForeground(Color.WHITE);
-        buttonVolverC.setFont(new Font("Arial", Font.BOLD, 50));
-        buttonVolverC.setBorder(null);
 
+        buttonAumento = crearBoton(100, 100, 100, 100, "+");
+        fondoMenuConfiguracion.add(buttonAumento);
+
+        buttonReduccion = crearBoton(300, 300, 100, 100, "-");
+        fondoMenuConfiguracion.add(buttonReduccion);
 
         panelConfiguracion.add(fondoMenuConfiguracion);
 
@@ -167,32 +125,15 @@ public class MenusDeJuego {
         JLabel fondoMenuInfo = new JLabel(new ImageIcon(Objects.requireNonNull(getClass().getResource("assets/Pantalla_Menu.png"))));//Imagen de FONDO
         fondoMenuInfo.setLayout(null);//Ningún Layout en Especial
 
-        fondoMenuInfo.add(buttonVolverMenu);
-        buttonVolverMenu.setBounds(100, 300, 387, 73);
-        buttonVolverMenu.setOpaque(false);
-        buttonVolverMenu.setContentAreaFilled(false);
-        buttonVolverMenu.setBorderPainted(false);
-        buttonVolverMenu.setForeground(Color.WHITE);
-        buttonVolverMenu.setFont(new Font("Arial", Font.BOLD, 50));
-        buttonVolverMenu.setBorder(null);
-
-        fondoMenuInfo.add(buttonAutores);
-        buttonAutores.setBounds(100, 500, 387, 73);
-        buttonAutores.setOpaque(false);
-        buttonAutores.setContentAreaFilled(false);
-        buttonAutores.setBorderPainted(false);
-        buttonAutores.setForeground(Color.WHITE);
-        buttonAutores.setFont(new Font("Arial", Font.BOLD, 50));
-        buttonAutores.setBorder(null);
-
+        buttonReglas = crearBoton(100, 300, 387, 73, "Cómo jugar");
         fondoMenuInfo.add(buttonReglas);
-        buttonReglas.setBounds(100, 700, 387, 73);
-        buttonReglas.setOpaque(false);
-        buttonReglas.setContentAreaFilled(false);
-        buttonReglas.setBorderPainted(false);
-        buttonReglas.setForeground(Color.WHITE);
-        buttonReglas.setFont(new Font("Arial", Font.BOLD, 50));
-        buttonReglas.setBorder(null);
+
+        buttonAutores = crearBoton(100, 500, 387, 73, "Autores");
+        fondoMenuInfo.add(buttonAutores);
+
+
+        buttonVolverMenu = crearBoton(100, 700, 387, 73, "Volver");
+        fondoMenuInfo.add(buttonVolverMenu);
 
         panelInfo.add(fondoMenuInfo);
 
@@ -201,14 +142,8 @@ public class MenusDeJuego {
         JLabel fondoMenuAutores = new JLabel(new ImageIcon(Objects.requireNonNull(getClass().getResource("assets/Autores.png"))));//Imagen de FONDO
         fondoMenuAutores.setLayout(null);//Ningún Layout en Especial
 
+        buttonVolverInfoA = crearBoton(90, 850, 387, 73, "Volver");
         fondoMenuAutores.add(buttonVolverInfoA);
-        buttonVolverInfoA.setBounds(90, 850, 387, 73);
-        buttonVolverInfoA.setOpaque(false);
-        buttonVolverInfoA.setContentAreaFilled(false);
-        buttonVolverInfoA.setBorderPainted(false);
-        buttonVolverInfoA.setForeground(Color.WHITE);
-        buttonVolverInfoA.setFont(new Font("Arial", Font.BOLD, 50));
-        buttonVolverInfoA.setBorder(null);
 
         panelAutores.add(fondoMenuAutores);
 
@@ -217,14 +152,9 @@ public class MenusDeJuego {
         JLabel fondoMenuReglas = new JLabel(new ImageIcon(Objects.requireNonNull(getClass().getResource("assets/Reglas de Juego.png"))));//Imagen de FONDO
         fondoMenuReglas.setLayout(null);//Ningún Layout en Especial
 
+        buttonVolverR = crearBoton(800, 850, 387, 73, "Volver");
         fondoMenuReglas.add(buttonVolverR);
         buttonVolverR.setBounds(800, 850, 387, 73);
-        buttonVolverR.setOpaque(false);
-        buttonVolverR.setContentAreaFilled(false);
-        buttonVolverR.setBorderPainted(false);
-        buttonVolverR.setForeground(Color.WHITE);
-        buttonVolverR.setFont(new Font("Arial", Font.BOLD, 50));
-        buttonVolverR.setBorder(null);
 
         panelReglas.add(fondoMenuReglas);
 
@@ -246,7 +176,7 @@ public class MenusDeJuego {
         panelCont.add(panelReglas, "Reglas");
         panelCont.add(panelMapaJugable, "MapaJugable");
         panelCont.add(panelMenuPausa, "MenuPausa");
-        panelCont.add(panelConfiguracion,"Configuracion");
+        panelCont.add(panelConfiguracion, "Configuracion");
 
 
         //CARD LAYOUT EMPIEZA POR MOSTRAR EL PANEL 1 - MENÚ PRINCIPAL
@@ -264,11 +194,41 @@ public class MenusDeJuego {
             }
         });
 
+        buttonPartidaNueva.addMouseListener(new java.awt.event.MouseAdapter() { //Cambia el color de las letras en el momento que el ratón pasa encima
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                buttonPartidaNueva.setForeground(Color.decode("#60B13A"));
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) { //Vuelve al color original una vez el ratón se quita del texto
+                buttonPartidaNueva.setForeground(Color.WHITE);
+            }
+        });
+
+        buttonCargarPartida.addMouseListener(new java.awt.event.MouseAdapter() { //Cambia el color de las letras en el momento que el ratón pasa encima
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                buttonCargarPartida.setForeground(Color.decode("#60B13A"));
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) { //Vuelve al color original una vez el ratón se quita del texto
+                buttonCargarPartida.setForeground(Color.WHITE);
+            }
+        });
+
         buttonConfiguracion.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
                 cl.show(panelCont, "Configuracion");
 
+            }
+        });
+
+        buttonConfiguracion.addMouseListener(new java.awt.event.MouseAdapter() { //Cambia el color de las letras en el momento que el ratón pasa encima
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                buttonConfiguracion.setForeground(Color.decode("#60B13A"));
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) { //Vuelve al color original una vez el ratón se quita del texto
+                buttonConfiguracion.setForeground(Color.WHITE);
             }
         });
 
@@ -279,10 +239,42 @@ public class MenusDeJuego {
             }
         });
 
+        buttonInformacion.addMouseListener(new java.awt.event.MouseAdapter() { //Cambia el color de las letras en el momento que el ratón pasa encima
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                buttonInformacion.setForeground(Color.decode("#60B13A"));
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) { //Vuelve al color original una vez el ratón se quita del texto
+                buttonInformacion.setForeground(Color.WHITE);
+            }
+        });
+
         buttonSalir.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
+
                 System.exit(0);
+
+            }
+        });
+
+        buttonSalir.addMouseListener(new java.awt.event.MouseAdapter() { //Cambia el color de las letras en el momento que el ratón pasa encima
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                buttonSalir.setForeground(Color.decode("#60B13A"));
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) { //Vuelve al color original una vez el ratón se quita del texto
+                buttonSalir.setForeground(Color.WHITE);
+            }
+        });
+
+        buttonInformacion.addMouseListener(new java.awt.event.MouseAdapter() { //Cambia el color de las letras en el momento que el ratón pasa encima
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                buttonInformacion.setForeground(Color.decode("#60B13A"));
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) { //Vuelve al color original una vez el ratón se quita del texto
+                buttonInformacion.setForeground(Color.WHITE);
             }
         });
 
@@ -293,10 +285,30 @@ public class MenusDeJuego {
             }
         });
 
+        buttonContinuarPartida.addMouseListener(new java.awt.event.MouseAdapter() { //Cambia el color de las letras en el momento que el ratón pasa encima
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                buttonContinuarPartida.setForeground(Color.decode("#60B13A"));
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) { //Vuelve al color original una vez el ratón se quita del texto
+                buttonContinuarPartida.setForeground(Color.WHITE);
+            }
+        });
+
         buttonSalirMenu.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
                 cl.show(panelCont, "Menu");
+            }
+        });
+
+        buttonSalirMenu.addMouseListener(new java.awt.event.MouseAdapter() { //Cambia el color de las letras en el momento que el ratón pasa encima
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                buttonSalirMenu.setForeground(Color.decode("#60B13A"));
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) { //Vuelve al color original una vez el ratón se quita del texto
+                buttonSalirMenu.setForeground(Color.WHITE);
             }
         });
 
@@ -308,11 +320,31 @@ public class MenusDeJuego {
             }
         });
 
+        buttonVolverMenu.addMouseListener(new java.awt.event.MouseAdapter() { //Cambia el color de las letras en el momento que el ratón pasa encima
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                buttonVolverMenu.setForeground(Color.decode("#60B13A"));
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) { //Vuelve al color original una vez el ratón se quita del texto
+                buttonVolverMenu.setForeground(Color.WHITE);
+            }
+        });
+
 
         buttonAutores.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
                 cl.show(panelCont, "Autores");
+            }
+        });
+
+        buttonAutores.addMouseListener(new java.awt.event.MouseAdapter() { //Cambia el color de las letras en el momento que el ratón pasa encima
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                buttonAutores.setForeground(Color.decode("#60B13A"));
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) { //Vuelve al color original una vez el ratón se quita del texto
+                buttonAutores.setForeground(Color.WHITE);
             }
         });
 
@@ -323,10 +355,30 @@ public class MenusDeJuego {
             }
         });
 
+        buttonReglas.addMouseListener(new java.awt.event.MouseAdapter() { //Cambia el color de las letras en el momento que el ratón pasa encima
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                buttonReglas.setForeground(Color.decode("#60B13A"));
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) { //Vuelve al color original una vez el ratón se quita del texto
+                buttonReglas.setForeground(Color.WHITE);
+            }
+        });
+
         buttonVolverInfoA.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
                 cl.show(panelCont, "Info");
+            }
+        });
+
+        buttonVolverInfoA.addMouseListener(new java.awt.event.MouseAdapter() { //Cambia el color de las letras en el momento que el ratón pasa encima
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                buttonVolverInfoA.setForeground(Color.decode("#60B13A"));
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) { //Vuelve al color original una vez el ratón se quita del texto
+                buttonVolverInfoA.setForeground(Color.WHITE);
             }
         });
 
@@ -337,10 +389,30 @@ public class MenusDeJuego {
             }
         });
 
+        buttonVolverR.addMouseListener(new java.awt.event.MouseAdapter() { //Cambia el color de las letras en el momento que el ratón pasa encima
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                buttonVolverR.setForeground(Color.decode("#60B13A"));
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) { //Vuelve al color original una vez el ratón se quita del texto
+                buttonVolverR.setForeground(Color.WHITE);
+            }
+        });
+
         buttonVolverC.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
                 cl.show(panelCont, "Menu");
+            }
+        });
+
+        buttonVolverC.addMouseListener(new java.awt.event.MouseAdapter() { //Cambia el color de las letras en el momento que el ratón pasa encima
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                buttonVolverC.setForeground(Color.decode("#60B13A"));
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) { //Vuelve al color original una vez el ratón se quita del texto
+                buttonVolverC.setForeground(Color.WHITE);
             }
         });
 
@@ -351,11 +423,40 @@ public class MenusDeJuego {
             }
         });
 
+        buttonGuardarPartida.addMouseListener(new java.awt.event.MouseAdapter() { //Cambia el color de las letras en el momento que el ratón pasa encima
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                buttonGuardarPartida.setForeground(Color.decode("#60B13A"));
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) { //Vuelve al color original una vez el ratón se quita del texto
+                buttonGuardarPartida.setForeground(Color.WHITE);
+            }
+        });
+
         Marco.add(panelCont);
         Marco.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         Marco.setVisible(true);
 
-            //FONDOS DE LOS MENÚS
+        //FONDOS DE LOS MENÚS
+
+    }
+
+    //Le pasamos los parametros necesarios para crear un boton
+    public JButton crearBoton(int x, int y, int width, int height, String text) throws IOException, FontFormatException {
+
+
+        JButton button = new JButton(text); //Texto
+        button.setFont(Font.createFont(Font.TRUETYPE_FONT, new File("src/assets/font/PostNoBillsColombo-ExtraBold.ttf"))); //Añadimos fuente personalizada
+        button.setFont(button.getFont().deriveFont(Font.PLAIN, 50)); //Añadimos el tamaño de la fuente
+        button.setBounds(x, y, width, height);//Se establece su posición y tamaño
+        button.setForeground(Color.WHITE); //Color del texto
+        button.setBorder(null); //Seteamos el borde a null
+        button.setOpaque(false); //No lo ponemos opaco
+        button.setContentAreaFilled(false); //No ponemos el contenido del area
+        button.setBorderPainted(false); //Seteamos el borde en false
+
+
+        return button;
 
     }
 }
