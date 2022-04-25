@@ -11,7 +11,7 @@ public class MenusDeJuego {
 
     //EL FRAME DEL JUEGO
     Frame Marco = new Frame();
-
+    int[] Datos = new int[4];
     //LOS JPANELS DEL JUEGO
     JPanel panelCont = new JPanel(); //Panel que contiene paneles
     JPanel panelMenu = new JPanel();
@@ -41,6 +41,30 @@ public class MenusDeJuego {
     JButton buttonSalirMenu;
     JButton buttonAumento;
     JButton buttonReduccion;
+
+    JButton buttonAumento2;
+
+    JButton buttonReduccion2;
+
+    JButton buttonAumento3;
+
+    JButton buttonReduccion3;
+
+    JButton buttonAumento4;
+
+    JButton buttonReduccion4;
+    JButton buttonCiudad;
+
+    JButton buttonGuardarConfig;
+
+    //LABELS TEXT.
+
+    JLabel labelCityInfo;
+    JLabel labelCInfectadas;
+    JLabel labelCInfectadasRonda;
+    JLabel NEDerrota;
+    JLabel NBDerrota;
+
 
     //SE CREA UN OBJETO ES UN MANAGER DE LAYOUTS, EN ESTE CASO CARDLAYOUT
     CardLayout cl = new CardLayout();
@@ -86,8 +110,16 @@ public class MenusDeJuego {
 
         JLabel fondoMenuMapaJugable = new JLabel(new ImageIcon(Objects.requireNonNull(getClass().getResource("assets/Mapa_Jugable.png"))));//Imagen de FONDO
         fondoMenuMapaJugable.setLayout(null);//Ningún Layout en Especial
+
         buttonPausa = crearBoton(0, 0, 100, 80, "||");
         fondoMenuMapaJugable.add(buttonPausa);
+
+        buttonCiudad = crearBoton(500, 600, 100, 80, "C");
+        fondoMenuMapaJugable.add(buttonCiudad);
+
+        labelCityInfo = crearLabel(30,220,500,500,"HOLAS");
+        fondoMenuMapaJugable.add(labelCityInfo);
+
 
         panelMapaJugable.add(fondoMenuMapaJugable);
 
@@ -104,19 +136,58 @@ public class MenusDeJuego {
 
         panelMenuPausa.add(fondoMenuPausa);
 
-        //ELEMENTOS MENÚ CONFIGURACIÓN
+        //ELEMENTOS MENÚ CONFIGURACIÓN CON MODIFICADOR DE XML
 
         JLabel fondoMenuConfiguracion = new JLabel(new ImageIcon(Objects.requireNonNull(getClass().getResource("assets/Configuracion.png"))));
         fondoMenuConfiguracion.setLayout(null);//Ningún Layout en Especial
 
+        CargarXML xml = new CargarXML();
+
+        Datos = xml.ObtenerDatosXML();
+
         buttonVolverC = crearBoton(800, 800, 387, 73, "Volver");
         fondoMenuConfiguracion.add(buttonVolverC);
 
-        buttonAumento = crearBoton(100, 100, 100, 100, "+");
+        buttonAumento = crearBoton(900, 347, 100, 73, "+");
         fondoMenuConfiguracion.add(buttonAumento);
 
-        buttonReduccion = crearBoton(300, 300, 100, 100, "-");
+        buttonReduccion = crearBoton(800, 347, 100, 73, "-");
         fondoMenuConfiguracion.add(buttonReduccion);
+
+        buttonAumento2 = crearBoton(930, 450, 100, 73, "+");
+        fondoMenuConfiguracion.add(buttonAumento2);
+
+        buttonReduccion2 = crearBoton(830, 450, 100, 73, "-");
+        fondoMenuConfiguracion.add(buttonReduccion2);
+
+        buttonAumento3 = crearBoton(1050, 550, 100, 73, "+");
+        fondoMenuConfiguracion.add(buttonAumento3);
+
+        buttonReduccion3 = crearBoton(950, 550, 100, 73, "-");
+        fondoMenuConfiguracion.add(buttonReduccion3);
+
+        buttonAumento4 = crearBoton(920, 650, 100, 73, "+");
+        fondoMenuConfiguracion.add(buttonAumento4);
+
+        buttonReduccion4 = crearBoton(820, 650, 100, 73, "-");
+        fondoMenuConfiguracion.add(buttonReduccion4);
+
+        buttonGuardarConfig = crearBoton(200, 800, 300, 73, "Guardar");
+        fondoMenuConfiguracion.add(buttonGuardarConfig);
+
+        int D1 = Datos[0];
+        int D2 = Datos[1];
+        int D3 = Datos[2];
+        int D4 = Datos[3];
+
+        labelCInfectadas  = crearLabel(885 ,337,100,100,Integer.toString(D1));
+        fondoMenuConfiguracion.add(labelCInfectadas);
+        labelCInfectadasRonda = crearLabel(910 ,440,100,100,Integer.toString(D2));
+        fondoMenuConfiguracion.add(labelCInfectadasRonda);
+        NEDerrota = crearLabel(1040 ,540,100,100,Integer.toString(D3));
+        fondoMenuConfiguracion.add(NEDerrota);
+        NBDerrota = crearLabel(910 ,640,100,100,Integer.toString(D4));
+        fondoMenuConfiguracion.add(NBDerrota);
 
         panelConfiguracion.add(fondoMenuConfiguracion);
 
@@ -189,6 +260,7 @@ public class MenusDeJuego {
         buttonPartidaNueva.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
+
                 cl.show(panelCont, "MapaJugable");
 
             }
@@ -213,6 +285,19 @@ public class MenusDeJuego {
                 buttonCargarPartida.setForeground(Color.WHITE);
             }
         });
+
+        buttonCiudad.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+
+               // Cities cities = new Cities();
+
+               // labelCityInfo.setText(cities.setCity1Status());
+
+            }
+        });
+
+
 
         buttonConfiguracion.addActionListener(new ActionListener() {
             @Override
@@ -301,6 +386,7 @@ public class MenusDeJuego {
                 cl.show(panelCont, "Menu");
             }
         });
+
 
         buttonSalirMenu.addMouseListener(new java.awt.event.MouseAdapter() { //Cambia el color de las letras en el momento que el ratón pasa encima
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -433,6 +519,78 @@ public class MenusDeJuego {
             }
         });
 
+        buttonReduccion.addActionListener(new ActionListener() {//Botón para reducirrparámetro
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                int nlabelCInfectadas = Integer.parseInt(labelCInfectadas.getText()) - 1;
+                labelCInfectadas.setText(Integer.toString(nlabelCInfectadas));
+            }
+        });
+
+        buttonAumento.addActionListener(new ActionListener() { //Botón para aumentar parámetro
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                int nlabelCInfectadas = Integer.parseInt(labelCInfectadas.getText()) + 1;
+                labelCInfectadas.setText(Integer.toString(nlabelCInfectadas));
+            }
+        });
+
+        buttonReduccion2.addActionListener(new ActionListener() {//Botón para reducirrparámetro
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                int nlabelCInfectadasRonda = Integer.parseInt(labelCInfectadasRonda.getText()) - 1;
+                labelCInfectadasRonda.setText(Integer.toString(nlabelCInfectadasRonda));
+            }
+        });
+
+        buttonAumento2.addActionListener(new ActionListener() { //Botón para aumentar parámetro
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                int nlabelCInfectadasRonda = Integer.parseInt(labelCInfectadasRonda.getText()) + 1;
+                labelCInfectadasRonda.setText(Integer.toString(nlabelCInfectadasRonda));
+            }
+        });
+
+        buttonReduccion3.addActionListener(new ActionListener() {//Botón para reducirrparámetro
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                int nNEDerrota  = Integer.parseInt(NEDerrota.getText()) - 1;
+                NEDerrota.setText(Integer.toString(nNEDerrota));
+            }
+        });
+
+        buttonAumento3.addActionListener(new ActionListener() { //Botón para aumentar parámetro
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                int nNEDerrota = Integer.parseInt(NEDerrota.getText()) + 1;
+                NEDerrota.setText(Integer.toString(nNEDerrota));
+            }
+        });
+
+        buttonReduccion4.addActionListener(new ActionListener() {//Botón para reducirrparámetro
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                int nNBDerrota = Integer.parseInt(NBDerrota.getText()) - 1;
+                NBDerrota.setText(Integer.toString(nNBDerrota));
+            }
+        });
+
+        buttonAumento4.addActionListener(new ActionListener() { //Botón para aumentar parámetro
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                int  nNBDerrota = Integer.parseInt(NBDerrota.getText()) + 1;
+                NBDerrota.setText(Integer.toString(nNBDerrota));
+            }
+        });
+
+        buttonGuardarConfig.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                CargarXML Xml = new CargarXML();
+                xml.preCargarDatosXML(labelCInfectadas.getText(),labelCInfectadasRonda.getText(),NEDerrota.getText(),NBDerrota.getText());
+            }
+        });
+
         Marco.add(panelCont);
         Marco.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         Marco.setVisible(true);
@@ -457,6 +615,21 @@ public class MenusDeJuego {
 
 
         return button;
+
+    }
+
+    public JLabel crearLabel(int x, int y, int width, int height, String text) throws IOException, FontFormatException {
+
+        JLabel label = new JLabel(text); //Texto
+        label.setFont(Font.createFont(Font.TRUETYPE_FONT, new File("src/assets/font/PostNoBillsColombo-ExtraBold.ttf"))); //Añadimos fuente personalizada
+        label.setFont(label.getFont().deriveFont(Font.PLAIN, 50)); //Añadimos el tamaño de la fuente
+        label.setBounds(x, y, width, height);//Se establece su posición y tamaño
+        label.setForeground(Color.WHITE); //Color del texto
+        label.setVisible(true);
+       // label.setBorder(); //Seteamos el borde a null
+        //label.setOpaque(false); //No lo ponemos opaco
+
+        return label;
 
     }
 }
