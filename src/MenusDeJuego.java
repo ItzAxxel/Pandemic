@@ -8,7 +8,9 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Objects;
+import java.util.*;
 
 public class MenusDeJuego {
 
@@ -155,11 +157,14 @@ public class MenusDeJuego {
 
 					coord3[cont] = Integer.parseInt(dividir2[1]);
 
-					buttonCiudad = crearBoton(coord2[cont], coord3[cont], 100, 80, "+");
+					buttonCiudad = crearBotonCiudad(coord2[cont] , coord3[cont] , 100, 30, ciudades[cont], 0,0,0,0);
 					fondoMenuMapaJugable.add(buttonCiudad);
+					fondoMenuMapaJugable.getComponents();
+
+
+
 				} else {
 					detector = false;
-
 				}
 
 			} while (detector);
@@ -167,10 +172,9 @@ public class MenusDeJuego {
 			System.out.println("error");
 		}
 
+		/*Bucle para las cuidades vecinas*/
 
-		labelCityInfo = crearLabel(30, 220, 500, 500, "HOLAS");
-		fondoMenuMapaJugable.add(labelCityInfo);
-
+		/**/
 		panelMapaJugable.add(fondoMenuMapaJugable);
 
 		// ELEMENTOS MENÚ PAUSA
@@ -701,6 +705,24 @@ public class MenusDeJuego {
 
 	}
 
+	public JButton crearBotonCiudad(int x, int y, int width, int height, String text, int vAmarillo, int vRojo, int vAzul, int vVerde)
+
+
+			throws IOException, FontFormatException {
+
+		JButton button = new JButton(text); // Texto
+		button.setFont(button.getFont().deriveFont(Font.BOLD, 10)); // Añadimos el tamaño de la fuente
+		button.setBounds(x, y, width, height);// Se establece su posición y tamaño
+		button.setForeground(Color.WHITE); // Color del texto
+		button.setBorder(null); // Seteamos el borde a null
+		button.setOpaque(false); // No lo ponemos opaco
+		button.setContentAreaFilled(false); // No ponemos el contenido del area
+		button.setBorderPainted(false); // Seteamos el borde en false
+
+		return button;
+
+	}
+
 	public JLabel crearLabel(int x, int y, int width, int height, String text) throws IOException, FontFormatException {
 
 		JLabel label = new JLabel(text); // Texto
@@ -716,6 +738,16 @@ public class MenusDeJuego {
 		// label.setOpaque(false); //No lo ponemos opaco
 
 		return label;
+
+	}
+
+	public void aleatorioenfermedades(){
+
+		Random ale = new Random();
+
+		int aletorio = ale.nextInt(48);
+
+
 
 	}
 }
