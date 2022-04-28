@@ -1,16 +1,61 @@
-import java.io.*;
-import javax.xml.parsers.*;
-import javax.xml.transform.*;
-import javax.xml.transform.dom.*;
-import javax.xml.transform.stream.*;
-import org.w3c.dom.*;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import java.io.File;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class CargarXML {
 
-    public int[] ObtenerDatosXML()
-    {
+    public static void editar(Document texto, Node hijo, String numCiudadesInfectadasInicio,
+                              String numCuidadesInfectadasRonda, String numEnfermedadesActivasDerrota, String numBrotesDerrota) {
+
+        try {
+
+            Node nodo1 = texto.getElementsByTagName("numCiudadesInfectadasInicio").item(0);
+
+            nodo1.setTextContent(numCiudadesInfectadasInicio);
+
+            Node nodo2 = texto.getElementsByTagName("numCuidadesInfectadasRonda").item(0);
+
+            nodo2.setTextContent(numCuidadesInfectadasRonda);
+
+            Node nodo3 = texto.getElementsByTagName("numEnfermedadesActivasDerrota").item(0);
+
+            nodo3.setTextContent(numEnfermedadesActivasDerrota);
+
+            Node nodo4 = texto.getElementsByTagName("numBrotesDerrota").item(0);
+
+            nodo4.setTextContent(numBrotesDerrota);
+
+            TransformerFactory TF = TransformerFactory.newInstance();
+
+            Transformer T = TF.newTransformer();
+
+            T.transform(new DOMSource(texto), new StreamResult("src/assets/parametros.xml"));
+
+            System.out.println(hijo.getNodeName() + " = " + hijo.getTextContent());
+
+        } catch (TransformerException e) {
+
+            e.printStackTrace();
+
+        }
+
+    }
+
+    public int[] ObtenerDatosXML() {
         int[] Datos = new int[4];
 
         Scanner tec = new Scanner(System.in);
@@ -41,22 +86,18 @@ public class CargarXML {
                         if (hijo.getNodeType() == Node.ELEMENT_NODE) {
                             Element eHijo = (Element) hijo;
 
-                            if(hijo.getNodeName() == "numCiudadesInfectadasInicio")
-                            {
-                                Datos[0] =  Integer.parseInt(hijo.getTextContent());
+                            if (hijo.getNodeName() == "numCiudadesInfectadasInicio") {
+                                Datos[0] = Integer.parseInt(hijo.getTextContent());
                             }
-                            if(hijo.getNodeName() == "numCuidadesInfectadasRonda")
-                            {
-                                Datos[1] =  Integer.parseInt(hijo.getTextContent());
+                            if (hijo.getNodeName() == "numCuidadesInfectadasRonda") {
+                                Datos[1] = Integer.parseInt(hijo.getTextContent());
 
                             }
-                            if(hijo.getNodeName() == "numEnfermedadesActivasDerrota")
-                            {
-                                Datos[2] =  Integer.parseInt(hijo.getTextContent());
+                            if (hijo.getNodeName() == "numEnfermedadesActivasDerrota") {
+                                Datos[2] = Integer.parseInt(hijo.getTextContent());
                             }
-                            if(hijo.getNodeName() == "numBrotesDerrota")
-                            {
-                                Datos[3] =  Integer.parseInt(hijo.getTextContent());
+                            if (hijo.getNodeName() == "numBrotesDerrota") {
+                                Datos[3] = Integer.parseInt(hijo.getTextContent());
                             }
 
                         }
@@ -72,8 +113,7 @@ public class CargarXML {
         return Datos;
     }
 
-    public void preCargarDatosXML(String D1,String D2, String D3, String D4)
-    {
+    public void preCargarDatosXML(String D1, String D2, String D3, String D4) {
 
         String numCiudadesInfectadasInicio = null;
 
@@ -84,8 +124,7 @@ public class CargarXML {
         String numBrotesDerrota = null;
 
 
-        try
-        {
+        try {
 
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
@@ -127,50 +166,13 @@ public class CargarXML {
                 }
             }
 
-    } catch (ParserConfigurationException e) {
+        } catch (ParserConfigurationException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
         } catch (SAXException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    public static void editar(Document texto, Node hijo, String numCiudadesInfectadasInicio,
-                              String numCuidadesInfectadasRonda, String numEnfermedadesActivasDerrota, String numBrotesDerrota) {
-
-        try {
-
-            Node nodo1 = texto.getElementsByTagName("numCiudadesInfectadasInicio").item(0);
-
-            nodo1.setTextContent(numCiudadesInfectadasInicio);
-
-            Node nodo2 = texto.getElementsByTagName("numCuidadesInfectadasRonda").item(0);
-
-            nodo2.setTextContent(numCuidadesInfectadasRonda);
-
-            Node nodo3 = texto.getElementsByTagName("numEnfermedadesActivasDerrota").item(0);
-
-            nodo3.setTextContent(numEnfermedadesActivasDerrota);
-
-            Node nodo4 = texto.getElementsByTagName("numBrotesDerrota").item(0);
-
-            nodo4.setTextContent(numBrotesDerrota);
-
-            TransformerFactory TF = TransformerFactory.newInstance();
-
-            Transformer T = TF.newTransformer();
-
-            T.transform(new DOMSource(texto), new StreamResult("src/assets/parametros.xml"));
-
-            System.out.println(hijo.getNodeName() + " = " + hijo.getTextContent());
-
-        } catch (TransformerException e) {
-
-            e.printStackTrace();
-
-        }
-
     }
 
 }
