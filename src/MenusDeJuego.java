@@ -154,12 +154,10 @@ public class MenusDeJuego {
 
                     coord3[cont] = Integer.parseInt(dividir2[1]);
 
-                    buttonCiudad = crearBotonCiudad(coord2[cont], coord3[cont], 100, 30, ciudades[cont], 0, 0, 0, 0);
+                    buttonCiudad = crearBotonCiudad(coord2[cont], coord3[cont], 100, 30, ciudades[cont]);
 
-            fondoMenuMapaJugable.getComponents();
-        fondoMenuMapaJugable.add(buttonCiudad);
-
-
+                    fondoMenuMapaJugable.getComponents();
+                    fondoMenuMapaJugable.add(buttonCiudad);
 
 
                 } else {
@@ -172,9 +170,6 @@ public class MenusDeJuego {
         }
 
         /*Bucle para las cuidades vecinas*/
-
-
-
 
 
         panelMapaJugable.add(fondoMenuMapaJugable);
@@ -712,7 +707,7 @@ public class MenusDeJuego {
 
     }
 
-    public JButton crearBotonCiudad(int x, int y, int width, int height, String text, int vAmarillo, int vRojo, int vAzul, int vVerde)
+    public JButton crearBotonCiudad(int x, int y, int width, int height, String text)
             throws IOException, FontFormatException {
 
 

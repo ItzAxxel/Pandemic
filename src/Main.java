@@ -1,4 +1,3 @@
-import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 
@@ -11,8 +10,7 @@ public class Main {
 
         prueba.InfectarAlfa("prueba", true);
         prueba.curarAlfa("a", true);
-        prueba.removerAlfa("b",false);
-
+        prueba.removerAlfa("b", false);
 
 
     }
