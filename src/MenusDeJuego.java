@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,6 +24,7 @@ public class MenusDeJuego {
     JPanel panelMapaJugable = new JPanel();
     JPanel panelMenuPausa = new JPanel();
     JPanel panelConfiguracion = new JPanel();
+    JTextArea textArea = new JTextArea();
 
     // LOS JBUTTONS DEL JUEGO
 
@@ -174,7 +176,13 @@ public class MenusDeJuego {
 
         /*Bucle para las cuidades vecinas*/
 
-
+        //Para el registro de la partida
+        textArea.setBounds(25,495,350,500); //Tamaño
+        Border border = BorderFactory.createLineBorder(Color.BLACK); //Creamos el borde
+        textArea.setBorder(BorderFactory.createCompoundBorder(border, BorderFactory.createEmptyBorder(100, 100, 100, 100))); //Tamaño del borde
+        textArea.setBackground(Color.GRAY); //Color del text area
+        textArea.setVisible(true); //Lo ponemos en visible
+        fondoMenuMapaJugable.add(textArea);//Lo añadimos en el Fondo
         panelMapaJugable.add(fondoMenuMapaJugable);
 
         // ELEMENTOS MENÚ PAUSA

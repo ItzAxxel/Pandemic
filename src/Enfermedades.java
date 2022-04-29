@@ -94,22 +94,17 @@ public class Enfermedades {
         return alfa = 0;
     }
 
-    public void aleatorios() {
-
-        Random aleatorio1 = new Random();
-
-        int aleatorioVirus = aleatorio1.nextInt(4) + 1;
+    public void aleatorioCiudades() {
 
         Random aleatorio2 = new Random();
 
         int aleatoriociudades = aleatorio2.nextInt(48 ) + 1;
 
-
         String documento = "ciudades.txt";
 
         String s;
 
-        String[] Arrayciudades = new String[50];
+        String[] Arrayciudades = new String[48];
 
         int cont = 0;
 
@@ -123,11 +118,10 @@ public class Enfermedades {
                 s = br.readLine();
                 if (s != null && cont <= aleatoriociudades) {
 
-
                     String[] dividir = s.split(";");
 
                     Arrayciudades[cont] = dividir[0];
-                    
+
                 } else {
                     detector = false;
                 }
@@ -141,6 +135,18 @@ public class Enfermedades {
 
     }
 
+    public void aleatorioEnfermedades() {
+
+        Random aleatorio1 = new Random();
+
+        int aleatorioenfermedades = aleatorio1.nextInt(4);
+
+        String[] Arrayvirus = {"Alfa", "Beta", "Gamma", "Delta"};
+
+            System.out.println("Numero aleatorio: " + aleatorioenfermedades);
+            System.out.println(Arrayvirus[aleatorioenfermedades]);
+
+    }
 
 
 }
