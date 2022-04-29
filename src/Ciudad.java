@@ -1,6 +1,9 @@
+import javax.swing.*;
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.HashMap;
 
 public class Ciudad {
 
@@ -27,8 +30,15 @@ public class Ciudad {
         this.coordenadaY = coordenadaY;
     }
 
-    public Ciudad(String nombreCiudad){
+    public Ciudad() {
         this.nombreCiudad = nombreCiudad;
+        this.ciudadesColindantes = ciudadesColindantes;
+        this.virusAmarillo = virusAmarillo;
+        this.virusRojo = virusRojo;
+        this.virusVerde = virusVerde;
+        this.virusAzul = virusAzul;
+        this.coordenadaX = coordenadaX;
+        this.coordenadaY = coordenadaY;
     }
 
     //Gett y setter
@@ -99,16 +109,19 @@ public class Ciudad {
 
     //M�todos
 
-    public String NombreCiudad(){
+    public void introducirDatosHashMap() {
         String documento = "ciudades.txt";
 
         String s;
 
-        String[] ciudades = new String[50];
+        boolean detector = true;
 
         int cont = 0;
 
-        boolean detector = true;
+        String[] ArrayCiudades = new String[48];
+
+        String[] ArrayVecinas = new String[48];
+
 
         try {
             FileReader fr = new FileReader(documento);
@@ -121,12 +134,19 @@ public class Ciudad {
 
                     cont++;
 
-                    String[] dividir1 = s.split(";");
+                    String[] dividir = s.split(";");
 
-                    ciudades[cont] = dividir1[0];
+                    HashMap<Object, HashMap<Object, Object>> ciudades = new HashMap<Object, HashMap<Object, Object>>();
 
-                    ciudades[cont] = String.valueOf(new Ciudad (nombreCiudad));
-    
+                    ArrayCiudades[cont] = dividir[0];
+
+                    HashMap<Object, Object> vecinas = new HashMap<Object, Object>();
+
+                    ArrayVecinas[cont] = dividir[3];
+
+                    vecinas.put(ArrayCiudades[cont], ArrayVecinas[cont]);
+
+                    ciudades.put(ArrayCiudades[cont], vecinas);
                 } else {
                     detector = false;
                 }
@@ -135,6 +155,23 @@ public class Ciudad {
         } catch (IOException e) {
             System.out.println("error");
         }
+    }
+
+    public static JButton crearBotonCiudad(int coordenadaX, int coordenadaY, int width, int height, String nombreCiudad)
+            throws IOException, FontFormatException {
+
+        JButton button = new JButton(nombreCiudad); // Texto
+        button.setFont(button.getFont().deriveFont(Font.BOLD, 15)); // Añadimos el tamaño de la fuente
+        button.setBounds(coordenadaX, coordenadaY, width, height);// Se establece su posición y tamaño
+        button.setForeground(Color.WHITE); // Color del texto
+        button.setBorder(null); // Seteamos el borde a null
+        button.setOpaque(false); // No lo ponemos opaco
+        button.setContentAreaFilled(false); // No ponemos el contenido del area
+        button.setBorderPainted(false); // Seteamos el borde en false
+
+        return button;
+
+
     }
 
 }

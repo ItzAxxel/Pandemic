@@ -7,11 +7,13 @@ public class Main {
 
         MenusDeJuego menu = new MenusDeJuego();
         Enfermedades prueba = new Enfermedades();
+        Enfermedades enfermedades = new Enfermedades();
 
         prueba.InfectarAlfa("prueba", true);
         prueba.curarAlfa("a", true);
         prueba.removerAlfa("b", false);
 
+        enfermedades.aleatorios();
 
     }
 }

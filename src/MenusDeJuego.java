@@ -92,10 +92,10 @@ public class MenusDeJuego {
         buttonCargarPartida = crearBoton(100, 400, 387, 73, "Cargar Partida");
         fondoMenu.add(buttonCargarPartida);// Se añade el botón al label FondoMenu
 
-        buttonConfiguracion = crearBoton(100, 500, 387, 73, "Configuraci�n");
+        buttonConfiguracion = crearBoton(100, 500, 387, 73, "Configuraci�n");
         fondoMenu.add(buttonConfiguracion);// Se añade el botón al label FondoMenu
 
-        buttonInformacion = crearBoton(100, 600, 387, 73, "Informaci�n");
+        buttonInformacion = crearBoton(100, 600, 387, 73, "Informaci�n");
         fondoMenu.add(buttonInformacion);// Se añade el botón al label FondoMenu
 
         buttonSalir = crearBoton(100, 700, 387, 73, "Salir");
@@ -119,7 +119,7 @@ public class MenusDeJuego {
 
         String s;
 
-        String[] ciudades = new String[50];
+        String[] Arrayciudades = new String[50];
 
         String[] coord = new String[50];
 
@@ -130,6 +130,8 @@ public class MenusDeJuego {
         int cont = 0;
 
         boolean detector = true;
+
+        Ciudad ciudades = new Ciudad ();
 
         try {
             FileReader fr = new FileReader(documento);
@@ -144,7 +146,7 @@ public class MenusDeJuego {
 
                     String[] dividir1 = s.split(";");
 
-                    ciudades[cont] = dividir1[0];
+                    Arrayciudades[cont] = dividir1[0];
 
                     coord[cont] = dividir1[2];
 
@@ -154,7 +156,7 @@ public class MenusDeJuego {
 
                     coord3[cont] = Integer.parseInt(dividir2[1]);
 
-                    buttonCiudad = crearBotonCiudad(coord2[cont], coord3[cont], 100, 30, ciudades[cont]);
+                    buttonCiudad = Ciudad.crearBotonCiudad(coord2[cont], coord3[cont], 100, 30, Arrayciudades[cont]);
 
                     fondoMenuMapaJugable.getComponents();
                     fondoMenuMapaJugable.add(buttonCiudad);
@@ -168,6 +170,7 @@ public class MenusDeJuego {
         } catch (IOException e) {
             System.out.println("error");
         }
+
 
         /*Bucle para las cuidades vecinas*/
 
@@ -707,23 +710,6 @@ public class MenusDeJuego {
 
     }
 
-    public JButton crearBotonCiudad(int x, int y, int width, int height, String text)
-            throws IOException, FontFormatException {
-
-
-        JButton button = new JButton(text); // Texto
-        button.setFont(button.getFont().deriveFont(Font.BOLD, 15)); // Añadimos el tamaño de la fuente
-        button.setBounds(x, y, width, height);// Se establece su posición y tamaño
-        button.setForeground(Color.WHITE); // Color del texto
-        button.setBorder(null); // Seteamos el borde a null
-        button.setOpaque(false); // No lo ponemos opaco
-        button.setContentAreaFilled(false); // No ponemos el contenido del area
-        button.setBorderPainted(false); // Seteamos el borde en false
-
-        return button;
-
-
-    }
 
     public JLabel crearLabel(int x, int y, int width, int height, String text) throws IOException, FontFormatException {
 
@@ -742,15 +728,5 @@ public class MenusDeJuego {
         return label;
 
     }
-
-    public void aleatorioenfermedades() {
-
-        Random ale = new Random();
-
-        int aletorio = ale.nextInt(48);
-
-
-    }
-
 
 }
