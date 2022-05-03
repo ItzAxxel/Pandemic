@@ -12,6 +12,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Objects;
 import java.util.Random;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+
 
 public class MenusDeJuego {
 
@@ -28,6 +31,7 @@ public class MenusDeJuego {
 	JPanel panelMenuPausa = new JPanel();
 	JPanel panelConfiguracion = new JPanel();
 	JTextArea textArea = new JTextArea();
+	JLabel textoRonda = new JLabel("RONDA: ");
 
 	// LOS JBUTTONS DEL JUEGO
 
@@ -174,7 +178,24 @@ public class MenusDeJuego {
 		} catch (IOException e) {
 			System.out.println("error");
 		}
-
+		
+		// SISTEMA DE RONDAS (SOLO EL TEXTO)
+		SimpleAttributeSet attributeSet = new SimpleAttributeSet(); //Importamos la clase para estelizar el jtextPane
+		StyleConstants.setBold(attributeSet, true); //Ponemos en negrita la letra
+		StyleConstants.setForeground(attributeSet, Color.darkGray); //Junto a la negrita, ponemos el color de la letra
+		jtextPane.setCharacterAttributes(attributeSet,true); //Lo seteamos en el jtextpane
+		jtextPane.setBounds(25, 495, 350, 500);// Tamaño del jtextPane
+		jtextPane.setBackground(Color.gray); //El color del fondo del jtextpane
+		Border border = BorderFactory.createLineBorder(Color.BLACK); // Creamos el borde
+		jtextPane.setBorder(BorderFactory.createCompoundBorder(border, BorderFactory.createEmptyBorder(100, 100, 100, 100))); // Tamaño del borde
+		jtextPane.setFont(Font.createFont(Font.TRUETYPE_FONT, new File("src/assets/font/PostNoBillsColombo-ExtraBold.ttf"))); // Añadimos fuente personalizada
+		jtextPane.setFont(jtextPane.getFont().deriveFont(Font.PLAIN, 25)); //Ponemos el tamañlo de la fuente
+		jtextPane.setText("Aasd"); //El texto a añadir
+		jtextPane.setVisible(true); // Lo ponemos en visible
+		jtextPane.setEditable(false); //Hacemos que el usuario no pueda escribir
+		fondoMenuMapaJugable.add(jtextPane);// Lo añadimos en el Fondo
+		panelMapaJugable.add(fondoMenuMapaJugable);
+		
 		/* Bucle para las cuidades vecinas */
 
 		// Para el registro de la partida
