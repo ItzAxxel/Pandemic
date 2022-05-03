@@ -3,155 +3,196 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.*;
+
 public class Enfermedades {
 
+	// Atributos
 
-    //Atributos
+	protected int alfa; // Enfermedad roja
+	protected int beta; // Enfermedad azul
+	protected int delta; // Enfermedad amarilla
+	protected int omega; // Enfermedad verde
+	protected boolean infected; // Comprobaar si est� enfermo
+	// Constructores
 
-    protected int alfa; //Enfermedad roja
-    protected int beta; //Enfermedad azul
-    protected int delta; //Enfermedad amarilla
-    protected int omega; //Enfermedad verde
-    protected boolean infected; //Comprobaar si est� enfermo
-    //Constructores
+	public Enfermedades(int enfermedadRoja, int enfermedadAzul, int enfermedadAmarilla, int enfermedadVerde,
+			boolean infected) {
+		this.alfa = enfermedadRoja;
+		this.beta = enfermedadAzul;
+		this.delta = enfermedadAmarilla;
+		this.omega = enfermedadVerde;
+		this.infected = infected;
+	}
 
-    public Enfermedades(int enfermedadRoja, int enfermedadAzul, int enfermedadAmarilla, int enfermedadVerde, boolean infected) {
-        this.alfa = enfermedadRoja;
-        this.beta = enfermedadAzul;
-        this.delta = enfermedadAmarilla;
-        this.omega = enfermedadVerde;
-        this.infected = infected;
-    }
+	public Enfermedades() {
+		this.alfa = 0;
+		this.beta = 0;
+		this.delta = 0;
+		this.omega = 0;
+		this.infected = false;
+	}
 
-    public Enfermedades() {
-        this.alfa = 0;
-        this.beta = 0;
-        this.delta = 0;
-        this.omega = 0;
-        this.infected = false;
-    }
+	// Getters Y setters
 
-    //Getters Y setters
+	public int getAlfa() {
+		return alfa;
+	}
 
-    public int getAlfa() {
-        return alfa;
-    }
+	public void setAlfa(int alfa) {
+		this.alfa = alfa;
+	}
 
-    public void setAlfa(int alfa) {
-        this.alfa = alfa;
-    }
+	public int getBeta() {
+		return beta;
+	}
 
-    public int getBeta() {
-        return beta;
-    }
+	public void setBeta(int beta) {
+		this.beta = beta;
+	}
 
-    public void setBeta(int beta) {
-        this.beta = beta;
-    }
+	public int getDelta() {
+		return delta;
+	}
 
-    public int getDelta() {
-        return delta;
-    }
+	public void setDelta(int delta) {
+		this.delta = delta;
+	}
 
-    public void setDelta(int delta) {
-        this.delta = delta;
-    }
+	public int getOmega() {
+		return omega;
+	}
 
-    public int getOmega() {
-        return omega;
-    }
+	public void setOmega(int omega) {
+		this.omega = omega;
+	}
 
-    public void setOmega(int omega) {
-        this.omega = omega;
-    }
+	public boolean getInfected() {
+		return this.infected;
 
-    public boolean getInfected() {
-        return this.infected;
+	}
 
-    }
+	public void setInfected(boolean infected) {
+		this.infected = infected;
+	}
 
-    public void setInfected(boolean infected) {
-        this.infected = infected;
-    }
+	// Metodos
 
-    //Metodos
+	public int InfectarAlfa(String nombreCiudad, boolean infected) {
+		System.out.println("�" + nombreCiudad + " ha sido infectada por el virus Alfa!");
+		infected = true;
+		return alfa + 1;
+	}
 
-    public int InfectarAlfa(String nombreCiudad, boolean infected) {
-        System.out.println("�" + nombreCiudad + " ha sido infectada por el virus Alfa!");
-        infected = true;
-        return alfa + 1;
-    }
+	public int removerAlfa(String nombreCiudad, boolean infected) {
+		System.out.println("�" + nombreCiudad + " se ha removido 1 de infecci�n del virus Alfa!");
+		infected = true;
+		return alfa - 1;
+	}
 
-    public int removerAlfa(String nombreCiudad, boolean infected) {
-        System.out.println("�" + nombreCiudad + " se ha removido 1 de infecci�n del virus Alfa!");
-        infected = true;
-        return alfa - 1;
-    }
+	public int curarAlfa(String nombreCiudad, boolean infected) {
+		System.out.println("�" + nombreCiudad + " se ha curado al completo del virus Alfa!");
+		infected = false;
+		return alfa = 0;
+	}
 
-    public int curarAlfa(String nombreCiudad, boolean infected) {
-        System.out.println("�" + nombreCiudad + " se ha curado al completo del virus Alfa!");
-        infected = false;
-        return alfa = 0;
-    }
+	/* Metodo para las ciudades que se infectaran al inicio */
+	public void aleatorioCiudadesInicio() {
 
-    public void aleatorioCiudades() {
-    	
-    	CargarXML virusinicio = new CargarXML();
+		CargarXML virusinicio = new CargarXML();
 
-        Random aleatorio2 = new Random();
+		Random aleatorio = new Random();
 
-        int aleatoriociudades = aleatorio2.nextInt(48 ) + 1;
+		int aleatoriociudades = aleatorio.nextInt(48) + 1;
 
-        String documento = "ciudades.txt";
+		String documento = "ciudades.txt";
 
-        String s;
+		String s;
 
-        String[] Arrayciudades = new String[48];
+		String[] Arrayciudades = new String[48];
 
-        int cont = 0;
+		int cont = 0;
 
-        boolean detector = true;
+		boolean detector = true;
 
-        try {
-            FileReader fr = new FileReader(documento);
-            BufferedReader br = new BufferedReader(fr);
-            do {
-                cont++;
-                s = br.readLine();
-                if (s != null && cont <= aleatoriociudades) {
+		try {
+			FileReader fr = new FileReader(documento);
+			BufferedReader br = new BufferedReader(fr);
+			do {
+				cont++;
+				s = br.readLine();
+				if (s != null && cont <= aleatoriociudades) {
 
-                    String[] dividir = s.split(";");
+					String[] dividir = s.split(";");
 
-                    Arrayciudades[cont] = dividir[0];
+					Arrayciudades[cont] = dividir[0];
 
-                } else {
-                    detector = false;
-                }
+				} else {
+					detector = false;
+				}
 
-            } while (detector);
-            System.out.println("Numero aleatorio: " + aleatoriociudades);
-            System.out.println(Arrayciudades[aleatoriociudades]);
-        } catch (IOException e) {
-            System.out.println("error");
-        }
+			} while (detector);
+			int aleatorioenfermedades = aleatorio.nextInt(4);
 
-    }
+			String[] Arrayvirus = { "Alfa", "Beta", "Gamma", "Delta" };
 
-    public void aleatorioEnfermedades() {
+			System.out.println("La ciudad: " + Arrayciudades[aleatoriociudades] + " sera infectada con el virus: "
+					+ Arrayvirus[aleatorioenfermedades]);
 
-        Random aleatorio1 = new Random();
+		} catch (IOException e) {
+			System.out.println("error");
+		}
 
-        int aleatorioenfermedades = aleatorio1.nextInt(4);
+	}
 
-        String[] Arrayvirus = {"Alfa", "Beta", "Gamma", "Delta"};
+	/**/
+	/* Metodo para las ciudades que se infectaran por ronda */
+	public void aleatorioCiudadesContinuar() {
 
-            System.out.println("Numero aleatorio: " + aleatorioenfermedades);
-            System.out.println(Arrayvirus[aleatorioenfermedades]);
+		CargarXML virusinicio = new CargarXML();
 
-    }
+		Random aleatorio = new Random();
 
+		int aleatoriociudades = aleatorio.nextInt(48) + 1;
 
+		int aleatorioenfermedades = aleatorio.nextInt(4);
+
+		String documento = "ciudades.txt";
+
+		String s;
+
+		String[] Arrayciudades = new String[48];
+
+		int cont = 0;
+
+		boolean detector = true;
+
+		try {
+			FileReader fr = new FileReader(documento);
+			BufferedReader br = new BufferedReader(fr);
+			do {
+				cont++;
+				s = br.readLine();
+				if (s != null && cont <= aleatoriociudades) {
+
+					String[] dividir = s.split(";");
+
+					Arrayciudades[cont] = dividir[0];
+
+				} else {
+					detector = false;
+				}
+
+			} while (detector);
+
+			String[] Arrayvirus = { "Alfa", "Beta", "Gamma", "Delta" };
+
+			System.out.println("La ciudad: " + Arrayciudades[aleatoriociudades] + " sera infectada con el virus: "
+					+ Arrayvirus[aleatorioenfermedades]);
+
+		} catch (IOException e) {
+			System.out.println("error");
+		}
+
+	}
+	/**/
 }
-
-
-

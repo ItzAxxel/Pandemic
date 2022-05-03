@@ -12,8 +12,11 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+
+import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
+import java.util.EventObject;
 import java.util.Scanner;
 
 public class CargarXML {
@@ -103,13 +106,6 @@ public class CargarXML {
 						}
 					}
 				}
-
-				for (int j = 0; j != Datos[0]; j++) {
-					Enfermedades virus = new Enfermedades();
-					virus.aleatorioCiudades();
-					virus.aleatorioEnfermedades();
-				}
-
 			}
 
 		} catch (ParserConfigurationException | SAXException | IOException ex) {
@@ -118,6 +114,8 @@ public class CargarXML {
 
 		return Datos;
 	}
+	
+	
 
 	public void preCargarDatosXML(String D1, String D2, String D3, String D4) {
 

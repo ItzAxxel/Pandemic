@@ -1,5 +1,8 @@
 import javax.swing.*;
 import javax.swing.border.Border;
+
+import org.omg.CORBA.PUBLIC_MEMBER;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -208,7 +211,7 @@ public class MenusDeJuego {
 
 		JLabel fondoMenuConfiguracion = new JLabel(
 				new ImageIcon(Objects.requireNonNull(getClass().getResource("assets/Configuracion.png"))));
-		fondoMenuConfiguracion.setLayout(null);// Ningún Layout en Especial
+		fondoMenuConfiguracion.setLayout(null);// Ningun Layout en Especial
 
 		CargarXML xml = new CargarXML();
 
@@ -249,6 +252,18 @@ public class MenusDeJuego {
 		int D3 = Datos[2];
 		int D4 = Datos[3];
 
+		/* Bucle de ciudades que se infectaran al inicio */
+		for (int j = 0; j != D1; j++) {
+			Enfermedades virus = new Enfermedades();
+			virus.aleatorioCiudadesInicio();
+		}
+		/**/
+		/* Bucle de ciudades que se infectara por ronda */
+		for (int h = 0; h != D2; h++) {
+			Enfermedades virus = new Enfermedades();
+			virus.aleatorioCiudadesContinuar();
+		}
+		/**/
 		labelCInfectadas = crearLabel(885, 337, 100, 100, Integer.toString(D1));
 		fondoMenuConfiguracion.add(labelCInfectadas);
 		labelCInfectadasRonda = crearLabel(910, 440, 100, 100, Integer.toString(D2));
@@ -265,7 +280,7 @@ public class MenusDeJuego {
 		JLabel fondoMenuInfo = new JLabel(
 				new ImageIcon(Objects.requireNonNull(getClass().getResource("assets/Pantalla_Menu.png"))));// Imagen de
 		// FONDO
-		fondoMenuInfo.setLayout(null);// Ningún Layout en Especial
+		fondoMenuInfo.setLayout(null);// Ningun Layout en Especial
 
 		buttonReglas = crearBoton(100, 300, 387, 73, "Como jugar");
 		fondoMenuInfo.add(buttonReglas);
@@ -282,7 +297,7 @@ public class MenusDeJuego {
 
 		JLabel fondoMenuAutores = new JLabel(
 				new ImageIcon(Objects.requireNonNull(getClass().getResource("assets/Autores.png"))));// Imagen de FONDO
-		fondoMenuAutores.setLayout(null);// Ningún Layout en Especial
+		fondoMenuAutores.setLayout(null);// Ningun Layout en Especial
 
 		buttonVolverInfoA = crearBoton(90, 850, 387, 73, "Volver");
 		fondoMenuAutores.add(buttonVolverInfoA);
@@ -295,7 +310,7 @@ public class MenusDeJuego {
 				new ImageIcon(Objects.requireNonNull(getClass().getResource("assets/Reglas de Juego.png"))));// Imagen
 		// de
 		// FONDO
-		fondoMenuReglas.setLayout(null);// Ningún Layout en Especial
+		fondoMenuReglas.setLayout(null);// Ningun Layout en Especial
 
 		buttonVolverR = crearBoton(800, 850, 387, 73, "Volver");
 		fondoMenuReglas.add(buttonVolverR);
@@ -322,7 +337,7 @@ public class MenusDeJuego {
 		panelCont.add(panelMenuPausa, "MenuPausa");
 		panelCont.add(panelConfiguracion, "Configuracion");
 
-		// CARD LAYOUT EMPIEZA POR MOSTRAR EL PANEL 1 - MENÚ PRINCIPAL
+		// CARD LAYOUT EMPIEZA POR MOSTRAR EL PANEL 1 - MENU PRINCIPAL
 
 		cl.show(panelCont, "Menu");
 
@@ -364,11 +379,6 @@ public class MenusDeJuego {
 		buttonCiudad.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-
-				// Cities cities = new Cities();
-
-				// labelCityInfo.setText(cities.setCity1Status());
-
 			}
 		});
 
@@ -665,7 +675,7 @@ public class MenusDeJuego {
 			}
 		});
 
-		buttonReduccion4.addActionListener(new ActionListener() {// Botón para reducirrparámetro
+		buttonReduccion4.addActionListener(new ActionListener() {// Boton para reducir parametro
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				int nNBDerrota = Integer.parseInt(NBDerrota.getText()) - 1;
@@ -673,7 +683,7 @@ public class MenusDeJuego {
 			}
 		});
 
-		buttonAumento4.addActionListener(new ActionListener() { // Botón para aumentar parámetro
+		buttonAumento4.addActionListener(new ActionListener() { // Boton para aumentar parametro
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				int nNBDerrota = Integer.parseInt(NBDerrota.getText()) + 1;
