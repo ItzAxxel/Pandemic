@@ -5,10 +5,9 @@ public class Main {
 
     public static void main(String[] args) throws IOException, FontFormatException {
 
-        new MenusDeJuego();
-        Enfermedades enfermedades = new Enfermedades();
-        enfermedades.aleatorioCiudades();
-        enfermedades.aleatorioEnfermedades();
+        MenusDeJuego menu = new MenusDeJuego();
+
+
 
     }
 }

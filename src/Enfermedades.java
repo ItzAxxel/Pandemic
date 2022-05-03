@@ -95,6 +95,8 @@ public class Enfermedades {
     }
 
     public void aleatorioCiudades() {
+    	
+    	CargarXML virusinicio = new CargarXML();
 
         Random aleatorio2 = new Random();
 
