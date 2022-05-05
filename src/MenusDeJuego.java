@@ -1,8 +1,6 @@
 import javax.swing.*;
 import javax.swing.border.Border;
-
 import org.omg.CORBA.PUBLIC_MEMBER;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,11 +8,11 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Random;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
-
 
 public class MenusDeJuego {
 
@@ -54,20 +52,13 @@ public class MenusDeJuego {
 	JButton buttonSalirMenu;
 	JButton buttonAumento;
 	JButton buttonReduccion;
-
 	JButton buttonAumento2;
-
 	JButton buttonReduccion2;
-
 	JButton buttonAumento3;
-
 	JButton buttonReduccion3;
-
 	JButton buttonAumento4;
-
 	JButton buttonReduccion4;
 	JButton buttonCiudad;
-
 	JButton buttonGuardarConfig;
 
 	JButton buttonGuardarNombreUsuario;
@@ -79,6 +70,8 @@ public class MenusDeJuego {
 	JLabel labelCInfectadasRonda;
 	JLabel NEDerrota;
 	JLabel NBDerrota;
+	
+	ArrayList<JButton> BotonesCiudad = new ArrayList<JButton>();
 
 	// SE CREA UN OBJETO ES UN MANAGER DE LAYOUTS, EN ESTE CASO CARDLAYOUT
 	CardLayout cl = new CardLayout();
@@ -96,7 +89,6 @@ public class MenusDeJuego {
 		fondoMenu.setLayout(null);// Ningún Layout en Especial
 
 		// Botones en el JLabel que producen cambios entre Cards de JPanels
-
 
 		buttonPartidaNueva = crearBoton(100, 300, 387, 73, "Nueva Partida");
 		fondoMenu.add(buttonPartidaNueva);// Se añade el botón al label FondoMenu
@@ -119,17 +111,24 @@ public class MenusDeJuego {
 
 		// ELEMENTOS REGISTRAR USUARIO
 
-		JLabel fondoRegistrarUsuario = new JLabel(new ImageIcon(Objects.requireNonNull(getClass().getResource("assets/RegistarUsuario.png")))); //Ponemos el fondo
-		JTextField introducirNombreUsuario = new JTextField(20); //Creamos la zona de texto donde el usuario deberá registrarse
-		String nombreUsuario = String.valueOf(introducirNombreUsuario);
-		fondoRegistrarUsuario.add(introducirNombreUsuario); //Lo añadimos al fondo
-		introducirNombreUsuario.setBounds(750,450,450,30); //Introducimos las coordenadas
-		introducirNombreUsuario.setFont(Font.createFont(Font.TRUETYPE_FONT, new File("src/assets/font/PostNoBillsColombo-ExtraBold.ttf"))); // Añadimos fuente personalizada
-		introducirNombreUsuario.setFont(introducirNombreUsuario.getFont().deriveFont(Font.PLAIN, 30)); //Ponemos el tamañlo de la fuente
-		buttonGuardarNombreUsuario = crearBoton(770, 550, 387, 73, "Continuar"); //Creamos un botón
+		JLabel fondoRegistrarUsuario = new JLabel(
+				new ImageIcon(Objects.requireNonNull(getClass().getResource("assets/RegistarUsuario.png")))); // Ponemos
+																												// el
+																												// fondo
+		JTextField introducirNombreUsuario = new JTextField(20); // Creamos la zona de texto donde el usuario deberá
+																	// registrarse
+		fondoRegistrarUsuario.add(introducirNombreUsuario); // Lo añadimos al fondo
+		introducirNombreUsuario.setBounds(750, 450, 450, 30); // Introducimos las coordenadas
+		introducirNombreUsuario.setFont(
+				Font.createFont(Font.TRUETYPE_FONT, new File("src/assets/font/PostNoBillsColombo-ExtraBold.ttf"))); // Añadimos
+																													// fuente
+																													// personalizada
+		introducirNombreUsuario.setFont(introducirNombreUsuario.getFont().deriveFont(Font.PLAIN, 30)); // Ponemos el
+																										// tamañlo de
+																										// la fuente
+		buttonGuardarNombreUsuario = crearBoton(770, 550, 387, 73, "Continuar"); // Creamos un botón
 		fondoRegistrarUsuario.add(buttonGuardarNombreUsuario);// Se añade el botón al label FondoMenu
-		panelRegistarUsuario.add(fondoRegistrarUsuario); //Lo añadimos al jpanel
-
+		panelRegistarUsuario.add(fondoRegistrarUsuario); // Lo añadimos al jpanel
 
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -185,10 +184,12 @@ public class MenusDeJuego {
 					coord3[cont] = Integer.parseInt(dividir2[1]);
 
 					buttonCiudad = Ciudad.crearBotonCiudad(coord2[cont], coord3[cont], 100, 30, Arrayciudades[cont]);
-
+					BotonesCiudad.add(buttonCiudad);
+					
+					
 					fondoMenuMapaJugable.getComponents();
 					fondoMenuMapaJugable.add(buttonCiudad);
-
+					
 				} else {
 					detector = false;
 				}
@@ -197,33 +198,37 @@ public class MenusDeJuego {
 		} catch (IOException e) {
 			System.out.println("error");
 		}
-		
+
 		// SISTEMA DE RONDAS (SOLO EL TEXTO)
-		SimpleAttributeSet attributeSet = new SimpleAttributeSet(); //Importamos la clase para estelizar el jtextPane
-		StyleConstants.setBold(attributeSet, true); //Ponemos en negrita la letra
-		StyleConstants.setForeground(attributeSet, Color.darkGray); //Junto a la negrita, ponemos el color de la letra
-		jtextPane.setCharacterAttributes(attributeSet,true); //Lo seteamos en el jtextpane
+		SimpleAttributeSet attributeSet = new SimpleAttributeSet(); // Importamos la clase para estelizar el jtextPane
+		StyleConstants.setBold(attributeSet, true); // Ponemos en negrita la letra
+		StyleConstants.setForeground(attributeSet, Color.darkGray); // Junto a la negrita, ponemos el color de la letra
+		jtextPane.setCharacterAttributes(attributeSet, true); // Lo seteamos en el jtextpane
 		jtextPane.setBounds(25, 495, 350, 500);// Tamaño del jtextPane
-		jtextPane.setBackground(Color.gray); //El color del fondo del jtextpane
+		jtextPane.setBackground(Color.gray); // El color del fondo del jtextpane
 		Border borderJtextPane = BorderFactory.createLineBorder(Color.BLACK); // Creamos el borde
-		jtextPane.setBorder(BorderFactory.createCompoundBorder(borderJtextPane, BorderFactory.createEmptyBorder(100, 100, 100, 100))); // Tamaño del borde
-		jtextPane.setFont(Font.createFont(Font.TRUETYPE_FONT, new File("src/assets/font/PostNoBillsColombo-ExtraBold.ttf"))); // Añadimos fuente personalizada
-		jtextPane.setFont(jtextPane.getFont().deriveFont(Font.PLAIN, 25)); //Ponemos el tamañlo de la fuente
-		jtextPane.setText("Aasd"); //El texto a añadir
+		jtextPane.setBorder(BorderFactory.createCompoundBorder(borderJtextPane,
+				BorderFactory.createEmptyBorder(100, 100, 100, 100))); // Tamaño del borde
+		jtextPane.setFont(
+				Font.createFont(Font.TRUETYPE_FONT, new File("src/assets/font/PostNoBillsColombo-ExtraBold.ttf"))); // Añadimos
+																													// fuente
+																													// personalizada
+		jtextPane.setFont(jtextPane.getFont().deriveFont(Font.PLAIN, 25)); // Ponemos el tamañlo de la fuente
+		jtextPane.setText("Aasd"); // El texto a añadir
 		jtextPane.setVisible(true); // Lo ponemos en visible
-		jtextPane.setEditable(false); //Hacemos que el usuario no pueda escribir
+		jtextPane.setEditable(false); // Hacemos que el usuario no pueda escribir
 		fondoMenuMapaJugable.add(jtextPane);// Lo añadimos en el Fondo
 		panelMapaJugable.add(fondoMenuMapaJugable);
-		
+
 		/* Bucle para las cuidades vecinas */
 
 		// Para el registro de la partida
 		textArea.setBounds(25, 495, 350, 500); // Tamaño
 		Border borderTextArea = BorderFactory.createLineBorder(Color.BLACK); // Creamos el borde
-		textArea.setBorder(
-				BorderFactory.createCompoundBorder(borderTextArea, BorderFactory.createEmptyBorder(100, 100, 100, 100))); // Tamaño
-																													// del
-																													// borde
+		textArea.setBorder(BorderFactory.createCompoundBorder(borderTextArea,
+				BorderFactory.createEmptyBorder(100, 100, 100, 100))); // Tamaño
+		// del
+		// borde
 		textArea.setBackground(Color.GRAY); // Color del text area
 		textArea.setVisible(true); // Lo ponemos en visible
 		fondoMenuMapaJugable.add(textArea);// Lo añadimos en el Fondo
@@ -398,6 +403,14 @@ public class MenusDeJuego {
 			public void actionPerformed(ActionEvent arg0) {
 
 				cl.show(panelCont, "MapaJugable");
+				
+				String nombreUsuario = introducirNombreUsuario.getText();
+				
+				Usuario nombreusuario = new Usuario(nombreUsuario);
+				
+				Ranking nombreranking = new Ranking(nombreUsuario);
+				
+				nombreranking.insertWithStatement();
 
 			}
 		});
@@ -426,7 +439,8 @@ public class MenusDeJuego {
 			}
 		});
 
-		buttonGuardarNombreUsuario.addMouseListener(new java.awt.event.MouseAdapter() { // Cambia el color de las letras en el
+		buttonGuardarNombreUsuario.addMouseListener(new java.awt.event.MouseAdapter() { // Cambia el color de las letras
+																						// en el
 			// momento que el raton pasa encima
 			public void mouseEntered(java.awt.event.MouseEvent evt) {
 				buttonGuardarNombreUsuario.setForeground(Color.decode("#60B13A"));
@@ -438,9 +452,9 @@ public class MenusDeJuego {
 			}
 		});
 
-
 		buttonCiudad.addActionListener(new ActionListener() {
 			@Override
+			
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});

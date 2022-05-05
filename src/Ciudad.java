@@ -109,54 +109,6 @@ public class Ciudad {
 
     //Métodos
 
-    public void introducirDatosHashMap() {
-        String documento = "ciudades.txt";
-
-        String s;
-
-        boolean detector = true;
-
-        int cont = 0;
-
-        String[] ArrayCiudades = new String[48];
-
-        String[] ArrayVecinas = new String[48];
-
-
-        try {
-            FileReader fr = new FileReader(documento);
-            BufferedReader br = new BufferedReader(fr);
-            do {
-
-                s = br.readLine();
-
-                if (s != null) {
-
-                    cont++;
-
-                    String[] dividir = s.split(";");
-
-                    HashMap<Object, HashMap<Object, Object>> ciudades = new HashMap<Object, HashMap<Object, Object>>();
-
-                    ArrayCiudades[cont] = dividir[0];
-
-                    HashMap<Object, Object> vecinas = new HashMap<Object, Object>();
-
-                    ArrayVecinas[cont] = dividir[3];
-
-                    vecinas.put(ArrayCiudades[cont], ArrayVecinas[cont]);
-
-                    ciudades.put(ArrayCiudades[cont], vecinas);
-                } else {
-                    detector = false;
-                }
-
-            } while (detector);
-        } catch (IOException e) {
-            System.out.println("error");
-        }
-    }
-
     public static JButton crearBotonCiudad(int coordenadaX, int coordenadaY, int width, int height, String nombreCiudad)
             throws IOException, FontFormatException {
 
