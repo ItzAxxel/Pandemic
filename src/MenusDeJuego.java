@@ -221,7 +221,20 @@ public class MenusDeJuego {
 		panelMapaJugable.add(fondoMenuMapaJugable);
 
 		/* Bucle para las cuidades vecinas */
-
+		
+		//SISTEMA DE RONDA (EL TEXTO)
+		JTextField textoRonda = new JTextField("RONDA: "); //Creamos el texto
+		textoRonda.setBounds(770,0,300,100); //Ponemos las coordenadas
+		textoRonda.setBorder(javax.swing.BorderFactory.createEmptyBorder()); //Quitamos los bordes que trae por defecto
+		textoRonda.setOpaque(false); //Ponemos en transparente el fondo
+		textoRonda.setFont(Font.createFont(Font.TRUETYPE_FONT, new File("src/assets/font/PostNoBillsColombo-ExtraBold.ttf"))); // Añadimos fuente personalizada
+		textoRonda.setFont(jtextPane.getFont().deriveFont(Font.PLAIN, 50)); //Ponemos el tamañlo de la fuente
+		textoRonda.setForeground(Color.WHITE); //Ponemos el color de la letra en blanco
+		textoRonda.setVisible(true); // Lo ponemos en visible
+		textoRonda.setEditable(false); //Hacemos que el usuario no pueda editarlo
+		fondoMenuMapaJugable.add(textoRonda);// Lo añadimos en el Fondo
+		panelMapaJugable.add(fondoMenuMapaJugable);
+	
 		// Para el registro de la partida
 		textArea.setBounds(25, 495, 350, 500); // Tamaño
 		Border borderTextArea = BorderFactory.createLineBorder(Color.BLACK); // Creamos el borde
