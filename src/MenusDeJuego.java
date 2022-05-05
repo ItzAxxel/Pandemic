@@ -311,17 +311,19 @@ public class MenusDeJuego {
 		int D4 = Datos[3];
 
 		/* Bucle de ciudades que se infectaran al inicio */
-		for (int j = 0; j != D1; j++) {
+		for (int j = 0; j < D1; j++) {
 			Enfermedades virus = new Enfermedades();
 			virus.aleatorioCiudadesInicio();
 		}
 		/**/
 		/* Bucle de ciudades que se infectara por ronda */
-		for (int h = 0; h != D2; h++) {
+		for (int h = 0; h < D2; h++) {
 			Enfermedades virus = new Enfermedades();
+			jtextPane.setText(virus.aleatorioCiudadesInicio());
 			virus.aleatorioCiudadesContinuar();
 		}
 		/**/
+
 		labelCInfectadas = crearLabel(885, 337, 100, 100, Integer.toString(D1));
 		fondoMenuConfiguracion.add(labelCInfectadas);
 		labelCInfectadasRonda = crearLabel(910, 440, 100, 100, Integer.toString(D2));
@@ -415,18 +417,28 @@ public class MenusDeJuego {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 
-				cl.show(panelCont, "MapaJugable");
-				
-				String nombreUsuario = introducirNombreUsuario.getText();
-				
-				Usuario nombreusuario = new Usuario(nombreUsuario);
-				
-				Ranking nombreranking = new Ranking(nombreUsuario);
-				
-				nombreranking.insertWithStatement();
+				if(introducirNombreUsuario.getText().isEmpty()){
+					JOptionPane.showMessageDialog(buttonGuardarNombreUsuario, "Introduce tu nombre de usuario.");
+
+				} else {
+					String nombreUsuario = introducirNombreUsuario.getText();
+
+					Usuario nombreusuario = new Usuario(nombreUsuario);
+
+					Ranking nombreranking = new Ranking(nombreUsuario);
+
+					nombreranking.insertWithStatement();
+
+					cl.show(panelCont, "MapaJugable");
+				}
+
+
+
 
 			}
 		});
+
+
 
 		buttonPartidaNueva.addMouseListener(new java.awt.event.MouseAdapter() { // Cambia el color de las letras en el
 			// momento que el raton pasa encima
@@ -461,7 +473,7 @@ public class MenusDeJuego {
 
 			public void mouseExited(java.awt.event.MouseEvent evt) { // Vuelve al color original una vez el raton se
 				// quita del texto
-				buttonCargarPartida.setForeground(Color.WHITE);
+				buttonGuardarNombreUsuario.setForeground(Color.WHITE);
 			}
 		});
 

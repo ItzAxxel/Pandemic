@@ -1,7 +1,6 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.*;
 
 public class Enfermedades {
@@ -96,19 +95,19 @@ public class Enfermedades {
 	}
 
 	/* Metodo para las ciudades que se infectaran al inicio */
-	public void aleatorioCiudadesInicio() {
+	public String aleatorioCiudadesInicio() {
 
 		CargarXML virusinicio = new CargarXML();
 
 		Random aleatorio = new Random();
 
-		int aleatoriociudades = aleatorio.nextInt(48) + 1;
+		int aleatoriociudades = aleatorio.nextInt(48) + 1 ;
 
 		String documento = "ciudades.txt";
 
 		String s;
 
-		String[] Arrayciudades = new String[48];
+		String[] Arrayciudades = new String[49];
 
 		int cont = 0;
 
@@ -135,13 +134,14 @@ public class Enfermedades {
 
 			String[] Arrayvirus = { "Alfa", "Beta", "Gamma", "Delta" };
 
-			System.out.println("La ciudad: " + Arrayciudades[aleatoriociudades] + " sera infectada con el virus: "
-					+ Arrayvirus[aleatorioenfermedades]);
+			return "La ciudad: " + Arrayciudades[aleatoriociudades] + " sera infectada con el virus: "
+					+ Arrayvirus[aleatorioenfermedades];
 
 		} catch (IOException e) {
 			System.out.println("error");
 		}
 
+		return documento;
 	}
 
 	/**/
@@ -160,7 +160,7 @@ public class Enfermedades {
 
 		String s;
 
-		String[] Arrayciudades = new String[48];
+		String[] Arrayciudades = new String[49];
 
 		int cont = 0;
 
