@@ -27,9 +27,11 @@ public class MenusDeJuego {
 	JPanel panelInfo = new JPanel();
 	JPanel panelAutores = new JPanel();
 	JPanel panelReglas = new JPanel();
+	JPanel panelRegistarUsuario = new JPanel();
 	JPanel panelMapaJugable = new JPanel();
 	JPanel panelMenuPausa = new JPanel();
 	JPanel panelConfiguracion = new JPanel();
+	JTextPane jtextPane = new JTextPane();
 	JTextArea textArea = new JTextArea();
 	JLabel textoRonda = new JLabel("RONDA: ");
 
@@ -68,6 +70,8 @@ public class MenusDeJuego {
 
 	JButton buttonGuardarConfig;
 
+	JButton buttonGuardarNombreUsuario;
+
 	// LABELS TEXT.
 
 	JLabel labelCityInfo;
@@ -93,7 +97,6 @@ public class MenusDeJuego {
 
 		// Botones en el JLabel que producen cambios entre Cards de JPanels
 
-		// Creamos los botones con la funcion crearBoton() [Ver linea 429]
 
 		buttonPartidaNueva = crearBoton(100, 300, 387, 73, "Nueva Partida");
 		fondoMenu.add(buttonPartidaNueva);// Se añade el botón al label FondoMenu
@@ -111,6 +114,22 @@ public class MenusDeJuego {
 		fondoMenu.add(buttonSalir);// Se añade el botón al label FondoMenu
 
 		panelMenu.add(fondoMenu);
+
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		// ELEMENTOS REGISTRAR USUARIO
+
+		JLabel fondoRegistrarUsuario = new JLabel(new ImageIcon(Objects.requireNonNull(getClass().getResource("assets/RegistarUsuario.png")))); //Ponemos el fondo
+		JTextField introducirNombreUsuario = new JTextField(20); //Creamos la zona de texto donde el usuario deberá registrarse
+		String nombreUsuario = String.valueOf(introducirNombreUsuario);
+		fondoRegistrarUsuario.add(introducirNombreUsuario); //Lo añadimos al fondo
+		introducirNombreUsuario.setBounds(750,450,450,30); //Introducimos las coordenadas
+		introducirNombreUsuario.setFont(Font.createFont(Font.TRUETYPE_FONT, new File("src/assets/font/PostNoBillsColombo-ExtraBold.ttf"))); // Añadimos fuente personalizada
+		introducirNombreUsuario.setFont(introducirNombreUsuario.getFont().deriveFont(Font.PLAIN, 30)); //Ponemos el tamañlo de la fuente
+		buttonGuardarNombreUsuario = crearBoton(770, 550, 387, 73, "Continuar"); //Creamos un botón
+		fondoRegistrarUsuario.add(buttonGuardarNombreUsuario);// Se añade el botón al label FondoMenu
+		panelRegistarUsuario.add(fondoRegistrarUsuario); //Lo añadimos al jpanel
+
 
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -186,8 +205,8 @@ public class MenusDeJuego {
 		jtextPane.setCharacterAttributes(attributeSet,true); //Lo seteamos en el jtextpane
 		jtextPane.setBounds(25, 495, 350, 500);// Tamaño del jtextPane
 		jtextPane.setBackground(Color.gray); //El color del fondo del jtextpane
-		Border border = BorderFactory.createLineBorder(Color.BLACK); // Creamos el borde
-		jtextPane.setBorder(BorderFactory.createCompoundBorder(border, BorderFactory.createEmptyBorder(100, 100, 100, 100))); // Tamaño del borde
+		Border borderJtextPane = BorderFactory.createLineBorder(Color.BLACK); // Creamos el borde
+		jtextPane.setBorder(BorderFactory.createCompoundBorder(borderJtextPane, BorderFactory.createEmptyBorder(100, 100, 100, 100))); // Tamaño del borde
 		jtextPane.setFont(Font.createFont(Font.TRUETYPE_FONT, new File("src/assets/font/PostNoBillsColombo-ExtraBold.ttf"))); // Añadimos fuente personalizada
 		jtextPane.setFont(jtextPane.getFont().deriveFont(Font.PLAIN, 25)); //Ponemos el tamañlo de la fuente
 		jtextPane.setText("Aasd"); //El texto a añadir
@@ -200,9 +219,9 @@ public class MenusDeJuego {
 
 		// Para el registro de la partida
 		textArea.setBounds(25, 495, 350, 500); // Tamaño
-		Border border = BorderFactory.createLineBorder(Color.BLACK); // Creamos el borde
+		Border borderTextArea = BorderFactory.createLineBorder(Color.BLACK); // Creamos el borde
 		textArea.setBorder(
-				BorderFactory.createCompoundBorder(border, BorderFactory.createEmptyBorder(100, 100, 100, 100))); // Tamaño
+				BorderFactory.createCompoundBorder(borderTextArea, BorderFactory.createEmptyBorder(100, 100, 100, 100))); // Tamaño
 																													// del
 																													// borde
 		textArea.setBackground(Color.GRAY); // Color del text area
@@ -357,6 +376,7 @@ public class MenusDeJuego {
 		panelCont.add(panelMapaJugable, "MapaJugable");
 		panelCont.add(panelMenuPausa, "MenuPausa");
 		panelCont.add(panelConfiguracion, "Configuracion");
+		panelCont.add(panelRegistarUsuario, "RegistrarUsuario");
 
 		// CARD LAYOUT EMPIEZA POR MOSTRAR EL PANEL 1 - MENU PRINCIPAL
 
@@ -365,6 +385,15 @@ public class MenusDeJuego {
 		// L O S B O T O N E S Y S U S A C C I O N E S //
 
 		buttonPartidaNueva.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+
+				cl.show(panelCont, "RegistrarUsuario");
+
+			}
+		});
+
+		buttonGuardarNombreUsuario.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 
@@ -396,6 +425,19 @@ public class MenusDeJuego {
 				buttonCargarPartida.setForeground(Color.WHITE);
 			}
 		});
+
+		buttonGuardarNombreUsuario.addMouseListener(new java.awt.event.MouseAdapter() { // Cambia el color de las letras en el
+			// momento que el raton pasa encima
+			public void mouseEntered(java.awt.event.MouseEvent evt) {
+				buttonGuardarNombreUsuario.setForeground(Color.decode("#60B13A"));
+			}
+
+			public void mouseExited(java.awt.event.MouseEvent evt) { // Vuelve al color original una vez el raton se
+				// quita del texto
+				buttonCargarPartida.setForeground(Color.WHITE);
+			}
+		});
+
 
 		buttonCiudad.addActionListener(new ActionListener() {
 			@Override
