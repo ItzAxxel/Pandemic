@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -101,6 +102,8 @@ public class Enfermedades {
 
 		Random aleatorio = new Random();
 
+		ArrayList<String> mostrarTexto = new ArrayList<String>();
+
 		int aleatoriociudades = aleatorio.nextInt(48) + 1 ;
 
 		String documento = "ciudades.txt";
@@ -134,23 +137,26 @@ public class Enfermedades {
 
 			String[] Arrayvirus = { "Alfa", "Beta", "Gamma", "Delta" };
 
-			return "La ciudad: " + Arrayciudades[aleatoriociudades] + " sera infectada con el virus: "
-					+ Arrayvirus[aleatorioenfermedades];
+			return "La ciudad: " + Arrayciudades[aleatoriociudades] + " será infectada con el virus: " + Arrayvirus[aleatorioenfermedades];
 
 		} catch (IOException e) {
-			System.out.println("error");
+			System.out.println("error: " + e);
 		}
 
-		return documento;
+		return null;
 	}
 
 	/**/
 	/* Metodo para las ciudades que se infectaran por ronda */
+
+
 	public void aleatorioCiudadesContinuar() {
 
 		CargarXML virusinicio = new CargarXML();
 
 		Random aleatorio = new Random();
+
+		ArrayList<String> mostrarTexto = new ArrayList<String>();
 
 		int aleatoriociudades = aleatorio.nextInt(48) + 1;
 
@@ -186,8 +192,7 @@ public class Enfermedades {
 
 			String[] Arrayvirus = { "Alfa", "Beta", "Gamma", "Delta" };
 
-			System.out.println("La ciudad: " + Arrayciudades[aleatoriociudades] + " sera infectada con el virus: "
-					+ Arrayvirus[aleatorioenfermedades]);
+			mostrarTexto.add("La ciudad: " + Arrayciudades[aleatoriociudades] + " será infectada con el virus: " + Arrayvirus[aleatorioenfermedades]);
 
 		} catch (IOException e) {
 			System.out.println("error");

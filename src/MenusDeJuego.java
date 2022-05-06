@@ -4,6 +4,8 @@ import org.omg.CORBA.PUBLIC_MEMBER;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -29,9 +31,7 @@ public class MenusDeJuego {
 	JPanel panelMapaJugable = new JPanel();
 	JPanel panelMenuPausa = new JPanel();
 	JPanel panelConfiguracion = new JPanel();
-	JTextPane jtextPane = new JTextPane();
-	JTextArea textArea = new JTextArea();
-	JLabel textoRonda = new JLabel("RONDA: ");
+	JTextArea historial = new JTextArea();
 
 	// LOS JBUTTONS DEL JUEGO
 
@@ -72,6 +72,7 @@ public class MenusDeJuego {
 	JLabel NBDerrota;
 	
 	ArrayList<JButton> BotonesCiudad = new ArrayList<JButton>();
+	Enfermedades virus = new Enfermedades();
 
 	// SE CREA UN OBJETO ES UN MANAGER DE LAYOUTS, EN ESTE CASO CARDLAYOUT
 	CardLayout cl = new CardLayout();
@@ -199,25 +200,14 @@ public class MenusDeJuego {
 			System.out.println("error");
 		}
 
-		// SISTEMA DE RONDAS (SOLO EL TEXTO)
-		SimpleAttributeSet attributeSet = new SimpleAttributeSet(); // Importamos la clase para estelizar el jtextPane
-		StyleConstants.setBold(attributeSet, true); // Ponemos en negrita la letra
-		StyleConstants.setForeground(attributeSet, Color.darkGray); // Junto a la negrita, ponemos el color de la letra
-		jtextPane.setCharacterAttributes(attributeSet, true); // Lo seteamos en el jtextpane
-		jtextPane.setBounds(25, 495, 350, 500);// Tamaño del jtextPane
-		jtextPane.setBackground(Color.gray); // El color del fondo del jtextpane
-		Border borderJtextPane = BorderFactory.createLineBorder(Color.BLACK); // Creamos el borde
-		jtextPane.setBorder(BorderFactory.createCompoundBorder(borderJtextPane,
-				BorderFactory.createEmptyBorder(100, 100, 100, 100))); // Tamaño del borde
-		jtextPane.setFont(
-				Font.createFont(Font.TRUETYPE_FONT, new File("src/assets/font/PostNoBillsColombo-ExtraBold.ttf"))); // Añadimos
-																													// fuente
-																													// personalizada
-		jtextPane.setFont(jtextPane.getFont().deriveFont(Font.PLAIN, 25)); // Ponemos el tamañlo de la fuente
-		jtextPane.setText("Aasd"); // El texto a añadir
-		jtextPane.setVisible(true); // Lo ponemos en visible
-		jtextPane.setEditable(false); // Hacemos que el usuario no pueda escribir
-		fondoMenuMapaJugable.add(jtextPane);// Lo añadimos en el Fondo
+		// SISTEMA DE HISTORIAL
+		historial.setBounds(20,600,440,500);
+		historial.setEditable(false);
+		historial.setFont(Font.createFont(Font.TRUETYPE_FONT, new File("src/assets/font/PostNoBillsColombo-ExtraBold.ttf"))); // Añadimos fuente personalizada
+		historial.setFont(historial.getFont().deriveFont(Font.PLAIN, 18)); //Ponemos el tamañlo de la fuente
+		historial.setBackground(Color.darkGray);
+		historial.setForeground(Color.white);
+		fondoMenuMapaJugable.add(historial);// Lo añadimos en el Fondo
 		panelMapaJugable.add(fondoMenuMapaJugable);
 
 		/* Bucle para las cuidades vecinas */
@@ -225,27 +215,16 @@ public class MenusDeJuego {
 		//SISTEMA DE RONDA (EL TEXTO)
 		JTextField textoRonda = new JTextField("RONDA: "); //Creamos el texto
 		textoRonda.setBounds(770,0,300,100); //Ponemos las coordenadas
-		textoRonda.setBorder(javax.swing.BorderFactory.createEmptyBorder()); //Quitamos los bordes que trae por defecto
+		textoRonda.setBorder(BorderFactory.createEmptyBorder()); //Quitamos los bordes que trae por defecto
 		textoRonda.setOpaque(false); //Ponemos en transparente el fondo
 		textoRonda.setFont(Font.createFont(Font.TRUETYPE_FONT, new File("src/assets/font/PostNoBillsColombo-ExtraBold.ttf"))); // Añadimos fuente personalizada
-		textoRonda.setFont(jtextPane.getFont().deriveFont(Font.PLAIN, 50)); //Ponemos el tamañlo de la fuente
+		textoRonda.setFont(textoRonda.getFont().deriveFont(Font.PLAIN, 50)); //Ponemos el tamañlo de la fuente
 		textoRonda.setForeground(Color.WHITE); //Ponemos el color de la letra en blanco
 		textoRonda.setVisible(true); // Lo ponemos en visible
 		textoRonda.setEditable(false); //Hacemos que el usuario no pueda editarlo
 		fondoMenuMapaJugable.add(textoRonda);// Lo añadimos en el Fondo
 		panelMapaJugable.add(fondoMenuMapaJugable);
-	
-		// Para el registro de la partida
-		textArea.setBounds(25, 495, 350, 500); // Tamaño
-		Border borderTextArea = BorderFactory.createLineBorder(Color.BLACK); // Creamos el borde
-		textArea.setBorder(BorderFactory.createCompoundBorder(borderTextArea,
-				BorderFactory.createEmptyBorder(100, 100, 100, 100))); // Tamaño
-		// del
-		// borde
-		textArea.setBackground(Color.GRAY); // Color del text area
-		textArea.setVisible(true); // Lo ponemos en visible
-		fondoMenuMapaJugable.add(textArea);// Lo añadimos en el Fondo
-		panelMapaJugable.add(fondoMenuMapaJugable);
+
 
 		// ELEMENTOS MENU PAUSA
 
@@ -310,18 +289,22 @@ public class MenusDeJuego {
 		int D3 = Datos[2];
 		int D4 = Datos[3];
 
+		historial.setText(null); //Limpiamos el chat
+
 		/* Bucle de ciudades que se infectaran al inicio */
 		for (int j = 0; j < D1; j++) {
-			Enfermedades virus = new Enfermedades();
-			virus.aleatorioCiudadesInicio();
+			historial.append(virus.aleatorioCiudadesInicio() + "\n"); //Ponemos en el historial las ciudades infectadas
+			virus.aleatorioCiudadesInicio(); //Llamamos a la función
+
 		}
 		/**/
+
 		/* Bucle de ciudades que se infectara por ronda */
+		historial.append("\n");
 		for (int h = 0; h < D2; h++) {
-			Enfermedades virus = new Enfermedades();
-			jtextPane.setText(virus.aleatorioCiudadesInicio());
 			virus.aleatorioCiudadesContinuar();
 		}
+
 		/**/
 
 		labelCInfectadas = crearLabel(885, 337, 100, 100, Integer.toString(D1));
@@ -410,6 +393,13 @@ public class MenusDeJuego {
 
 				cl.show(panelCont, "RegistrarUsuario");
 
+				historial.setText(null);
+
+				for(int i = 0; i < D1; i++){
+					historial.append(virus.aleatorioCiudadesInicio() + "\n");
+					virus.aleatorioCiudadesInicio();
+				}
+
 			}
 		});
 
@@ -440,38 +430,38 @@ public class MenusDeJuego {
 
 
 
-		buttonPartidaNueva.addMouseListener(new java.awt.event.MouseAdapter() { // Cambia el color de las letras en el
+		buttonPartidaNueva.addMouseListener(new MouseAdapter() { // Cambia el color de las letras en el
 			// momento que el raton pasa encima
-			public void mouseEntered(java.awt.event.MouseEvent evt) {
+			public void mouseEntered(MouseEvent evt) {
 				buttonPartidaNueva.setForeground(Color.decode("#60B13A"));
 			}
 
-			public void mouseExited(java.awt.event.MouseEvent evt) { // Vuelve al color original una vez el raton se
+			public void mouseExited(MouseEvent evt) { // Vuelve al color original una vez el raton se
 				// quita del texto
 				buttonPartidaNueva.setForeground(Color.WHITE);
 			}
 		});
 
-		buttonCargarPartida.addMouseListener(new java.awt.event.MouseAdapter() { // Cambia el color de las letras en el
+		buttonCargarPartida.addMouseListener(new MouseAdapter() { // Cambia el color de las letras en el
 			// momento que el raton pasa encima
-			public void mouseEntered(java.awt.event.MouseEvent evt) {
+			public void mouseEntered(MouseEvent evt) {
 				buttonCargarPartida.setForeground(Color.decode("#60B13A"));
 			}
 
-			public void mouseExited(java.awt.event.MouseEvent evt) { // Vuelve al color original una vez el raton se
+			public void mouseExited(MouseEvent evt) { // Vuelve al color original una vez el raton se
 				// quita del texto
 				buttonCargarPartida.setForeground(Color.WHITE);
 			}
 		});
 
-		buttonGuardarNombreUsuario.addMouseListener(new java.awt.event.MouseAdapter() { // Cambia el color de las letras
+		buttonGuardarNombreUsuario.addMouseListener(new MouseAdapter() { // Cambia el color de las letras
 																						// en el
 			// momento que el raton pasa encima
-			public void mouseEntered(java.awt.event.MouseEvent evt) {
+			public void mouseEntered(MouseEvent evt) {
 				buttonGuardarNombreUsuario.setForeground(Color.decode("#60B13A"));
 			}
 
-			public void mouseExited(java.awt.event.MouseEvent evt) { // Vuelve al color original una vez el raton se
+			public void mouseExited(MouseEvent evt) { // Vuelve al color original una vez el raton se
 				// quita del texto
 				buttonGuardarNombreUsuario.setForeground(Color.WHITE);
 			}
@@ -479,8 +469,8 @@ public class MenusDeJuego {
 
 		buttonCiudad.addActionListener(new ActionListener() {
 			@Override
-			
 			public void actionPerformed(ActionEvent arg0) {
+				cl.show(panelCont, "MenuPausa"); 
 			}
 		});
 
@@ -492,13 +482,13 @@ public class MenusDeJuego {
 			}
 		});
 
-		buttonConfiguracion.addMouseListener(new java.awt.event.MouseAdapter() { // Cambia el color de las letras en el
+		buttonConfiguracion.addMouseListener(new MouseAdapter() { // Cambia el color de las letras en el
 			// momento que el raton pasa encima
-			public void mouseEntered(java.awt.event.MouseEvent evt) {
+			public void mouseEntered(MouseEvent evt) {
 				buttonConfiguracion.setForeground(Color.decode("#60B13A"));
 			}
 
-			public void mouseExited(java.awt.event.MouseEvent evt) { // Vuelve al color original una vez el raton se
+			public void mouseExited(MouseEvent evt) { // Vuelve al color original una vez el raton se
 				// quita del texto
 				buttonConfiguracion.setForeground(Color.WHITE);
 			}
@@ -511,13 +501,13 @@ public class MenusDeJuego {
 			}
 		});
 
-		buttonInformacion.addMouseListener(new java.awt.event.MouseAdapter() { // Cambia el color de las letras en el
+		buttonInformacion.addMouseListener(new MouseAdapter() { // Cambia el color de las letras en el
 			// momento que el raton pasa encima
-			public void mouseEntered(java.awt.event.MouseEvent evt) {
+			public void mouseEntered(MouseEvent evt) {
 				buttonInformacion.setForeground(Color.decode("#60B13A"));
 			}
 
-			public void mouseExited(java.awt.event.MouseEvent evt) { // Vuelve al color original una vez el raton se
+			public void mouseExited(MouseEvent evt) { // Vuelve al color original una vez el raton se
 				// quita del texto
 				buttonInformacion.setForeground(Color.WHITE);
 			}
@@ -532,25 +522,25 @@ public class MenusDeJuego {
 			}
 		});
 
-		buttonSalir.addMouseListener(new java.awt.event.MouseAdapter() { // Cambia el color de las letras en el momento
+		buttonSalir.addMouseListener(new MouseAdapter() { // Cambia el color de las letras en el momento
 			// que el raton pasa encima
-			public void mouseEntered(java.awt.event.MouseEvent evt) {
+			public void mouseEntered(MouseEvent evt) {
 				buttonSalir.setForeground(Color.decode("#60B13A"));
 			}
 
-			public void mouseExited(java.awt.event.MouseEvent evt) { // Vuelve al color original una vez el raton se
+			public void mouseExited(MouseEvent evt) { // Vuelve al color original una vez el raton se
 				// quita del texto
 				buttonSalir.setForeground(Color.WHITE);
 			}
 		});
 
-		buttonInformacion.addMouseListener(new java.awt.event.MouseAdapter() { // Cambia el color de las letras en el
+		buttonInformacion.addMouseListener(new MouseAdapter() { // Cambia el color de las letras en el
 			// momento que el raton pasa encima
-			public void mouseEntered(java.awt.event.MouseEvent evt) {
+			public void mouseEntered(MouseEvent evt) {
 				buttonInformacion.setForeground(Color.decode("#60B13A"));
 			}
 
-			public void mouseExited(java.awt.event.MouseEvent evt) { // Vuelve al color original una vez el raton se
+			public void mouseExited(MouseEvent evt) { // Vuelve al color original una vez el raton se
 				// quita del texto
 				buttonInformacion.setForeground(Color.WHITE);
 			}
@@ -562,16 +552,16 @@ public class MenusDeJuego {
 				cl.show(panelCont, "MapaJugable");
 			}
 		});
-		buttonContinuarPartida.addMouseListener(new java.awt.event.MouseAdapter() {
+		buttonContinuarPartida.addMouseListener(new MouseAdapter() {
 			/* Cambia el color de las letras en el momento que el raton pasa por encima */
 
-			public void mouseEntered(java.awt.event.MouseEvent evt) {
+			public void mouseEntered(MouseEvent evt) {
 				buttonContinuarPartida.setForeground(Color.decode("#60B13A"));
 			}
 
 			/**/
 			/* Vuelve al color original una vez el raton se quita del texto */
-			public void mouseExited(java.awt.event.MouseEvent evt) {
+			public void mouseExited(MouseEvent evt) {
 				buttonContinuarPartida.setForeground(Color.WHITE);
 			}
 			/**/
@@ -581,16 +571,20 @@ public class MenusDeJuego {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				cl.show(panelCont, "Menu");
+
+
+
 			}
 		});
 
-		buttonSalirMenu.addMouseListener(new java.awt.event.MouseAdapter() { // Cambia el color de las letras en el
+		buttonSalirMenu.addMouseListener(new MouseAdapter() { // Cambia el color de las letras en el
 			// momento que el raton pasa encima
-			public void mouseEntered(java.awt.event.MouseEvent evt) {
+
+			public void mouseEntered(MouseEvent evt) {
 				buttonSalirMenu.setForeground(Color.decode("#60B13A"));
 			}
 
-			public void mouseExited(java.awt.event.MouseEvent evt) { // Vuelve al color original una vez el raton se
+			public void mouseExited(MouseEvent evt) { // Vuelve al color original una vez el raton se
 				// quita del texto
 				buttonSalirMenu.setForeground(Color.WHITE);
 			}
@@ -603,13 +597,13 @@ public class MenusDeJuego {
 			}
 		});
 
-		buttonVolverMenu.addMouseListener(new java.awt.event.MouseAdapter() { // Cambia el color de las letras en el
+		buttonVolverMenu.addMouseListener(new MouseAdapter() { // Cambia el color de las letras en el
 			// momento que el raton pasa encima
-			public void mouseEntered(java.awt.event.MouseEvent evt) {
+			public void mouseEntered(MouseEvent evt) {
 				buttonVolverMenu.setForeground(Color.decode("#60B13A"));
 			}
 
-			public void mouseExited(java.awt.event.MouseEvent evt) { // Vuelve al color original una vez el raton se
+			public void mouseExited(MouseEvent evt) { // Vuelve al color original una vez el raton se
 				// quita del texto
 				buttonVolverMenu.setForeground(Color.WHITE);
 			}
@@ -622,13 +616,13 @@ public class MenusDeJuego {
 			}
 		});
 
-		buttonAutores.addMouseListener(new java.awt.event.MouseAdapter() { // Cambia el color de las letras en el
+		buttonAutores.addMouseListener(new MouseAdapter() { // Cambia el color de las letras en el
 			// momento que el raton pasa encima
-			public void mouseEntered(java.awt.event.MouseEvent evt) {
+			public void mouseEntered(MouseEvent evt) {
 				buttonAutores.setForeground(Color.decode("#60B13A"));
 			}
 
-			public void mouseExited(java.awt.event.MouseEvent evt) { // Vuelve al color original una vez el raton se
+			public void mouseExited(MouseEvent evt) { // Vuelve al color original una vez el raton se
 				// quita del texto
 				buttonAutores.setForeground(Color.WHITE);
 			}
@@ -641,13 +635,13 @@ public class MenusDeJuego {
 			}
 		});
 
-		buttonReglas.addMouseListener(new java.awt.event.MouseAdapter() { // Cambia el color de las letras en el momento
+		buttonReglas.addMouseListener(new MouseAdapter() { // Cambia el color de las letras en el momento
 			// que el raton pasa encima
-			public void mouseEntered(java.awt.event.MouseEvent evt) {
+			public void mouseEntered(MouseEvent evt) {
 				buttonReglas.setForeground(Color.decode("#60B13A"));
 			}
 
-			public void mouseExited(java.awt.event.MouseEvent evt) { // Vuelve al color original una vez el raton se
+			public void mouseExited(MouseEvent evt) { // Vuelve al color original una vez el raton se
 				// quita del texto
 				buttonReglas.setForeground(Color.WHITE);
 			}
@@ -660,13 +654,13 @@ public class MenusDeJuego {
 			}
 		});
 
-		buttonVolverInfoA.addMouseListener(new java.awt.event.MouseAdapter() { // Cambia el color de las letras en el
+		buttonVolverInfoA.addMouseListener(new MouseAdapter() { // Cambia el color de las letras en el
 			// momento que el raton pasa encima
-			public void mouseEntered(java.awt.event.MouseEvent evt) {
+			public void mouseEntered(MouseEvent evt) {
 				buttonVolverInfoA.setForeground(Color.decode("#60B13A"));
 			}
 
-			public void mouseExited(java.awt.event.MouseEvent evt) { // Vuelve al color original una vez el raton se
+			public void mouseExited(MouseEvent evt) { // Vuelve al color original una vez el raton se
 				// quita del texto
 				buttonVolverInfoA.setForeground(Color.WHITE);
 			}
@@ -679,13 +673,13 @@ public class MenusDeJuego {
 			}
 		});
 
-		buttonVolverR.addMouseListener(new java.awt.event.MouseAdapter() { // Cambia el color de las letras en el
+		buttonVolverR.addMouseListener(new MouseAdapter() { // Cambia el color de las letras en el
 			// momento que el raton pasa encima
-			public void mouseEntered(java.awt.event.MouseEvent evt) {
+			public void mouseEntered(MouseEvent evt) {
 				buttonVolverR.setForeground(Color.decode("#60B13A"));
 			}
 
-			public void mouseExited(java.awt.event.MouseEvent evt) { // Vuelve al color original una vez el raton se
+			public void mouseExited(MouseEvent evt) { // Vuelve al color original una vez el raton se
 				// quita del texto
 				buttonVolverR.setForeground(Color.WHITE);
 			}
@@ -698,13 +692,13 @@ public class MenusDeJuego {
 			}
 		});
 
-		buttonVolverC.addMouseListener(new java.awt.event.MouseAdapter() { // Cambia el color de las letras en el
+		buttonVolverC.addMouseListener(new MouseAdapter() { // Cambia el color de las letras en el
 			// momento que el raton pasa encima
-			public void mouseEntered(java.awt.event.MouseEvent evt) {
+			public void mouseEntered(MouseEvent evt) {
 				buttonVolverC.setForeground(Color.decode("#60B13A"));
 			}
 
-			public void mouseExited(java.awt.event.MouseEvent evt) { // Vuelve al color original una vez el raton se
+			public void mouseExited(MouseEvent evt) { // Vuelve al color original una vez el raton se
 				// quita del texto
 				buttonVolverC.setForeground(Color.WHITE);
 			}
@@ -717,13 +711,13 @@ public class MenusDeJuego {
 			}
 		});
 
-		buttonGuardarPartida.addMouseListener(new java.awt.event.MouseAdapter() { // Cambia el color de las letras en el
+		buttonGuardarPartida.addMouseListener(new MouseAdapter() { // Cambia el color de las letras en el
 			// momento que el raton pasa encima
-			public void mouseEntered(java.awt.event.MouseEvent evt) {
+			public void mouseEntered(MouseEvent evt) {
 				buttonGuardarPartida.setForeground(Color.decode("#60B13A"));
 			}
 
-			public void mouseExited(java.awt.event.MouseEvent evt) { // Vuelve al color original una vez el raton se
+			public void mouseExited(MouseEvent evt) { // Vuelve al color original una vez el raton se
 				// quita del texto
 				buttonGuardarPartida.setForeground(Color.WHITE);
 			}
