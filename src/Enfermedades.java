@@ -137,7 +137,7 @@ public class Enfermedades {
 
 			String[] Arrayvirus = { "Alfa", "Beta", "Gamma", "Delta" };
 
-			return "La ciudad: " + Arrayciudades[aleatoriociudades] + " será infectada con el virus: " + Arrayvirus[aleatorioenfermedades];
+			return "La ciudad: " + Arrayciudades[aleatoriociudades] + " sera infectada con el virus: " + Arrayvirus[aleatorioenfermedades];
 
 		} catch (IOException e) {
 			System.out.println("error: " + e);
@@ -192,7 +192,7 @@ public class Enfermedades {
 
 			String[] Arrayvirus = { "Alfa", "Beta", "Gamma", "Delta" };
 
-			mostrarTexto.add("La ciudad: " + Arrayciudades[aleatoriociudades] + " será infectada con el virus: " + Arrayvirus[aleatorioenfermedades]);
+			mostrarTexto.add("La ciudad: " + Arrayciudades[aleatoriociudades] + " sera infectada con el virus: " + Arrayvirus[aleatorioenfermedades]);
 
 		} catch (IOException e) {
 			System.out.println("error");

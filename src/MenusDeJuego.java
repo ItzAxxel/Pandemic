@@ -72,6 +72,7 @@ public class MenusDeJuego {
 	JLabel NBDerrota;
 	
 	ArrayList<JButton> BotonesCiudad = new ArrayList<JButton>();
+	ArrayList<JLabel> LabelsCiudades = new ArrayList<JLabel>();
 	Enfermedades virus = new Enfermedades();
 
 	// SE CREA UN OBJETO ES UN MANAGER DE LAYOUTS, EN ESTE CASO CARDLAYOUT
@@ -185,12 +186,16 @@ public class MenusDeJuego {
 					coord3[cont] = Integer.parseInt(dividir2[1]);
 
 					buttonCiudad = Ciudad.crearBotonCiudad(coord2[cont], coord3[cont], 100, 30, Arrayciudades[cont]);
-					BotonesCiudad.add(buttonCiudad);
-					
-					
 					fondoMenuMapaJugable.getComponents();
 					fondoMenuMapaJugable.add(buttonCiudad);
-					
+					buttonCiudad.addActionListener(new ActionListener() {
+						@Override
+						public void actionPerformed(ActionEvent arg0) {
+							cl.show(panelCont, "MenuPausa");
+
+						}
+					});
+
 				} else {
 					detector = false;
 				}
@@ -421,10 +426,6 @@ public class MenusDeJuego {
 
 					cl.show(panelCont, "MapaJugable");
 				}
-
-
-
-
 			}
 		});
 
@@ -464,13 +465,6 @@ public class MenusDeJuego {
 			public void mouseExited(MouseEvent evt) { // Vuelve al color original una vez el raton se
 				// quita del texto
 				buttonGuardarNombreUsuario.setForeground(Color.WHITE);
-			}
-		});
-
-		buttonCiudad.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				cl.show(panelCont, "MenuPausa"); 
 			}
 		});
 

@@ -1,3 +1,5 @@
+import javafx.scene.control.Tooltip;
+
 import javax.swing.*;
 import java.awt.*;
 import java.io.BufferedReader;
@@ -112,7 +114,8 @@ public class Ciudad {
     public static JButton crearBotonCiudad(int coordenadaX, int coordenadaY, int width, int height, String nombreCiudad)
             throws IOException, FontFormatException {
 
-        JButton button = new JButton(nombreCiudad); // Texto
+        JButton button = new JButton(nombreCiudad);
+        button.setToolTipText(nombreCiudad);
         button.setFont(button.getFont().deriveFont(Font.BOLD, 15)); // Añadimos el tamaño de la fuente
         button.setBounds(coordenadaX, coordenadaY, width, height);// Se establece su posición y tamaño
         button.setForeground(Color.WHITE); // Color del texto
