@@ -70,7 +70,7 @@ public class MenusDeJuego {
 	JLabel labelCInfectadasRonda;
 	JLabel NEDerrota;
 	JLabel NBDerrota;
-	
+
 	ArrayList<JButton> BotonesCiudad = new ArrayList<JButton>();
 	ArrayList<JLabel> LabelsCiudades = new ArrayList<JLabel>();
 	Enfermedades virus = new Enfermedades();
@@ -148,13 +148,11 @@ public class MenusDeJuego {
 
 		String s;
 
-		String[] Arrayciudades = new String[50];
+		String[] Arrayciudades = new String[49];
 
-		String[] coord = new String[50];
+		int[][] coord = new int[49][2];
 
-		int[] coord2 = new int[50];
-
-		int[] coord3 = new int[50];
+		String[][] Arrayvecinas = new String[49][];
 
 		int cont = 0;
 
@@ -173,19 +171,27 @@ public class MenusDeJuego {
 
 					cont++;
 
-					String[] dividir1 = s.split(";");
+					String[] temporal = s.split(";");
+					String[] temporalCoords = temporal[2].split(",");
 
-					Arrayciudades[cont] = dividir1[0];
+					Arrayciudades[cont] = temporal[0];
 
-					coord[cont] = dividir1[2];
+					ciudades.setNombreCiudad(Arrayciudades[cont]);
 
-					String[] dividir2 = coord[cont].split(",");
+					coord[cont][0] = Integer.parseInt(temporalCoords[0]);
+					
+					ciudades.setCoordenadaX(coord[cont][0]);
+					
+					coord[cont][1] = Integer.parseInt(temporalCoords[1]);
+					
+					ciudades.setCoordenadaY(coord[cont][1]);
+					
+					Arrayvecinas[cont] = temporal[3].split(",");
+					
+					ciudades.setCiudadesColindantes(Arrayvecinas[cont]);
 
-					coord2[cont] = Integer.parseInt(dividir2[0]);
-
-					coord3[cont] = Integer.parseInt(dividir2[1]);
-
-					buttonCiudad = Ciudad.crearBotonCiudad(coord2[cont], coord3[cont], 100, 30, Arrayciudades[cont]);
+					buttonCiudad = Ciudad.crearBotonCiudad(coord[cont][0], coord[cont][1], 100, 30,
+							Arrayciudades[cont]);
 					fondoMenuMapaJugable.getComponents();
 					fondoMenuMapaJugable.add(buttonCiudad);
 					buttonCiudad.addActionListener(new ActionListener() {
@@ -206,30 +212,35 @@ public class MenusDeJuego {
 		}
 
 		// SISTEMA DE HISTORIAL
-		historial.setBounds(20,600,440,500);
+		historial.setBounds(20, 600, 440, 500);
 		historial.setEditable(false);
-		historial.setFont(Font.createFont(Font.TRUETYPE_FONT, new File("src/assets/font/PostNoBillsColombo-ExtraBold.ttf"))); // Añadimos fuente personalizada
-		historial.setFont(historial.getFont().deriveFont(Font.PLAIN, 18)); //Ponemos el tamañlo de la fuente
+		historial.setFont(
+				Font.createFont(Font.TRUETYPE_FONT, new File("src/assets/font/PostNoBillsColombo-ExtraBold.ttf"))); // Añadimos
+																													// fuente
+																													// personalizada
+		historial.setFont(historial.getFont().deriveFont(Font.PLAIN, 18)); // Ponemos el tamañlo de la fuente
 		historial.setBackground(Color.darkGray);
 		historial.setForeground(Color.white);
 		fondoMenuMapaJugable.add(historial);// Lo añadimos en el Fondo
 		panelMapaJugable.add(fondoMenuMapaJugable);
 
 		/* Bucle para las cuidades vecinas */
-		
-		//SISTEMA DE RONDA (EL TEXTO)
-		JTextField textoRonda = new JTextField("RONDA: "); //Creamos el texto
-		textoRonda.setBounds(770,0,300,100); //Ponemos las coordenadas
-		textoRonda.setBorder(BorderFactory.createEmptyBorder()); //Quitamos los bordes que trae por defecto
-		textoRonda.setOpaque(false); //Ponemos en transparente el fondo
-		textoRonda.setFont(Font.createFont(Font.TRUETYPE_FONT, new File("src/assets/font/PostNoBillsColombo-ExtraBold.ttf"))); // Añadimos fuente personalizada
-		textoRonda.setFont(textoRonda.getFont().deriveFont(Font.PLAIN, 50)); //Ponemos el tamañlo de la fuente
-		textoRonda.setForeground(Color.WHITE); //Ponemos el color de la letra en blanco
+
+		// SISTEMA DE RONDA (EL TEXTO)
+		JTextField textoRonda = new JTextField("RONDA: "); // Creamos el texto
+		textoRonda.setBounds(770, 0, 300, 100); // Ponemos las coordenadas
+		textoRonda.setBorder(BorderFactory.createEmptyBorder()); // Quitamos los bordes que trae por defecto
+		textoRonda.setOpaque(false); // Ponemos en transparente el fondo
+		textoRonda.setFont(
+				Font.createFont(Font.TRUETYPE_FONT, new File("src/assets/font/PostNoBillsColombo-ExtraBold.ttf"))); // Añadimos
+																													// fuente
+																													// personalizada
+		textoRonda.setFont(textoRonda.getFont().deriveFont(Font.PLAIN, 50)); // Ponemos el tamañlo de la fuente
+		textoRonda.setForeground(Color.WHITE); // Ponemos el color de la letra en blanco
 		textoRonda.setVisible(true); // Lo ponemos en visible
-		textoRonda.setEditable(false); //Hacemos que el usuario no pueda editarlo
+		textoRonda.setEditable(false); // Hacemos que el usuario no pueda editarlo
 		fondoMenuMapaJugable.add(textoRonda);// Lo añadimos en el Fondo
 		panelMapaJugable.add(fondoMenuMapaJugable);
-
 
 		// ELEMENTOS MENU PAUSA
 
@@ -294,13 +305,11 @@ public class MenusDeJuego {
 		int D3 = Datos[2];
 		int D4 = Datos[3];
 
-		historial.setText(null); //Limpiamos el chat
+		historial.setText(null); // Limpiamos el chat
 
 		/* Bucle de ciudades que se infectaran al inicio */
 		for (int j = 0; j < D1; j++) {
-			historial.append(virus.aleatorioCiudadesInicio() + "\n"); //Ponemos en el historial las ciudades infectadas
-			virus.aleatorioCiudadesInicio(); //Llamamos a la función
-
+			historial.append(virus.aleatorioCiudadesInicio() + "\n"); // Ponemos en el historial las ciudades infectadas
 		}
 		/**/
 
@@ -400,7 +409,7 @@ public class MenusDeJuego {
 
 				historial.setText(null);
 
-				for(int i = 0; i < D1; i++){
+				for (int i = 0; i < D1; i++) {
 					historial.append(virus.aleatorioCiudadesInicio() + "\n");
 					virus.aleatorioCiudadesInicio();
 				}
@@ -412,7 +421,7 @@ public class MenusDeJuego {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 
-				if(introducirNombreUsuario.getText().isEmpty()){
+				if (introducirNombreUsuario.getText().isEmpty()) {
 					JOptionPane.showMessageDialog(buttonGuardarNombreUsuario, "Introduce tu nombre de usuario.");
 
 				} else {
@@ -428,8 +437,6 @@ public class MenusDeJuego {
 				}
 			}
 		});
-
-
 
 		buttonPartidaNueva.addMouseListener(new MouseAdapter() { // Cambia el color de las letras en el
 			// momento que el raton pasa encima
@@ -456,7 +463,7 @@ public class MenusDeJuego {
 		});
 
 		buttonGuardarNombreUsuario.addMouseListener(new MouseAdapter() { // Cambia el color de las letras
-																						// en el
+																			// en el
 			// momento que el raton pasa encima
 			public void mouseEntered(MouseEvent evt) {
 				buttonGuardarNombreUsuario.setForeground(Color.decode("#60B13A"));
@@ -565,8 +572,6 @@ public class MenusDeJuego {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				cl.show(panelCont, "Menu");
-
-
 
 			}
 		});

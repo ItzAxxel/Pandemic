@@ -4,66 +4,63 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
-public class Enfermedades {
+public class Enfermedades extends Ciudad {
 
 	// Atributos
 
 	protected int alfa; // Enfermedad roja
 	protected int beta; // Enfermedad azul
 	protected int delta; // Enfermedad amarilla
-	protected int omega; // Enfermedad verde
+	protected int gamma; // Enfermedad verde
 	protected boolean infected; // Comprobaar si est� enfermo
 	// Constructores
 
-	public Enfermedades(int enfermedadRoja, int enfermedadAzul, int enfermedadAmarilla, int enfermedadVerde,
-			boolean infected) {
-		this.alfa = enfermedadRoja;
-		this.beta = enfermedadAzul;
-		this.delta = enfermedadAmarilla;
-		this.omega = enfermedadVerde;
-		this.infected = infected;
-	}
-
 	public Enfermedades() {
-		this.alfa = 0;
-		this.beta = 0;
-		this.delta = 0;
-		this.omega = 0;
-		this.infected = false;
+
 	}
 
+	public Enfermedades(int VirusAlfa, int VirusBeta, int VirusGamma, int VirusDelta) {
+		this.alfa = VirusAlfa;
+		this.beta = VirusBeta;
+		this.gamma = VirusGamma;
+		this.delta = VirusDelta;
+	}
 	// Getters Y setters
+
+	public void setAlfa(int VirusAlfa) {
+		alfa = VirusAlfa;
+	}
 
 	public int getAlfa() {
 		return alfa;
 	}
 
-	public void setAlfa(int alfa) {
-		this.alfa = alfa;
+	public void setBeta(int VirusBeta) {
+		beta = VirusBeta;
 	}
 
 	public int getBeta() {
 		return beta;
 	}
 
-	public void setBeta(int beta) {
-		this.beta = beta;
+	public void setGamma(int VirusGamma) {
+		gamma = VirusGamma;
+	}
+
+	public int getGamma() {
+		return gamma;
+	}
+
+	public void setDelta(int VirusDelta) {
+		delta = VirusDelta;
 	}
 
 	public int getDelta() {
 		return delta;
 	}
 
-	public void setDelta(int delta) {
-		this.delta = delta;
-	}
-
-	public int getOmega() {
-		return omega;
-	}
-
-	public void setOmega(int omega) {
-		this.omega = omega;
+	public void setInfected(boolean infected) {
+		this.infected = infected;
 	}
 
 	public boolean getInfected() {
@@ -71,40 +68,16 @@ public class Enfermedades {
 
 	}
 
-	public void setInfected(boolean infected) {
-		this.infected = infected;
-	}
-
-	// Metodos
-
-	public int InfectarAlfa(String nombreCiudad, boolean infected) {
-		System.out.println("�" + nombreCiudad + " ha sido infectada por el virus Alfa!");
-		infected = true;
-		return alfa + 1;
-	}
-
-	public int removerAlfa(String nombreCiudad, boolean infected) {
-		System.out.println("�" + nombreCiudad + " se ha removido 1 de infecci�n del virus Alfa!");
-		infected = true;
-		return alfa - 1;
-	}
-
-	public int curarAlfa(String nombreCiudad, boolean infected) {
-		System.out.println("�" + nombreCiudad + " se ha curado al completo del virus Alfa!");
-		infected = false;
-		return alfa = 0;
-	}
-
 	/* Metodo para las ciudades que se infectaran al inicio */
 	public String aleatorioCiudadesInicio() {
+
+		Enfermedades virus = new Enfermedades();
 
 		CargarXML virusinicio = new CargarXML();
 
 		Random aleatorio = new Random();
 
-		ArrayList<String> mostrarTexto = new ArrayList<String>();
-
-		int aleatoriociudades = aleatorio.nextInt(48) + 1 ;
+		int aleatoriociudades = aleatorio.nextInt(48) + 1;
 
 		String documento = "ciudades.txt";
 
@@ -133,11 +106,26 @@ public class Enfermedades {
 				}
 
 			} while (detector);
+
 			int aleatorioenfermedades = aleatorio.nextInt(4);
 
 			String[] Arrayvirus = { "Alfa", "Beta", "Gamma", "Delta" };
 
-			return "La ciudad: " + Arrayciudades[aleatoriociudades] + " sera infectada con el virus: " + Arrayvirus[aleatorioenfermedades];
+			for (int i = 0; i < documento.length(); i++) {
+				switch (aleatorioenfermedades) {
+				case 0:
+					virus.setAlfa(virus.getAlfa() + 1);
+				case 1:
+					virus.setBeta(virus.getBeta() + 1);
+				case 2:
+					virus.setGamma(virus.getGamma() + 1);
+				case 3:
+					virus.setDelta(virus.getDelta() + 1);
+				}
+			}
+
+			return "La ciudad: " + Arrayciudades[aleatoriociudades] + " sera infectada con el virus: "
+					+ Arrayvirus[aleatorioenfermedades];
 
 		} catch (IOException e) {
 			System.out.println("error: " + e);
@@ -146,9 +134,7 @@ public class Enfermedades {
 		return null;
 	}
 
-	/**/
 	/* Metodo para las ciudades que se infectaran por ronda */
-
 
 	public void aleatorioCiudadesContinuar() {
 
@@ -192,7 +178,8 @@ public class Enfermedades {
 
 			String[] Arrayvirus = { "Alfa", "Beta", "Gamma", "Delta" };
 
-			mostrarTexto.add("La ciudad: " + Arrayciudades[aleatoriociudades] + " sera infectada con el virus: " + Arrayvirus[aleatorioenfermedades]);
+			mostrarTexto.add("La ciudad: " + Arrayciudades[aleatoriociudades] + " sera infectada con el virus: "
+					+ Arrayvirus[aleatorioenfermedades]);
 
 		} catch (IOException e) {
 			System.out.println("error");
