@@ -188,7 +188,7 @@ public class MenusDeJuego {
 					
 					Arrayvecinas[cont] = temporal[3].split(",");
 					
-					ciudades.setCiudadesColindantes(Arrayvecinas[cont]);
+					ciudades.setCiudadesVecinas(Arrayvecinas[cont]);
 
 					buttonCiudad = Ciudad.crearBotonCiudad(coord[cont][0], coord[cont][1], 100, 30,
 							Arrayciudades[cont]);

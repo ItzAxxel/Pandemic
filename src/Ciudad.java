@@ -1,4 +1,4 @@
-import javafx.scene.control.Tooltip;
+/*import javafx.scene.control.Tooltip;
 
 import javax.swing.*;
 import java.awt.*;
@@ -67,87 +67,87 @@ public class Ciudad {
 	public void setCoordenadaY(int coordenadaY) {
 		this.coordenadaY = coordenadaY;
 	}
+*/
+// Métodos
 
-	// Métodos
+/* Metodo para las ciudades que se infectaran al inicio 
+public String aleatorioCiudadesInicio() {
 
-	/* Metodo para las ciudades que se infectaran al inicio */
-	public String aleatorioCiudadesInicio() {
+	Enfermedades virus = new Enfermedades();
 
-		Enfermedades virus = new Enfermedades();
+	CargarXML virusinicio = new CargarXML();
 
-		CargarXML virusinicio = new CargarXML();
+	Random aleatorio = new Random();
 
-		Random aleatorio = new Random();
+	int aleatoriociudades = aleatorio.nextInt(48) + 1;
 
-		int aleatoriociudades = aleatorio.nextInt(48) + 1;
+	String documento = "ciudades.txt";
 
-		String documento = "ciudades.txt";
+	String s;
 
-		String s;
+	String[] Arrayciudades = new String[49];
 
-		String[] Arrayciudades = new String[49];
+	int cont = 0;
 
-		int cont = 0;
+	boolean detector = true;
 
-		boolean detector = true;
+	try {
+		FileReader fr = new FileReader(documento);
+		BufferedReader br = new BufferedReader(fr);
+		do {
+			cont++;
+			s = br.readLine();
+			if (s != null && cont <= aleatoriociudades) {
 
-		try {
-			FileReader fr = new FileReader(documento);
-			BufferedReader br = new BufferedReader(fr);
-			do {
-				cont++;
-				s = br.readLine();
-				if (s != null && cont <= aleatoriociudades) {
+				String[] dividir = s.split(";");
 
-					String[] dividir = s.split(";");
+				Arrayciudades[cont] = dividir[0];
 
-					Arrayciudades[cont] = dividir[0];
-
-				} else {
-					detector = false;
-				}
-
-			} while (detector);
-			int aleatorioenfermedades = aleatorio.nextInt(4);
-
-			String[] Arrayvirus = { "Alfa", "Beta", "Gamma", "Delta" };
-
-			int contadorAlfa = 0;
-
-			int contadorBeta = 0;
-
-			int contadorGamma = 0;
-
-			int contadorDelta = 0;
-
-			if (aleatorioenfermedades == 0) {
-				contadorAlfa++;
-				virus.setAlfa(contadorAlfa);
-
-			} else if (aleatorioenfermedades == 1) {
-				contadorBeta++;
-				virus.setBeta(contadorBeta);
-			} else if (aleatorioenfermedades == 2) {
-				contadorGamma++;
-				virus.setGamma(contadorGamma);
 			} else {
-				contadorDelta++;
-				virus.setDelta(contadorDelta);
-
+				detector = false;
 			}
 
-			return "La ciudad: " + Arrayciudades[aleatoriociudades] + " sera infectada con el virus: "
-					+ Arrayvirus[aleatorioenfermedades];
+		} while (detector);
+		int aleatorioenfermedades = aleatorio.nextInt(4);
 
-		} catch (IOException e) {
-			System.out.println("error: " + e);
+		String[] Arrayvirus = { "Alfa", "Beta", "Gamma", "Delta" };
+
+		int contadorAlfa = 0;
+
+		int contadorBeta = 0;
+
+		int contadorGamma = 0;
+
+		int contadorDelta = 0;
+
+		if (aleatorioenfermedades == 0) {
+			contadorAlfa++;
+			virus.setAlfa(contadorAlfa);
+
+		} else if (aleatorioenfermedades == 1) {
+			contadorBeta++;
+			virus.setBeta(contadorBeta);
+		} else if (aleatorioenfermedades == 2) {
+			contadorGamma++;
+			virus.setGamma(contadorGamma);
+		} else {
+			contadorDelta++;
+			virus.setDelta(contadorDelta);
+
 		}
 
-		return null;
+		return "La ciudad: " + Arrayciudades[aleatoriociudades] + " sera infectada con el virus: "
+				+ Arrayvirus[aleatorioenfermedades];
+
+	} catch (IOException e) {
+		System.out.println("error: " + e);
 	}
 
-	/* Metodo para las ciudades que se infectaran por ronda */
-
+	return null;
+}
+*/
+/* Metodo para las ciudades que se infectaran por ronda */
+/*
 	public void aleatorioCiudadesContinuar() {
 
 		CargarXML virusinicio = new CargarXML();
@@ -198,7 +198,124 @@ public class Ciudad {
 		}
 
 	}
-	/**/
+	*/
+/**/
+
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Random;
+
+import javax.swing.JButton;
+
+public class Ciudad {
+
+	// Atributos
+	protected String nombreCiudad;
+	protected int virusRojo;
+	protected int virusAmarillo;
+	protected int virusAzul;
+	protected int virusVerde;
+	protected int coordenadaX;
+	protected int coordenadaY;
+	protected String[] CiudadesVecinas;
+	public ArrayList<Ciudad> ArrayCiudades = new ArrayList<>();
+
+	// CONSTRUCTOR HECHO POR LA MAQUINA. ESTA FORMA SE DEBE A QUE LOS VALORES POR
+
+	public Ciudad() {
+
+	}
+
+	public Ciudad(String nombreCiudad, int coordX, int coordY, int Rojo, int Amarillo, int Azul, int Verde,
+			String[] CiudadesVecinas) {
+		this.nombreCiudad = nombreCiudad;
+		this.coordenadaX = coordX;
+		this.coordenadaY = coordY;
+		this.virusRojo = Rojo;
+		this.virusAmarillo = Amarillo;
+		this.virusAzul = Azul;
+		this.virusVerde = Verde;
+		this.CiudadesVecinas = CiudadesVecinas;
+	}
+
+	// ¡ESTO SON LOS GETTER Y LOS SETTERS DE ESTA CLASEEEEEE!
+
+	public String getNombreCiudad() {
+		return nombreCiudad;
+	}
+
+	public void setNombreCiudad(String nombreCiudad) {
+		this.nombreCiudad = nombreCiudad;
+	}
+
+	public int getVirusRojo() {
+		return virusRojo;
+	}
+
+	public void setVirusRojo(int virusRojo) {
+		this.virusRojo = virusRojo;
+	}
+
+	public int getVirusAmarillo() {
+		return virusAmarillo;
+	}
+
+	public void setVirusAmarillo(int virusAmarillo) {
+		this.virusAmarillo = virusAmarillo;
+	}
+
+	public int getVirusAzul() {
+		return virusAzul;
+	}
+
+	public void setVirusAzul(int virusAzul) {
+		this.virusAzul = virusAzul;
+	}
+
+	public int getVirusVerde() {
+		return virusVerde;
+	}
+
+	public void setVirusVerde(int virusVerde) {
+		this.virusVerde = virusVerde;
+	}
+
+	public int getCoordenadaX() {
+		return coordenadaX;
+	}
+
+	public void setCoordenadaX(int coordenadaX) {
+		this.coordenadaX = coordenadaX;
+	}
+
+	public int getCoordenadaY() {
+		return coordenadaY;
+	}
+
+	public void setCoordenadaY(int coordenadaY) {
+		this.coordenadaY = coordenadaY;
+	}
+
+	public String[] getCiudadesVecinas() {
+		return CiudadesVecinas;
+	}
+
+	public void setCiudadesVecinas(String[] CiudadesVecinas) {
+		CiudadesVecinas = CiudadesVecinas;
+	}
+
+	public ArrayList<Ciudad> getArrayCiudades() {
+		return ArrayCiudades;
+	}
+
+	public void setArrayCiudades(ArrayList<Ciudad> arrayCiudades) {
+		ArrayCiudades = arrayCiudades;
+	}
 
 	public static JButton crearBotonCiudad(int coordenadaX, int coordenadaY, int width, int height, String nombreCiudad)
 			throws IOException, FontFormatException {
@@ -219,178 +336,5 @@ public class Ciudad {
 		return button;
 
 	}
-
-	/*
-	 * import java.io.BufferedReader; import java.io.FileReader; import
-	 * java.io.IOException; import java.util.ArrayList; import java.util.Random;
-	 * 
-	 * public class CIUDAD {
-	 * 
-	 * //Atributos protected String nombreCiudad; protected int virusRojo; protected
-	 * int virusAmarillo; protected int virusAzul; protected int virusVerde;
-	 * protected int coordenadaX; protected int coordenadaY; protected String[]
-	 * NombresCiudadesColindantesX; public ArrayList<CIUDAD> ArrayCiudades = new
-	 * ArrayList<>();
-	 * 
-	 * 
-	 * //CONSTRUCTOR HECHO POR LA MAQUINA. ESTA FORMA SE DEBE A QUE LOS VALORES POR
-	 * DEFECTO LOS PRODUCE UN BUCLE MAS ABAJO EN EL CODIGO public CIUDAD(String
-	 * nombreCiudade, int coordX, int i, int i1, int i2, int i3, int i4, String[]
-	 * nombresCiudadesColindantesX) { }
-	 * 
-	 * 
-	 * // ¡ESTO SON LOS GETTER Y LOS SETTERS DE ESTA CLASEEEEEE!
-	 * 
-	 * public String getNombreCiudad() { return nombreCiudad; }
-	 * 
-	 * public void setNombreCiudad(String nombreCiudad) { this.nombreCiudad =
-	 * nombreCiudad; }
-	 * 
-	 * public int getVirusRojo() { return virusRojo; }
-	 * 
-	 * public void setVirusRojo(int virusRojo) { this.virusRojo = virusRojo; }
-	 * 
-	 * public int getVirusAmarillo() { return virusAmarillo; }
-	 * 
-	 * public void setVirusAmarillo(int virusAmarillo) { this.virusAmarillo =
-	 * virusAmarillo; }
-	 * 
-	 * public int getVirusAzul() { return virusAzul; }
-	 * 
-	 * public void setVirusAzul(int virusAzul) { this.virusAzul = virusAzul; }
-	 * 
-	 * public int getVirusVerde() { return virusVerde; }
-	 * 
-	 * public void setVirusVerde(int virusVerde) { this.virusVerde = virusVerde; }
-	 * 
-	 * public int getCoordenadaX() { return coordenadaX; }
-	 * 
-	 * public void setCoordenadaX(int coordenadaX) { this.coordenadaX = coordenadaX;
-	 * }
-	 * 
-	 * public int getCoordenadaY() { return coordenadaY; }
-	 * 
-	 * public void setCoordenadaY(int coordenadaY) { this.coordenadaY = coordenadaY;
-	 * }
-	 * 
-	 * public String[] getNombresCiudadesColindantesX() { return
-	 * NombresCiudadesColindantesX; }
-	 * 
-	 * public void setNombresCiudadesColindantesX(String[]
-	 * nombresCiudadesColindantesX) { NombresCiudadesColindantesX =
-	 * nombresCiudadesColindantesX; }
-	 * 
-	 * public ArrayList<CIUDAD> getArrayCiudades() { return ArrayCiudades; }
-	 * 
-	 * public void setArrayCiudades(ArrayList<CIUDAD> arrayCiudades) { ArrayCiudades
-	 * = arrayCiudades; }
-	 * 
-	 * 
-	 * 
-	 * 
-	 * //¡ESTE ES EL MALDITO METODO QUE SE ENCARGA DE CREAR LAS CIUDADES Y QUE SOL
-	 * SE LLAMARÁ UNA PUTA VEZ!
-	 * 
-	 * 
-	 * public ArrayList getCiudadesArray() {
-	 * 
-	 * Random ran = new Random();
-	 * 
-	 * 
-	 * String documento = "ObjetosPrueba.txt";
-	 * 
-	 * String s;
-	 * 
-	 * String[] NombreCiudades = new String[48];
-	 * 
-	 * String[] ParteCoord;
-	 * 
-	 * String[] coord = new String[48];
-	 * 
-	 * String[] ParteVirus;
-	 * 
-	 * String[] virus = new String[48];
-	 * 
-	 * int[] virusRojo = new int[48];
-	 * 
-	 * int[] virusAmarillo = new int[48];
-	 * 
-	 * int[] virusAzul = new int[48];
-	 * 
-	 * int[] virusVerde = new int[48];
-	 * 
-	 * int[] coordX = new int[48];
-	 * 
-	 * int[] coordY = new int[48];
-	 * 
-	 * String[] Prueba;
-	 * 
-	 * String[] NombresCiudadesColindantesX;
-	 * 
-	 * 
-	 * int cont = 0; int contP = 0;
-	 * 
-	 * boolean detector = true;
-	 * 
-	 * try { FileReader fr = new FileReader(documento); BufferedReader br = new
-	 * BufferedReader(fr); do {
-	 * 
-	 * s = br.readLine();
-	 * 
-	 * if (s != null) {
-	 * 
-	 * 
-	 * String[] ParteTxT = s.split(";");//Guarda toda la String del TxT dividida en
-	 * ;
-	 * 
-	 * NombreCiudades[cont] = ParteTxT[0];//Recibe el Nombre y lo guarga en un Array
-	 * de Nombres Ciudad
-	 * 
-	 * 
-	 * coord[cont] = ParteTxT[1];//Recibe las coordenadas y las pasa a un Array
-	 * Coordenadas
-	 * 
-	 * ParteCoord = coord[cont].split(",");//Divide las coordenadas del Array
-	 * Coordenadas y las pas al dividir2
-	 * 
-	 * coordY[cont] = Integer.parseInt(ParteCoord[0]);//Guarda en el Array
-	 * Coordenadas X la coordenada X
-	 * 
-	 * coordX[cont] = Integer.parseInt(ParteCoord[1]);//Guarda en el Array
-	 * Coordenadas Y la coordenada Y
-	 * 
-	 * 
-	 * virus[cont] = ParteTxT[2]; //Recibe los 4 virus
-	 * 
-	 * ParteVirus = virus[cont].split("-");
-	 * 
-	 * virusRojo[cont] = Integer.parseInt(ParteVirus[0]); virusAmarillo[cont] =
-	 * Integer.parseInt(ParteVirus[1]); virusAzul[cont] =
-	 * Integer.parseInt(ParteVirus[2]); virusVerde[cont] =
-	 * Integer.parseInt(ParteVirus[3]);
-	 * 
-	 * 
-	 * NombresCiudadesColindantesX = ParteTxT[3].split(",");
-	 * 
-	 * CIUDAD ciudad = new CIUDAD(NombreCiudades[cont], coordX[cont], coordY[cont],
-	 * virusRojo[0], virusAmarillo[1], virusAzul[2], virusVerde[3],
-	 * NombresCiudadesColindantesX); System.out.println(ciudad.getNombreCiudad() +
-	 * " " + ciudad.getCoordenadaX() + " " + ciudad.getCoordenadaY() + " " +
-	 * ciudad.getVirusRojo() + " " + ciudad.getVirusAmarillo() + " " +
-	 * ciudad.getVirusAzul() + " " + ciudad.getVirusVerde() + " " +
-	 * ciudad.getNombresCiudadesColindantesX()); ArrayCiudades.add(ciudad); cont++;
-	 * 
-	 * 
-	 * } else { detector = false; }
-	 * 
-	 * 
-	 * } while (detector);
-	 * 
-	 * } catch (IOException e) { System.out.println("ERROR " + e); }
-	 * 
-	 * return ArrayCiudades;
-	 * 
-	 * }
-	 */
 
 }

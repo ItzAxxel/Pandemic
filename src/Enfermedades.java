@@ -4,7 +4,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
-public class Enfermedades extends Ciudad {
+public class Enfermedades {
 
 	// Atributos
 
