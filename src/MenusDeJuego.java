@@ -144,21 +144,47 @@ public class MenusDeJuego {
 		buttonPausa = crearBoton(0, 0, 100, 80, "||");
 		fondoMenuMapaJugable.add(buttonPausa);
 
+		// BOTONES Y OBJETOS CIUDAD
+
+		Random ran = new Random ();
+
+		ArrayList <Ciudad> ArrayCiudades = new ArrayList<>();
+
 		String documento = "ciudades.txt";
 
 		String s;
 
-		String[] Arrayciudades = new String[49];
+		String[] NombreCiudades = new String[48];
 
-		int[][] coord = new int[49][2];
+		String[] ParteCoord;
 
-		String[][] Arrayvecinas = new String[49][];
+		String[] coord = new String[48];
+
+		String[] ParteVirus;
+
+		String[] virus = new String[48];
+
+		int[] virusRojo = new int[48];
+
+		int[] virusAmarillo = new int[48];
+
+		int[] virusAzul = new int[48];
+
+		int[] virusVerde = new int[48];
+
+		int[] coordX = new int[48];
+
+		int[] coordY = new int[48];
+
+		String [] Prueba;
+
+		String[] CiudadesVecinas;
+
 
 		int cont = 0;
+		int contP = 0;
 
 		boolean detector = true;
-
-		Ciudad ciudades = new Ciudad();
 
 		try {
 			FileReader fr = new FileReader(documento);
@@ -169,47 +195,58 @@ public class MenusDeJuego {
 
 				if (s != null) {
 
+
+					String[] ParteTxT = s.split(";");//Guarda toda la String del TxT dividida en ;
+
+					NombreCiudades[cont] = ParteTxT[0];//Recibe el Nombre y lo guarga en un Array de Nombres Ciudad
+
+					// System.out.print(NombreCiudades [cont] + ";");
+
+					coord[cont] = ParteTxT[1];//Recibe las coordenadas y las pasa a un Array Coordenadas
+
+					ParteCoord = coord[cont].split(",");//Divide las coordenadas del Array Coordenadas y las pas al dividir2
+
+					coordY[cont] = Integer.parseInt(ParteCoord[0]);//Guarda en el Array Coordenadas X la coordenada X
+
+					coordX[cont] = Integer.parseInt(ParteCoord[1]);//Guarda en el Array Coordenadas Y la coordenada Y
+
+					//  System.out.print(coordX[cont] + "," +  coordY[cont] + ";");
+
+					virus[cont] = ParteTxT[2]; //Recibe los 4 virus
+
+					ParteVirus = virus[cont].split("-");
+
+					virusRojo[cont] = Integer.parseInt(ParteVirus[0]);
+					virusAmarillo[cont] = Integer.parseInt(ParteVirus[1]);
+					virusAzul[cont] = Integer.parseInt(ParteVirus[2]);
+					virusVerde[cont] = Integer.parseInt(ParteVirus[3]);
+
+					//  System.out.print(virusRojo[cont] + "," + virusAmarillo [cont] + "," + virusAzul [cont] + "," + virusVerde [cont]);
+					// System.out.println();
+
+					// CiudadesVecinas.add(ParteTxT[3]);
+					CiudadesVecinas = ParteTxT[3].split(",");
+
+					Ciudad ciudad = new Ciudad (NombreCiudades[cont], coordX[cont], coordY[cont], virusRojo[0], virusAmarillo[1], virusAzul[2], virusVerde[3], CiudadesVecinas);
+					buttonCiudad = Ciudad.crearBotonCiudad(coordX [cont], coordY[cont], 100, 30, NombreCiudades[cont]);
+					fondoMenuMapaJugable.add(buttonCiudad);
+					System.out.println(ciudad.getNombreCiudad() + " " + ciudad.getCoordenadaX() + " " + ciudad.getCoordenadaY() + " " + ciudad.getVirusRojo() + " " + ciudad.getVirusAmarillo() + " "  + ciudad.getVirusAzul() + " " + ciudad.getVirusVerde() + " " + ciudad.getCiudadesVecinas());
+					ArrayCiudades.add(ciudad);
+					/* CiudadesVecinas.clear(); */
 					cont++;
 
-					String[] temporal = s.split(";");
-					String[] temporalCoords = temporal[2].split(",");
-
-					Arrayciudades[cont] = temporal[0];
-
-					ciudades.setNombreCiudad(Arrayciudades[cont]);
-
-					coord[cont][0] = Integer.parseInt(temporalCoords[0]);
-					
-					ciudades.setCoordenadaX(coord[cont][0]);
-					
-					coord[cont][1] = Integer.parseInt(temporalCoords[1]);
-					
-					ciudades.setCoordenadaY(coord[cont][1]);
-					
-					Arrayvecinas[cont] = temporal[3].split(",");
-					
-					ciudades.setCiudadesVecinas(Arrayvecinas[cont]);
-
-					buttonCiudad = Ciudad.crearBotonCiudad(coord[cont][0], coord[cont][1], 100, 30,
-							Arrayciudades[cont]);
-					fondoMenuMapaJugable.getComponents();
-					fondoMenuMapaJugable.add(buttonCiudad);
-					buttonCiudad.addActionListener(new ActionListener() {
-						@Override
-						public void actionPerformed(ActionEvent arg0) {
-							cl.show(panelCont, "MenuPausa");
-
-						}
-					});
 
 				} else {
 					detector = false;
 				}
 
 			} while (detector);
+
 		} catch (IOException e) {
-			System.out.println("error");
+			System.out.println("ERROR " + e);
 		}
+
+		/////////////////////////////////////////////////////////////////////
 
 		// SISTEMA DE HISTORIAL
 		historial.setBounds(20, 600, 440, 500);
@@ -305,19 +342,7 @@ public class MenusDeJuego {
 		int D3 = Datos[2];
 		int D4 = Datos[3];
 
-		historial.setText(null); // Limpiamos el chat
 
-		/* Bucle de ciudades que se infectaran al inicio */
-		for (int j = 0; j < D1; j++) {
-			historial.append(virus.aleatorioCiudadesInicio() + "\n"); // Ponemos en el historial las ciudades infectadas
-		}
-		/**/
-
-		/* Bucle de ciudades que se infectara por ronda */
-		historial.append("\n");
-		for (int h = 0; h < D2; h++) {
-			virus.aleatorioCiudadesContinuar();
-		}
 
 		/**/
 
@@ -406,13 +431,6 @@ public class MenusDeJuego {
 			public void actionPerformed(ActionEvent arg0) {
 
 				cl.show(panelCont, "RegistrarUsuario");
-
-				historial.setText(null);
-
-				for (int i = 0; i < D1; i++) {
-					historial.append(virus.aleatorioCiudadesInicio() + "\n");
-					virus.aleatorioCiudadesInicio();
-				}
 
 			}
 		});

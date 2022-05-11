@@ -201,140 +201,142 @@ public String aleatorioCiudadesInicio() {
 	*/
 /**/
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.FontFormatException;
-import java.io.BufferedReader;
-import java.io.FileReader;
+import javax.swing.*;
+import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
-import javax.swing.JButton;
-
 public class Ciudad {
 
-	// Atributos
-	protected String nombreCiudad;
-	protected int virusRojo;
-	protected int virusAmarillo;
-	protected int virusAzul;
-	protected int virusVerde;
-	protected int coordenadaX;
-	protected int coordenadaY;
-	protected String[] CiudadesVecinas;
-	public ArrayList<Ciudad> ArrayCiudades = new ArrayList<>();
+    Random ran = new Random();
 
-	// CONSTRUCTOR HECHO POR LA MAQUINA. ESTA FORMA SE DEBE A QUE LOS VALORES POR
+    // Atributos
+    protected String nombreCiudad;
+    protected int virusRojo;
+    protected int virusAmarillo;
+    protected int virusAzul;
+    protected int virusVerde;
+    protected int coordenadaX;
+    protected int coordenadaY;
+    protected String[] CiudadesVecinas;
+    public ArrayList<Ciudad> ArrayCiudades = new ArrayList<>();
 
-	public Ciudad() {
+    // CONSTRUCTOR HECHO POR LA MAQUINA. ESTA FORMA SE DEBE A QUE LOS VALORES POR
 
-	}
+    public Ciudad() {
 
-	public Ciudad(String nombreCiudad, int coordX, int coordY, int Rojo, int Amarillo, int Azul, int Verde,
-			String[] CiudadesVecinas) {
-		this.nombreCiudad = nombreCiudad;
-		this.coordenadaX = coordX;
-		this.coordenadaY = coordY;
-		this.virusRojo = Rojo;
-		this.virusAmarillo = Amarillo;
-		this.virusAzul = Azul;
-		this.virusVerde = Verde;
-		this.CiudadesVecinas = CiudadesVecinas;
-	}
+    }
 
-	// �ESTO SON LOS GETTER Y LOS SETTERS DE ESTA CLASEEEEEE!
+    public Ciudad(String nombreCiudad, int coordX, int coordY, int Rojo, int Amarillo, int Azul, int Verde, String[] CiudadesVecinas) {
+        this.nombreCiudad = nombreCiudad;
+        this.coordenadaX = coordX;
+        this.coordenadaY = coordY;
+        this.virusRojo = Rojo;
+        this.virusAmarillo = Amarillo;
+        this.virusAzul = Azul;
+        this.virusVerde = Verde;
+        this.CiudadesVecinas = CiudadesVecinas;
+    }
 
-	public String getNombreCiudad() {
-		return nombreCiudad;
-	}
+    // �ESTO SON LOS GETTER Y LOS SETTERS DE ESTA CLASEEEEEE!
 
-	public void setNombreCiudad(String nombreCiudad) {
-		this.nombreCiudad = nombreCiudad;
-	}
+    public String getNombreCiudad() {
+        return nombreCiudad;
+    }
 
-	public int getVirusRojo() {
-		return virusRojo;
-	}
+    public void setNombreCiudad(String nombreCiudad) {
+        this.nombreCiudad = nombreCiudad;
+    }
 
-	public void setVirusRojo(int virusRojo) {
-		this.virusRojo = virusRojo;
-	}
+    public int getVirusRojo() {
+        return virusRojo;
+    }
 
-	public int getVirusAmarillo() {
-		return virusAmarillo;
-	}
+    public void setVirusRojo(int virusRojo) {
+        this.virusRojo = virusRojo;
+    }
 
-	public void setVirusAmarillo(int virusAmarillo) {
-		this.virusAmarillo = virusAmarillo;
-	}
+    public int getVirusAmarillo() {
+        return virusAmarillo;
+    }
 
-	public int getVirusAzul() {
-		return virusAzul;
-	}
+    public void setVirusAmarillo(int virusAmarillo) {
+        this.virusAmarillo = virusAmarillo;
+    }
 
-	public void setVirusAzul(int virusAzul) {
-		this.virusAzul = virusAzul;
-	}
+    public int getVirusAzul() {
+        return virusAzul;
+    }
 
-	public int getVirusVerde() {
-		return virusVerde;
-	}
+    public void setVirusAzul(int virusAzul) {
+        this.virusAzul = virusAzul;
+    }
 
-	public void setVirusVerde(int virusVerde) {
-		this.virusVerde = virusVerde;
-	}
+    public int getVirusVerde() {
+        return virusVerde;
+    }
 
-	public int getCoordenadaX() {
-		return coordenadaX;
-	}
+    public void setVirusVerde(int virusVerde) {
+        this.virusVerde = virusVerde;
+    }
 
-	public void setCoordenadaX(int coordenadaX) {
-		this.coordenadaX = coordenadaX;
-	}
+    public int getCoordenadaX() {
+        return coordenadaX;
+    }
 
-	public int getCoordenadaY() {
-		return coordenadaY;
-	}
+    public void setCoordenadaX(int coordenadaX) {
+        this.coordenadaX = coordenadaX;
+    }
 
-	public void setCoordenadaY(int coordenadaY) {
-		this.coordenadaY = coordenadaY;
-	}
+    public int getCoordenadaY() {
+        return coordenadaY;
+    }
 
-	public String[] getCiudadesVecinas() {
-		return CiudadesVecinas;
-	}
+    public void setCoordenadaY(int coordenadaY) {
+        this.coordenadaY = coordenadaY;
+    }
 
-	public void setCiudadesVecinas(String[] CiudadesVecinas) {
-		CiudadesVecinas = CiudadesVecinas;
-	}
+    public String[] getCiudadesVecinas() {
+        return CiudadesVecinas;
+    }
 
-	public ArrayList<Ciudad> getArrayCiudades() {
-		return ArrayCiudades;
-	}
+    public void setCiudadesVecinas(String[] CiudadesVecinas) {
+        CiudadesVecinas = CiudadesVecinas;
+    }
 
-	public void setArrayCiudades(ArrayList<Ciudad> arrayCiudades) {
-		ArrayCiudades = arrayCiudades;
-	}
+    public ArrayList<Ciudad> getArrayCiudades() {
+        return ArrayCiudades;
+    }
 
-	public static JButton crearBotonCiudad(int coordenadaX, int coordenadaY, int width, int height, String nombreCiudad)
-			throws IOException, FontFormatException {
+    public void setArrayCiudades(ArrayList<Ciudad> arrayCiudades) {
+        ArrayCiudades = arrayCiudades;
+    }
+
+
+    // M�todos para poder modificar las enfermedades
+
+
+
+
+    public static JButton crearBotonCiudad(int coordenadaX, int coordenadaY, int width, int height, String nombreCiudad)
+            throws IOException {
 
 		Enfermedades virus = new Enfermedades();
+        Ciudad ciudad = new Ciudad();
 
-		JButton button = new JButton(nombreCiudad);
-		button.setToolTipText(nombreCiudad + " Virus Alfa: " + virus.getAlfa() + " Virus Beta: " + virus.getBeta()
-				+ " Virus Gamma: " + virus.getGamma() + " Virus Delta: " + virus.getDelta());
-		button.setFont(button.getFont().deriveFont(Font.BOLD, 15)); // Añadimos el tamaño de la fuente
-		button.setBounds(coordenadaX, coordenadaY, width, height);// Se establece su posición y tamaño
-		button.setForeground(Color.WHITE); // Color del texto
-		button.setBorder(null); // Seteamos el borde a null
-		button.setOpaque(false); // No lo ponemos opaco
-		button.setContentAreaFilled(false); // No ponemos el contenido del area
-		button.setBorderPainted(false); // Seteamos el borde en false
+        JButton button = new JButton(nombreCiudad);
+        button.setToolTipText("Virus Alfa: " + ciudad.getVirusRojo() + " Virus Beta: " + ciudad.getVirusVerde() + " Virus Gamma: " + ciudad.getVirusAzul() + " Virus Delta: " + ciudad.getVirusAmarillo());
+        button.setFont(button.getFont().deriveFont(Font.BOLD, 15)); // Añadimos el tamaño de la fuente
+        button.setBounds(coordenadaX, coordenadaY, width, height);// Se establece su posición y tamaño
+        button.setForeground(Color.WHITE); // Color del texto
+        button.setBorder(null); // Seteamos el borde a null
+        button.setOpaque(false); // No lo ponemos opaco
+        button.setContentAreaFilled(false); // No ponemos el contenido del area
+        button.setBorderPainted(false); // Seteamos el borde en false
+        System.out.println("Virus Alfa: " + ciudad.getVirusRojo() + " Virus Beta: " + ciudad.getVirusVerde() + " Virus Gamma: " + ciudad.getVirusAzul() + " Virus Delta: " + ciudad.getVirusAmarillo());
+        return button;
 
-		return button;
-
-	}
+    }
 
 }

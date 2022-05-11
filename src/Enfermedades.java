@@ -13,6 +13,7 @@ public class Enfermedades {
 	protected int delta; // Enfermedad amarilla
 	protected int gamma; // Enfermedad verde
 	protected boolean infected; // Comprobaar si est� enfermo
+
 	// Constructores
 
 	public Enfermedades() {
@@ -25,6 +26,7 @@ public class Enfermedades {
 		this.gamma = VirusGamma;
 		this.delta = VirusDelta;
 	}
+
 	// Getters Y setters
 
 	public void setAlfa(int VirusAlfa) {
