@@ -286,10 +286,11 @@ public class MenusDeJuego {
 		historial.setEditable(false);
 		historial.setFont(
 				Font.createFont(Font.TRUETYPE_FONT, new File("src/assets/font/PostNoBillsColombo-ExtraBold.ttf"))); // Añadimos
-																													// fuente
+		Border border = BorderFactory.createLineBorder(Color.decode("#60B13A"), 5); //borde																								// fuente
 																													// personalizada
 		historial.setFont(historial.getFont().deriveFont(Font.PLAIN, 18)); // Ponemos el tamañlo de la fuente
-		historial.setBackground(Color.darkGray);
+		historial.setBorder(border);
+		historial.setBackground(Color.decode("#3F3E3E"));
 		historial.setForeground(Color.white);
 		fondoMenuMapaJugable.add(historial);// Lo añadimos en el Fondo
 		panelMapaJugable.add(fondoMenuMapaJugable);
