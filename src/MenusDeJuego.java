@@ -20,6 +20,7 @@ public class MenusDeJuego {
 
 	// EL FRAME DEL JUEGO
 	Frame Marco = new Frame();
+	Jugador player = new Jugador();
 	int[] Datos = new int[4];
 	// LOS JPANELS DEL JUEGO
 	JPanel panelCont = new JPanel(); // Panel que contiene paneles
@@ -60,8 +61,12 @@ public class MenusDeJuego {
 	JButton buttonReduccion4;
 	JButton buttonCiudad;
 	JButton buttonGuardarConfig;
-
 	JButton buttonGuardarNombreUsuario;
+	JButton buttonVacunaRoja = new JButton();
+	JButton buttonVacunaAmarilla = new JButton();
+	JButton buttonVacunaAzul = new JButton();
+	JButton buttonVacunaVerde = new JButton();
+
 
 	// LABELS TEXT.
 
@@ -79,6 +84,8 @@ public class MenusDeJuego {
 	CardLayout cl = new CardLayout();
 
 	public MenusDeJuego() throws IOException, FontFormatException {
+
+
 
 		// SE ESTABLECE EL TIPO DE LAYOUT EN EL PANEL DE CONTENIDO
 		panelCont.setLayout(cl);
@@ -143,6 +150,32 @@ public class MenusDeJuego {
 
 		buttonPausa = crearBoton(0, 0, 100, 80, "||");
 		fondoMenuMapaJugable.add(buttonPausa);
+
+		//BOTONES VACUNAS
+
+		buttonVacunaRoja.setBounds(427, 817,127,123);
+		buttonVacunaRoja.setBackground(Color.decode("#9E2F2F"));
+
+		buttonVacunaAmarilla.setBounds(300, 817, 127,123);
+		buttonVacunaAmarilla.setBackground(Color.decode("#DFCC25"));
+
+		buttonVacunaAzul.setBounds(427, 940, 127,123);
+		buttonVacunaAzul.setBackground(Color.decode("#4634B7"));
+
+		buttonVacunaVerde.setBounds(300, 940, 127,123);
+		buttonVacunaVerde.setBackground(Color.decode("#60B13A"));
+
+		fondoMenuMapaJugable.add(buttonVacunaRoja);
+		fondoMenuMapaJugable.add(buttonVacunaAmarilla);
+		fondoMenuMapaJugable.add(buttonVacunaAzul);
+		fondoMenuMapaJugable.add(buttonVacunaVerde);
+
+
+
+
+
+
+
 
 		// BOTONES Y OBJETOS CIUDAD
 
@@ -249,7 +282,7 @@ public class MenusDeJuego {
 		/////////////////////////////////////////////////////////////////////
 
 		// SISTEMA DE HISTORIAL
-		historial.setBounds(20, 600, 440, 500);
+		historial.setBounds(428, 817, 700, 246);
 		historial.setEditable(false);
 		historial.setFont(
 				Font.createFont(Font.TRUETYPE_FONT, new File("src/assets/font/PostNoBillsColombo-ExtraBold.ttf"))); // Añadimos
@@ -425,6 +458,68 @@ public class MenusDeJuego {
 		cl.show(panelCont, "Menu");
 
 		// L O S B O T O N E S Y S U S A C C I O N E S //
+
+		buttonVacunaRoja.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				if (player.getAcciones() > 0) {
+					player.InvestigarVacunaRoja();
+					player.setAcciones(player.getAcciones() - 1);
+					System.out.println("AccionesJugador: " + player.getAcciones());
+					System.out.println("NivelVacunaRojo: " + player.getLvlVacunaRoja());
+				} else {
+					System.out.println("No tienes más acciones.");
+
+				}
+
+			}
+		});
+
+		buttonVacunaAmarilla.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+
+				if (player.getAcciones() > 0) {
+					player.InvestigarVacunaAmarilla();
+					player.setAcciones(player.getAcciones() - 1);
+					System.out.println("AccionesJugador: " + player.getAcciones());
+					System.out.println("NivelVacunaRojo: " + player.getLvlVacunaAmarilla());
+				} else {
+					System.out.println("No tienes más acciones.");
+
+				}
+			}
+		});
+
+		buttonVacunaAzul.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+
+				if (player.getAcciones() > 0) {
+					player.InvestigarVacunaRoja();
+					player.setAcciones(player.getAcciones() - 1);
+					System.out.println("AccionesJugador: " + player.getAcciones());
+					System.out.println("NivelVacunaRojo: " + player.getLvlVacunaAzul());
+				} else {
+					System.out.println("No tienes más acciones.");
+				}
+			}
+		});
+
+		buttonVacunaVerde.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				if (player.getAcciones() > 0) {
+					player.InvestigarVacunaVerde();
+					player.setAcciones(player.getAcciones() - 1);
+					System.out.println("AccionesJugador: " + player.getAcciones());
+					System.out.println("NivelVacunaRojo: " + player.getLvlVacunaVerde());
+				} else {
+					System.out.println("No tienes más acciones.");
+
+				}
+			}
+		});
 
 		buttonPartidaNueva.addActionListener(new ActionListener() {
 			@Override
