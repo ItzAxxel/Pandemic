@@ -483,6 +483,7 @@ public class MenusDeJuego {
 					System.out.println("AccionesJugador: " + player.getAcciones());
 					System.out.println("NivelVacunaAmarilla: " + player.getLvlVacunaAmarilla());
 				} else {
+
 					System.out.println("No tienes más acciones.");
 					player.setAcciones(3);
 
