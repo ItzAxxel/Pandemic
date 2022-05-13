@@ -81,13 +81,11 @@ public class MenusDeJuego {
 	public JTextField textoRonda;
 	int ronda = 0;
 	public static MenusDeJuego instance;
-
 	// SE CREA UN OBJETO ES UN MANAGER DE LAYOUTS, EN ESTE CASO CARDLAYOUT
 	CardLayout cl = new CardLayout();
 
 	public MenusDeJuego() throws IOException, FontFormatException {
 
-		
 		// SE ESTABLECE EL TIPO DE LAYOUT EN EL PANEL DE CONTENIDO
 		panelCont.setLayout(cl);
 
@@ -296,7 +294,6 @@ public class MenusDeJuego {
 
 		// SISTEMA DE RONDA (EL TEXTO)
 
-
 		textoRonda = new JTextField("RONDA: " + ronda); // Creamos el texto
 		textoRonda.setBounds(770, 0, 300, 100); // Ponemos las coordenadas
 		textoRonda.setBorder(BorderFactory.createEmptyBorder()); // Quitamos los bordes que trae por defecto
@@ -483,7 +480,6 @@ public class MenusDeJuego {
 					System.out.println("AccionesJugador: " + player.getAcciones());
 					System.out.println("NivelVacunaAmarilla: " + player.getLvlVacunaAmarilla());
 				} else {
-
 					System.out.println("No tienes más acciones.");
 					player.setAcciones(3);
 
@@ -544,10 +540,6 @@ public class MenusDeJuego {
 					String nombreUsuario = introducirNombreUsuario.getText();
 
 					Usuario nombreusuario = new Usuario(nombreUsuario);
-
-					Ranking nombreranking = new Ranking(nombreUsuario);
-
-					nombreranking.insertWithStatement();
 
 					cl.show(panelCont, "MapaJugable");
 				}
@@ -682,6 +674,13 @@ public class MenusDeJuego {
 				buttonContinuarPartida.setForeground(Color.WHITE);
 			}
 			/**/
+		});
+		
+		buttonCiudad.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed (ActionEvent arg0) {
+				cl.show(panelCont, "MenuPausa");
+			}
 		});
 
 		buttonSalirMenu.addActionListener(new ActionListener() {
@@ -835,6 +834,18 @@ public class MenusDeJuego {
 			public void mouseExited(MouseEvent evt) { // Vuelve al color original una vez el raton se
 				// quita del texto
 				buttonGuardarPartida.setForeground(Color.WHITE);
+			}
+		});
+
+		buttonGuardarPartida.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				
+				Usuario nombreusuario = new Usuario();
+				
+				Ranking ranking = new Ranking(nombreusuario.getNombre(), nombreusuario.getPuntos());
+
+				ranking.insertWithStatement();
 			}
 		});
 

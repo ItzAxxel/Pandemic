@@ -5,6 +5,7 @@ public class Jugador {
 	protected int lvlVacunaRoja = 0;
 	protected int lvlVacunaAmarilla = 0;
 	protected int lvlVacunaAzul = 0;
+	protected int puntos = 0;
 
 	public int getLvlVacunaRoja() {
 		return lvlVacunaRoja;
@@ -51,7 +52,7 @@ public class Jugador {
 
 	public void setAcciones(int acciones) {
 		this.acciones = acciones;
-		if(acciones == 0) {
+		if (acciones == 0) {
 			MenusDeJuego.instance.textoRonda.setText("RONDA: " + ++MenusDeJuego.instance.ronda);
 		}
 	}
@@ -66,6 +67,9 @@ public class Jugador {
 
 	public int InvestigarVacunaRoja() {
 		lvlVacunaRoja = lvlVacunaRoja + 1;
+		if (lvlVacunaRoja == 12) {
+			setPuntos(puntos++);
+		}
 		return lvlVacunaRoja;
 	}
 
@@ -82,6 +86,14 @@ public class Jugador {
 	public int InvestigarVacunaVerde() {
 		lvlVacunaVerde = lvlVacunaVerde + 1;
 		return lvlVacunaVerde;
+	}
+	
+	public int getPuntos() {
+		return puntos;
+	}
+	
+	public void setPuntos(int puntos) {
+		this.puntos = puntos;
 	}
 
 }

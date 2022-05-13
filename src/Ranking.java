@@ -7,10 +7,12 @@ public class Ranking {
 	private static final String PWD = "JAXS123";
 	private static final String URL = "jdbc:oracle:thin:@192.168.3.26:1521:xe";
 	private static String nombre;
+	private static int puntos;
 	static Connection connection = null;
 
-	public Ranking(String nombreUsuario) {
+	public Ranking(String nombreUsuario, int Puntos) {
 		nombre = nombreUsuario;
+		puntos = Puntos;
 		connection = makeConnection();
 
 	}
@@ -48,11 +50,14 @@ public class Ranking {
 		}
 	}
 
-	public static void insertWithStatement() {
+	public void insertWithStatement() {
 
 		Usuario nombreusuario = new Usuario(nombre);
 
-		String sql = "INSERT INTO RANKING VALUES ('" + nombreusuario.nombre + "')";
+		Jugador puntosjugador = new Jugador();
+
+		String sql = "INSERT INTO RANKING (nombre, puntosTotales) VALUES ('" + nombreusuario.nombre + "','"
+				+ puntosjugador.puntos + "')";
 
 		try {
 			Statement statement = (Statement) connection.createStatement();
