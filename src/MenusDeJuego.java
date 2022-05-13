@@ -67,7 +67,6 @@ public class MenusDeJuego {
 	JButton buttonVacunaAzul = new JButton();
 	JButton buttonVacunaVerde = new JButton();
 
-
 	// LABELS TEXT.
 
 	JLabel labelCityInfo;
@@ -79,14 +78,16 @@ public class MenusDeJuego {
 	ArrayList<JButton> BotonesCiudad = new ArrayList<JButton>();
 	ArrayList<JLabel> LabelsCiudades = new ArrayList<JLabel>();
 	Enfermedades virus = new Enfermedades();
+	public JTextField textoRonda;
+	int ronda = 0;
+	public static MenusDeJuego instance;
 
 	// SE CREA UN OBJETO ES UN MANAGER DE LAYOUTS, EN ESTE CASO CARDLAYOUT
 	CardLayout cl = new CardLayout();
 
 	public MenusDeJuego() throws IOException, FontFormatException {
 
-
-
+		
 		// SE ESTABLECE EL TIPO DE LAYOUT EN EL PANEL DE CONTENIDO
 		panelCont.setLayout(cl);
 
@@ -151,18 +152,18 @@ public class MenusDeJuego {
 		buttonPausa = crearBoton(0, 0, 100, 80, "||");
 		fondoMenuMapaJugable.add(buttonPausa);
 
-		//BOTONES VACUNAS
+		// BOTONES VACUNAS
 
-		buttonVacunaRoja.setBounds(427, 817,127,123);
+		buttonVacunaRoja.setBounds(427, 817, 127, 123);
 		buttonVacunaRoja.setBackground(Color.decode("#9E2F2F"));
 
-		buttonVacunaAmarilla.setBounds(300, 817, 127,123);
+		buttonVacunaAmarilla.setBounds(300, 817, 127, 123);
 		buttonVacunaAmarilla.setBackground(Color.decode("#DFCC25"));
 
-		buttonVacunaAzul.setBounds(427, 940, 127,123);
+		buttonVacunaAzul.setBounds(427, 940, 127, 123);
 		buttonVacunaAzul.setBackground(Color.decode("#4634B7"));
 
-		buttonVacunaVerde.setBounds(300, 940, 127,123);
+		buttonVacunaVerde.setBounds(300, 940, 127, 123);
 		buttonVacunaVerde.setBackground(Color.decode("#60B13A"));
 
 		fondoMenuMapaJugable.add(buttonVacunaRoja);
@@ -170,18 +171,11 @@ public class MenusDeJuego {
 		fondoMenuMapaJugable.add(buttonVacunaAzul);
 		fondoMenuMapaJugable.add(buttonVacunaVerde);
 
-
-
-
-
-
-
-
 		// BOTONES Y OBJETOS CIUDAD
 
-		Random ran = new Random ();
+		Random ran = new Random();
 
-		ArrayList <Ciudad> ArrayCiudades = new ArrayList<>();
+		ArrayList<Ciudad> ArrayCiudades = new ArrayList<>();
 
 		String documento = "ciudades.txt";
 
@@ -209,10 +203,9 @@ public class MenusDeJuego {
 
 		int[] coordY = new int[48];
 
-		String [] Prueba;
+		String[] Prueba;
 
 		String[] CiudadesVecinas;
-
 
 		int cont = 0;
 		int contP = 0;
@@ -228,24 +221,24 @@ public class MenusDeJuego {
 
 				if (s != null) {
 
+					String[] ParteTxT = s.split(";");// Guarda toda la String del TxT dividida en ;
 
-					String[] ParteTxT = s.split(";");//Guarda toda la String del TxT dividida en ;
-
-					NombreCiudades[cont] = ParteTxT[0];//Recibe el Nombre y lo guarga en un Array de Nombres Ciudad
+					NombreCiudades[cont] = ParteTxT[0];// Recibe el Nombre y lo guarga en un Array de Nombres Ciudad
 
 					// System.out.print(NombreCiudades [cont] + ";");
 
-					coord[cont] = ParteTxT[1];//Recibe las coordenadas y las pasa a un Array Coordenadas
+					coord[cont] = ParteTxT[1];// Recibe las coordenadas y las pasa a un Array Coordenadas
 
-					ParteCoord = coord[cont].split(",");//Divide las coordenadas del Array Coordenadas y las pas al dividir2
+					ParteCoord = coord[cont].split(",");// Divide las coordenadas del Array Coordenadas y las pas al
+														// dividir2
 
-					coordY[cont] = Integer.parseInt(ParteCoord[0]);//Guarda en el Array Coordenadas X la coordenada X
+					coordY[cont] = Integer.parseInt(ParteCoord[0]);// Guarda en el Array Coordenadas X la coordenada X
 
-					coordX[cont] = Integer.parseInt(ParteCoord[1]);//Guarda en el Array Coordenadas Y la coordenada Y
+					coordX[cont] = Integer.parseInt(ParteCoord[1]);// Guarda en el Array Coordenadas Y la coordenada Y
 
-					//  System.out.print(coordX[cont] + "," +  coordY[cont] + ";");
+					// System.out.print(coordX[cont] + "," + coordY[cont] + ";");
 
-					virus[cont] = ParteTxT[2]; //Recibe los 4 virus
+					virus[cont] = ParteTxT[2]; // Recibe los 4 virus
 
 					ParteVirus = virus[cont].split("-");
 
@@ -254,20 +247,24 @@ public class MenusDeJuego {
 					virusAzul[cont] = Integer.parseInt(ParteVirus[2]);
 					virusVerde[cont] = Integer.parseInt(ParteVirus[3]);
 
-					//  System.out.print(virusRojo[cont] + "," + virusAmarillo [cont] + "," + virusAzul [cont] + "," + virusVerde [cont]);
+					// System.out.print(virusRojo[cont] + "," + virusAmarillo [cont] + "," +
+					// virusAzul [cont] + "," + virusVerde [cont]);
 					// System.out.println();
 
 					// CiudadesVecinas.add(ParteTxT[3]);
 					CiudadesVecinas = ParteTxT[3].split(",");
 
-					Ciudad ciudad = new Ciudad (NombreCiudades[cont], coordX[cont], coordY[cont], virusRojo[0], virusAmarillo[1], virusAzul[2], virusVerde[3], CiudadesVecinas);
-					buttonCiudad = Ciudad.crearBotonCiudad(coordX [cont], coordY[cont], 100, 30, NombreCiudades[cont]);
+					Ciudad ciudad = new Ciudad(NombreCiudades[cont], coordX[cont], coordY[cont], virusRojo[0],
+							virusAmarillo[1], virusAzul[2], virusVerde[3], CiudadesVecinas);
+					buttonCiudad = Ciudad.crearBotonCiudad(coordX[cont], coordY[cont], 100, 30, NombreCiudades[cont]);
 					fondoMenuMapaJugable.add(buttonCiudad);
-					System.out.println(ciudad.getNombreCiudad() + " " + ciudad.getCoordenadaX() + " " + ciudad.getCoordenadaY() + " " + ciudad.getVirusRojo() + " " + ciudad.getVirusAmarillo() + " "  + ciudad.getVirusAzul() + " " + ciudad.getVirusVerde() + " " + ciudad.getCiudadesVecinas());
+					System.out.println(ciudad.getNombreCiudad() + " " + ciudad.getCoordenadaX() + " "
+							+ ciudad.getCoordenadaY() + " " + ciudad.getVirusRojo() + " " + ciudad.getVirusAmarillo()
+							+ " " + ciudad.getVirusAzul() + " " + ciudad.getVirusVerde() + " "
+							+ ciudad.getCiudadesVecinas());
 					ArrayCiudades.add(ciudad);
 					/* CiudadesVecinas.clear(); */
 					cont++;
-
 
 				} else {
 					detector = false;
@@ -286,8 +283,8 @@ public class MenusDeJuego {
 		historial.setEditable(false);
 		historial.setFont(
 				Font.createFont(Font.TRUETYPE_FONT, new File("src/assets/font/PostNoBillsColombo-ExtraBold.ttf"))); // Añadimos
-		Border border = BorderFactory.createLineBorder(Color.decode("#60B13A"), 5); //borde																								// fuente
-																													// personalizada
+		Border border = BorderFactory.createLineBorder(Color.decode("#60B13A"), 5); // borde // fuente
+																					// personalizada
 		historial.setFont(historial.getFont().deriveFont(Font.PLAIN, 18)); // Ponemos el tamañlo de la fuente
 		historial.setBorder(border);
 		historial.setBackground(Color.decode("#3F3E3E"));
@@ -298,7 +295,9 @@ public class MenusDeJuego {
 		/* Bucle para las cuidades vecinas */
 
 		// SISTEMA DE RONDA (EL TEXTO)
-		JTextField textoRonda = new JTextField("RONDA: "); // Creamos el texto
+
+
+		textoRonda = new JTextField("RONDA: " + ronda); // Creamos el texto
 		textoRonda.setBounds(770, 0, 300, 100); // Ponemos las coordenadas
 		textoRonda.setBorder(BorderFactory.createEmptyBorder()); // Quitamos los bordes que trae por defecto
 		textoRonda.setOpaque(false); // Ponemos en transparente el fondo
@@ -375,8 +374,6 @@ public class MenusDeJuego {
 		int D2 = Datos[1];
 		int D3 = Datos[2];
 		int D4 = Datos[3];
-
-
 
 		/**/
 
@@ -470,7 +467,7 @@ public class MenusDeJuego {
 					System.out.println("NivelVacunaRojo: " + player.getLvlVacunaRoja());
 				} else {
 					System.out.println("No tienes más acciones.");
-
+					player.setAcciones(4);
 				}
 
 			}
@@ -484,9 +481,10 @@ public class MenusDeJuego {
 					player.InvestigarVacunaAmarilla();
 					player.setAcciones(player.getAcciones() - 1);
 					System.out.println("AccionesJugador: " + player.getAcciones());
-					System.out.println("NivelVacunaRojo: " + player.getLvlVacunaAmarilla());
+					System.out.println("NivelVacunaAmarilla: " + player.getLvlVacunaAmarilla());
 				} else {
 					System.out.println("No tienes más acciones.");
+					player.setAcciones(4);
 
 				}
 			}
@@ -497,12 +495,14 @@ public class MenusDeJuego {
 			public void actionPerformed(ActionEvent arg0) {
 
 				if (player.getAcciones() > 0) {
-					player.InvestigarVacunaRoja();
+					player.InvestigarVacunaAzul();
 					player.setAcciones(player.getAcciones() - 1);
 					System.out.println("AccionesJugador: " + player.getAcciones());
-					System.out.println("NivelVacunaRojo: " + player.getLvlVacunaAzul());
+					System.out.println("NivelVacunaAzul: " + player.getLvlVacunaAzul());
 				} else {
 					System.out.println("No tienes más acciones.");
+					player.setAcciones(4);
+
 				}
 			}
 		});
@@ -514,9 +514,10 @@ public class MenusDeJuego {
 					player.InvestigarVacunaVerde();
 					player.setAcciones(player.getAcciones() - 1);
 					System.out.println("AccionesJugador: " + player.getAcciones());
-					System.out.println("NivelVacunaRojo: " + player.getLvlVacunaVerde());
+					System.out.println("NivelVacunaVerde: " + player.getLvlVacunaVerde());
 				} else {
 					System.out.println("No tienes más acciones.");
+					player.setAcciones(4);
 
 				}
 			}
