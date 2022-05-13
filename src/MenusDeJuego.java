@@ -467,7 +467,7 @@ public class MenusDeJuego {
 					System.out.println("NivelVacunaRojo: " + player.getLvlVacunaRoja());
 				} else {
 					System.out.println("No tienes más acciones.");
-					player.setAcciones(4);
+					player.setAcciones(3);
 				}
 
 			}
@@ -484,7 +484,7 @@ public class MenusDeJuego {
 					System.out.println("NivelVacunaAmarilla: " + player.getLvlVacunaAmarilla());
 				} else {
 					System.out.println("No tienes más acciones.");
-					player.setAcciones(4);
+					player.setAcciones(3);
 
 				}
 			}
@@ -501,7 +501,7 @@ public class MenusDeJuego {
 					System.out.println("NivelVacunaAzul: " + player.getLvlVacunaAzul());
 				} else {
 					System.out.println("No tienes más acciones.");
-					player.setAcciones(4);
+					player.setAcciones(3);
 
 				}
 			}
@@ -517,7 +517,7 @@ public class MenusDeJuego {
 					System.out.println("NivelVacunaVerde: " + player.getLvlVacunaVerde());
 				} else {
 					System.out.println("No tienes más acciones.");
-					player.setAcciones(4);
+					player.setAcciones(3);
 
 				}
 			}
