@@ -1,3 +1,5 @@
+import java.awt.FontFormatException;
+import java.io.IOException;
 import java.sql.*;
 import java.util.Scanner;
 
@@ -40,7 +42,7 @@ public class Ranking {
 	}
 
 	public static void closeConnection(Connection con) {
-		// cierra la conexión
+		// cierra la conexiï¿½n
 		try {
 			con.close();
 
@@ -54,10 +56,10 @@ public class Ranking {
 
 		Usuario nombreusuario = new Usuario(nombre);
 
-		Jugador puntosjugador = new Jugador();
+		System.out.println(nombreusuario);
 
-		String sql = "INSERT INTO RANKING (nombre, puntosTotales) VALUES ('" + nombreusuario.nombre + "','"
-				+ puntosjugador.puntos + "')";
+		String sql = "INSERT INTO RANKING (nombre, puntosTotales) VALUES ('" + nombreusuario.nombre + "','" + puntos
+				+ "')";
 
 		try {
 			Statement statement = (Statement) connection.createStatement();
@@ -68,6 +70,29 @@ public class Ranking {
 			System.out.println("The Insert had problems!! " + e);
 
 		}
+	}
+
+	public void insertWithStatement2() {
+
+		Usuario nombreusuario = new Usuario(nombre);
+		
+		Usuario puntosusuario = new Usuario(puntos);
+
+		System.out.println(nombreusuario);
+
+		String sql = "UPDATE RANKING SET puntosTotales = '" + puntosusuario.puntos + "'WHERE nombre = '" + nombreusuario.nombre
+				+ "'";
+
+		try {
+			Statement statement = (Statement) connection.createStatement();
+			statement.execute(sql);
+			statement.close();
+
+		} catch (SQLException e) {
+			System.out.println("The Insert had problems!! " + e);
+
+		}
+
 	}
 
 }

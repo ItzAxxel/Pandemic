@@ -20,7 +20,6 @@ public class MenusDeJuego {
 
 	// EL FRAME DEL JUEGO
 	Frame Marco = new Frame();
-	Jugador player = new Jugador();
 	int[] Datos = new int[4];
 	// LOS JPANELS DEL JUEGO
 	JPanel panelCont = new JPanel(); // Panel que contiene paneles
@@ -75,6 +74,8 @@ public class MenusDeJuego {
 	JLabel NEDerrota;
 	JLabel NBDerrota;
 
+	String nombreusuario; // jugador
+
 	ArrayList<JButton> BotonesCiudad = new ArrayList<JButton>();
 	ArrayList<JLabel> LabelsCiudades = new ArrayList<JLabel>();
 	Enfermedades virus = new Enfermedades();
@@ -83,6 +84,17 @@ public class MenusDeJuego {
 	public static MenusDeJuego instance;
 	// SE CREA UN OBJETO ES UN MANAGER DE LAYOUTS, EN ESTE CASO CARDLAYOUT
 	CardLayout cl = new CardLayout();
+
+	// PARA LAS VACUNAS
+
+	protected int acciones = 4;
+
+	protected int lvlVacunaRoja = 0;
+	protected int lvlVacunaAmarilla = 0;
+	protected int lvlVacunaAzul = 0;
+	protected int lvlVacunaVerde = 0;
+
+	int puntos = 0;
 
 	public MenusDeJuego() throws IOException, FontFormatException {
 
@@ -457,15 +469,23 @@ public class MenusDeJuego {
 		buttonVacunaRoja.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				if (player.getAcciones() > 0) {
-					player.InvestigarVacunaRoja();
-					player.setAcciones(player.getAcciones() - 1);
-					System.out.println("AccionesJugador: " + player.getAcciones());
-					System.out.println("NivelVacunaRojo: " + player.getLvlVacunaRoja());
+				if (acciones > 0) {
+					lvlVacunaRoja++;
+					acciones--;
+					System.out.println("AccionesJugador: " + acciones);
+					System.out.println("NivelVacunaRojo: " + lvlVacunaRoja);
+					if (lvlVacunaRoja == 12) {
+						puntos += 5;
+
+					}
 				} else {
 					System.out.println("No tienes más acciones.");
-					player.setAcciones(3);
+					if (acciones == 0) {
+						MenusDeJuego.instance.textoRonda.setText("RONDA: " + ++MenusDeJuego.instance.ronda);
+					}
+					acciones = 4;
 				}
+
 
 			}
 		});
@@ -474,16 +494,24 @@ public class MenusDeJuego {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 
-				if (player.getAcciones() > 0) {
-					player.InvestigarVacunaAmarilla();
-					player.setAcciones(player.getAcciones() - 1);
-					System.out.println("AccionesJugador: " + player.getAcciones());
-					System.out.println("NivelVacunaAmarilla: " + player.getLvlVacunaAmarilla());
+				if (acciones > 0) {
+					lvlVacunaAmarilla++;
+					acciones--;
+					System.out.println("AccionesJugador: " + acciones);
+					System.out.println("NivelVacunaAmarilla: " + lvlVacunaAmarilla);
+					if (lvlVacunaAmarilla == 12) {
+						puntos += 5;
+
+					}
 				} else {
 					System.out.println("No tienes más acciones.");
-					player.setAcciones(3);
+					if (acciones == 0) {
+						MenusDeJuego.instance.textoRonda.setText("RONDA: " + ++MenusDeJuego.instance.ronda);
+					}
+					acciones = 4;
 
 				}
+
 			}
 		});
 
@@ -491,14 +519,21 @@ public class MenusDeJuego {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 
-				if (player.getAcciones() > 0) {
-					player.InvestigarVacunaAzul();
-					player.setAcciones(player.getAcciones() - 1);
-					System.out.println("AccionesJugador: " + player.getAcciones());
-					System.out.println("NivelVacunaAzul: " + player.getLvlVacunaAzul());
+				if (acciones > 0) {
+					lvlVacunaAzul++;
+					acciones--;
+					System.out.println("AccionesJugador: " + acciones);
+					System.out.println("NivelVacunaAzul: " + lvlVacunaAzul);
+					if (lvlVacunaAzul == 12) {
+						puntos += 5;
+
+					}
 				} else {
 					System.out.println("No tienes más acciones.");
-					player.setAcciones(3);
+					if (acciones == 0) {
+						MenusDeJuego.instance.textoRonda.setText("RONDA: " + ++MenusDeJuego.instance.ronda);
+					}
+					acciones = 4;
 
 				}
 			}
@@ -507,14 +542,21 @@ public class MenusDeJuego {
 		buttonVacunaVerde.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				if (player.getAcciones() > 0) {
-					player.InvestigarVacunaVerde();
-					player.setAcciones(player.getAcciones() - 1);
-					System.out.println("AccionesJugador: " + player.getAcciones());
-					System.out.println("NivelVacunaVerde: " + player.getLvlVacunaVerde());
+				if (acciones > 0) {
+					lvlVacunaVerde++;
+					acciones--;
+					System.out.println("AccionesJugador: " + acciones);
+					System.out.println("NivelVacunaVerde: " + lvlVacunaVerde);
+					if (lvlVacunaVerde == 12) {
+						puntos += 5;
+
+					}
 				} else {
 					System.out.println("No tienes más acciones.");
-					player.setAcciones(3);
+					if (acciones == 0) {
+						MenusDeJuego.instance.textoRonda.setText("RONDA: " + ++MenusDeJuego.instance.ronda);
+					}
+					acciones = 4;
 
 				}
 			}
@@ -541,7 +583,12 @@ public class MenusDeJuego {
 
 					Usuario nombreusuario = new Usuario(nombreUsuario);
 
+					Ranking ranking = new Ranking(nombreusuario.nombre, 0);
+
 					cl.show(panelCont, "MapaJugable");
+
+					ranking.insertWithStatement();
+
 				}
 			}
 		});
@@ -675,10 +722,10 @@ public class MenusDeJuego {
 			}
 			/**/
 		});
-		
+
 		buttonCiudad.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed (ActionEvent arg0) {
+			public void actionPerformed(ActionEvent arg0) {
 				cl.show(panelCont, "MenuPausa");
 			}
 		});
@@ -840,12 +887,14 @@ public class MenusDeJuego {
 		buttonGuardarPartida.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				
-				Usuario nombreusuario = new Usuario();
-				
-				Ranking ranking = new Ranking(nombreusuario.getNombre(), nombreusuario.getPuntos());
 
-				ranking.insertWithStatement();
+				nombreusuario = introducirNombreUsuario.getText();
+
+				Ranking ranking = new Ranking(nombreusuario, puntos);
+
+				ranking.insertWithStatement2();
+				// TODO Auto-generated catch block
+
 			}
 		});
 

@@ -11,6 +11,7 @@ public class Usuario {
 	}
 	
 	public Usuario(int puntos) {
+		super();
 		this.puntos = puntos;
 
 	}
