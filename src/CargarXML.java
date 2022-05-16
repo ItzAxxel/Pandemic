@@ -19,9 +19,22 @@ import java.io.IOException;
 import java.util.EventObject;
 import java.util.Scanner;
 
+/**
+ * The type Cargar xml.
+ */
 public class CargarXML {
 
-	public static void editar(Document texto, Node hijo, String numCiudadesInfectadasInicio,
+    /**
+     * Editar.
+     *
+     * @param texto                         the texto
+     * @param hijo                          the hijo
+     * @param numCiudadesInfectadasInicio   the num ciudades infectadas inicio
+     * @param numCuidadesInfectadasRonda    the num cuidades infectadas ronda
+     * @param numEnfermedadesActivasDerrota the num enfermedades activas derrota
+     * @param numBrotesDerrota              the num brotes derrota
+     */
+    public static void editar(Document texto, Node hijo, String numCiudadesInfectadasInicio,
 			String numCuidadesInfectadasRonda, String numEnfermedadesActivasDerrota, String numBrotesDerrota) {
 
 		try {
@@ -58,7 +71,12 @@ public class CargarXML {
 
 	}
 
-	public int[] ObtenerDatosXML() {
+    /**
+     * Obtener datos xml int [ ].
+     *
+     * @return the int [ ]
+     */
+    public int[] ObtenerDatosXML() {
 		int[] Datos = new int[4];
 
 		Scanner tec = new Scanner(System.in);
@@ -114,10 +132,17 @@ public class CargarXML {
 
 		return Datos;
 	}
-	
-	
 
-	public void preCargarDatosXML(String D1, String D2, String D3, String D4) {
+
+    /**
+     * Pre cargar datos xml.
+     *
+     * @param D1 the d 1
+     * @param D2 the d 2
+     * @param D3 the d 3
+     * @param D4 the d 4
+     */
+    public void preCargarDatosXML(String D1, String D2, String D3, String D4) {
 
 		String numCiudadesInfectadasInicio = null;
 

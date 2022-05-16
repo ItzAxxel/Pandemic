@@ -1,71 +1,163 @@
+/**
+ * The type Jugador.
+ */
 public class Jugador {
 
-	protected int acciones;
-	protected String nombreJugador;
-	protected int lvlVacunaRoja = 0;
-	protected int lvlVacunaAmarilla = 0;
-	protected int lvlVacunaAzul = 0;
-	protected int puntos = 0;
+    /**
+     * The Acciones.
+     */
+    protected int acciones;
+    /**
+     * The Nombre jugador.
+     */
+    protected String nombreJugador;
+    /**
+     * The Lvl vacuna roja.
+     */
+    protected int lvlVacunaRoja = 0;
+    /**
+     * The Lvl vacuna amarilla.
+     */
+    protected int lvlVacunaAmarilla = 0;
+    /**
+     * The Lvl vacuna azul.
+     */
+    protected int lvlVacunaAzul = 0;
+    /**
+     * The Puntos.
+     */
+    protected int puntos = 0;
 
-	public int getLvlVacunaRoja() {
+    /**
+     * Gets lvl vacuna roja.
+     *
+     * @return the lvl vacuna roja
+     */
+    public int getLvlVacunaRoja() {
 		return lvlVacunaRoja;
 	}
 
-	public void setLvlVacunaRoja(int lvlVacunaRoja) {
+    /**
+     * Sets lvl vacuna roja.
+     *
+     * @param lvlVacunaRoja the lvl vacuna roja
+     */
+    public void setLvlVacunaRoja(int lvlVacunaRoja) {
 		this.lvlVacunaRoja = lvlVacunaRoja;
 	}
 
-	public int getLvlVacunaAmarilla() {
+    /**
+     * Gets lvl vacuna amarilla.
+     *
+     * @return the lvl vacuna amarilla
+     */
+    public int getLvlVacunaAmarilla() {
 		return lvlVacunaAmarilla;
 	}
 
-	public void setLvlVacunaAmarilla(int lvlVacunaAmarilla) {
+    /**
+     * Sets lvl vacuna amarilla.
+     *
+     * @param lvlVacunaAmarilla the lvl vacuna amarilla
+     */
+    public void setLvlVacunaAmarilla(int lvlVacunaAmarilla) {
 		this.lvlVacunaAmarilla = lvlVacunaAmarilla;
 	}
 
-	public int getLvlVacunaAzul() {
+    /**
+     * Gets lvl vacuna azul.
+     *
+     * @return the lvl vacuna azul
+     */
+    public int getLvlVacunaAzul() {
 		return lvlVacunaAzul;
 	}
 
-	public void setLvlVacunaAzul(int lvlVacunaAzul) {
+    /**
+     * Sets lvl vacuna azul.
+     *
+     * @param lvlVacunaAzul the lvl vacuna azul
+     */
+    public void setLvlVacunaAzul(int lvlVacunaAzul) {
 		this.lvlVacunaAzul = lvlVacunaAzul;
 	}
 
-	public int getLvlVacunaVerde() {
+    /**
+     * Gets lvl vacuna verde.
+     *
+     * @return the lvl vacuna verde
+     */
+    public int getLvlVacunaVerde() {
 		return lvlVacunaVerde;
 	}
 
-	public void setLvlVacunaVerde(int lvlVacunaVerde) {
+    /**
+     * Sets lvl vacuna verde.
+     *
+     * @param lvlVacunaVerde the lvl vacuna verde
+     */
+    public void setLvlVacunaVerde(int lvlVacunaVerde) {
 		this.lvlVacunaVerde = lvlVacunaVerde;
 	}
 
-	protected int lvlVacunaVerde = 0;
+    /**
+     * The Lvl vacuna verde.
+     */
+    protected int lvlVacunaVerde = 0;
 
-	public Jugador() {
+    /**
+     * Instantiates a new Jugador.
+     */
+    public Jugador() {
 		this.acciones = 4;
 		this.nombreJugador = nombreJugador;
 	}
 
-	public int getAcciones() {
+    /**
+     * Gets acciones.
+     *
+     * @return the acciones
+     */
+    public int getAcciones() {
 		return acciones;
 	}
 
-	public void setAcciones(int acciones) {
+    /**
+     * Sets acciones.
+     *
+     * @param acciones the acciones
+     */
+    public void setAcciones(int acciones) {
 		this.acciones = acciones;
 		if (acciones == 0) {
 			MenusDeJuego.instance.textoRonda.setText("RONDA: " + ++MenusDeJuego.instance.ronda);
 		}
 	}
 
-	public String getNombreJugador() {
+    /**
+     * Gets nombre jugador.
+     *
+     * @return the nombre jugador
+     */
+    public String getNombreJugador() {
 		return nombreJugador;
 	}
 
-	public void setNombreJugador(String nombreJugador) {
+    /**
+     * Sets nombre jugador.
+     *
+     * @param nombreJugador the nombre jugador
+     */
+    public void setNombreJugador(String nombreJugador) {
 		this.nombreJugador = nombreJugador;
 	}
 
-	public int InvestigarVacunaRoja() {
+    /**
+     * Investigar vacuna roja int.
+     *
+     * @return the int
+     */
+    public int InvestigarVacunaRoja() {
 		lvlVacunaRoja = lvlVacunaRoja + 1;
 		if (lvlVacunaRoja == 12) {
 			setPuntos(puntos++);
@@ -73,26 +165,51 @@ public class Jugador {
 		return lvlVacunaRoja;
 	}
 
-	public int InvestigarVacunaAmarilla() {
+    /**
+     * Investigar vacuna amarilla int.
+     *
+     * @return the int
+     */
+    public int InvestigarVacunaAmarilla() {
 		lvlVacunaAmarilla = lvlVacunaAmarilla + 1;
 		return lvlVacunaAmarilla;
 	}
 
-	public int InvestigarVacunaAzul() {
+    /**
+     * Investigar vacuna azul int.
+     *
+     * @return the int
+     */
+    public int InvestigarVacunaAzul() {
 		lvlVacunaAzul = lvlVacunaAzul + 1;
 		return lvlVacunaAzul;
 	}
 
-	public int InvestigarVacunaVerde() {
+    /**
+     * Investigar vacuna verde int.
+     *
+     * @return the int
+     */
+    public int InvestigarVacunaVerde() {
 		lvlVacunaVerde = lvlVacunaVerde + 1;
 		return lvlVacunaVerde;
 	}
-	
-	public int getPuntos() {
+
+    /**
+     * Gets puntos.
+     *
+     * @return the puntos
+     */
+    public int getPuntos() {
 		return puntos;
 	}
-	
-	public void setPuntos(int puntos) {
+
+    /**
+     * Sets puntos.
+     *
+     * @param puntos the puntos
+     */
+    public void setPuntos(int puntos) {
 		this.puntos = puntos;
 	}
 

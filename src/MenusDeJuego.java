@@ -16,87 +16,281 @@ import java.util.Random;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 
+/**
+ * The type Menus de juego.
+ */
 public class MenusDeJuego {
 
-	// EL FRAME DEL JUEGO
+    /**
+     * The Marco.
+     */
+// EL FRAME DEL JUEGO
 	Frame Marco = new Frame();
-	int[] Datos = new int[4];
-	// LOS JPANELS DEL JUEGO
+    /**
+     * The Datos.
+     */
+    int[] Datos = new int[4];
+    /**
+     * The Panel cont.
+     */
+// LOS JPANELS DEL JUEGO
 	JPanel panelCont = new JPanel(); // Panel que contiene paneles
-	JPanel panelMenu = new JPanel();
-	JPanel panelInfo = new JPanel();
-	JPanel panelAutores = new JPanel();
-	JPanel panelReglas = new JPanel();
-	JPanel panelRegistarUsuario = new JPanel();
-	JPanel panelMapaJugable = new JPanel();
-	JPanel panelMenuPausa = new JPanel();
-	JPanel panelConfiguracion = new JPanel();
-	JTextArea historial = new JTextArea();
+    /**
+     * The Panel menu.
+     */
+    JPanel panelMenu = new JPanel();
+    /**
+     * The Panel info.
+     */
+    JPanel panelInfo = new JPanel();
+    /**
+     * The Panel autores.
+     */
+    JPanel panelAutores = new JPanel();
+    /**
+     * The Panel reglas.
+     */
+	JPanel panelRanking = new JPanel();
+    JPanel panelReglas = new JPanel();
+    /**
+     * The Panel registar usuario.
+     */
+    JPanel panelRegistarUsuario = new JPanel();
+    /**
+     * The Panel mapa jugable.
+     */
+    JPanel panelMapaJugable = new JPanel();
+    /**
+     * The Panel menu pausa.
+     */
+    JPanel panelMenuPausa = new JPanel();
+    /**
+     * The Panel configuracion.
+     */
+    JPanel panelConfiguracion = new JPanel();
+    /**
+     * The Historial.
+     */
+    JTextArea historial = new JTextArea();
 
 	// LOS JBUTTONS DEL JUEGO
 
-	JButton buttonPartidaNueva;
-	JButton buttonConfiguracion;
-	JButton buttonCargarPartida;
-	JButton buttonInformacion;
-	JButton buttonAutores;
-	JButton buttonReglas;
-	JButton buttonVolverMenu;
-	JButton buttonVolverInfoA;
-	JButton buttonVolverR;
-	JButton buttonVolverC;
-	JButton buttonPausa;
-	JButton buttonSalir;
-	JButton buttonGuardarPartida;
-	JButton buttonContinuarPartida;
-	JButton buttonSalirMenu;
-	JButton buttonAumento;
-	JButton buttonReduccion;
-	JButton buttonAumento2;
-	JButton buttonReduccion2;
-	JButton buttonAumento3;
-	JButton buttonReduccion3;
-	JButton buttonAumento4;
-	JButton buttonReduccion4;
-	JButton buttonCiudad;
-	JButton buttonGuardarConfig;
-	JButton buttonGuardarNombreUsuario;
-	JButton buttonVacunaRoja = new JButton();
-	JButton buttonVacunaAmarilla = new JButton();
-	JButton buttonVacunaAzul = new JButton();
-	JButton buttonVacunaVerde = new JButton();
+    /**
+     * The Button partida nueva.
+     */
+    JButton buttonPartidaNueva;
+    /**
+     * The Button configuracion.
+     */
+    JButton buttonConfiguracion;
+    /**
+     * The Button cargar partida.
+     */
+    JButton buttonCargarPartida;
+    /**
+     * The Button informacion.
+     */
+    JButton buttonInformacion;
+	JButton buttonRanking;
+    /**
+     * The Button autores.
+     */
+    JButton buttonAutores;
+    /**
+     * The Button reglas.
+     */
+    JButton buttonReglas;
+    /**
+     * The Button volver menu.
+     */
+    JButton buttonVolverMenu;
+    /**
+     * The Button volver info a.
+     */
+    JButton buttonVolverInfoA;
+    /**
+     * The Button volver r.
+     */
+    JButton buttonVolverR;
+    /**
+     * The Button volver c.
+     */
+    JButton buttonVolverC;
+    /**
+     * The Button pausa.
+     */
+    JButton buttonPausa;
+    /**
+     * The Button salir.
+     */
+    JButton buttonSalir;
+    /**
+     * The Button guardar partida.
+     */
+    JButton buttonGuardarPartida;
+    /**
+     * The Button continuar partida.
+     */
+    JButton buttonContinuarPartida;
+    /**
+     * The Button salir menu.
+     */
+    JButton buttonSalirMenu;
+    /**
+     * The Button aumento.
+     */
+    JButton buttonAumento;
+    /**
+     * The Button reduccion.
+     */
+    JButton buttonReduccion;
+    /**
+     * The Button aumento 2.
+     */
+    JButton buttonAumento2;
+    /**
+     * The Button reduccion 2.
+     */
+    JButton buttonReduccion2;
+    /**
+     * The Button aumento 3.
+     */
+    JButton buttonAumento3;
+    /**
+     * The Button reduccion 3.
+     */
+    JButton buttonReduccion3;
+    /**
+     * The Button aumento 4.
+     */
+    JButton buttonAumento4;
+    /**
+     * The Button reduccion 4.
+     */
+    JButton buttonReduccion4;
+    /**
+     * The Button ciudad.
+     */
+    JButton buttonCiudad;
+    /**
+     * The Button guardar config.
+     */
+    JButton buttonGuardarConfig;
+    /**
+     * The Button guardar nombre usuario.
+     */
+    JButton buttonGuardarNombreUsuario;
+    /**
+     * The Button vacuna roja.
+     */
+    JButton buttonVacunaRoja = new JButton();
+    /**
+     * The Button vacuna amarilla.
+     */
+    JButton buttonVacunaAmarilla = new JButton();
+    /**
+     * The Button vacuna azul.
+     */
+    JButton buttonVacunaAzul = new JButton();
+    /**
+     * The Button vacuna verde.
+     */
+    JButton buttonVacunaVerde = new JButton();
 
 	// LABELS TEXT.
 
-	JLabel labelCityInfo;
-	JLabel labelCInfectadas;
-	JLabel labelCInfectadasRonda;
-	JLabel NEDerrota;
-	JLabel NBDerrota;
+    /**
+     * The Label city info.
+     */
+    JLabel labelCityInfo;
+    /**
+     * The Label c infectadas.
+     */
+    JLabel labelCInfectadas;
+    /**
+     * The Label c infectadas ronda.
+     */
+    JLabel labelCInfectadasRonda;
+    /**
+     * The Ne derrota.
+     */
+    JLabel NEDerrota;
+    /**
+     * The Nb derrota.
+     */
+    JLabel NBDerrota;
 
-	String nombreusuario; // jugador
+    /**
+     * The Nombreusuario.
+     */
+    String nombreusuario; // jugador
 
-	ArrayList<JButton> BotonesCiudad = new ArrayList<JButton>();
-	ArrayList<JLabel> LabelsCiudades = new ArrayList<JLabel>();
-	Enfermedades virus = new Enfermedades();
-	public JTextField textoRonda;
-	int ronda = 0;
-	public static MenusDeJuego instance;
-	// SE CREA UN OBJETO ES UN MANAGER DE LAYOUTS, EN ESTE CASO CARDLAYOUT
+    /**
+     * The Botones ciudad.
+     */
+    ArrayList<JButton> BotonesCiudad = new ArrayList<JButton>();
+    /**
+     * The Labels ciudades.
+     */
+    ArrayList<JLabel> LabelsCiudades = new ArrayList<JLabel>();
+    /**
+     * The Virus.
+     */
+    Enfermedades virus = new Enfermedades();
+    /**
+     * The Texto ronda.
+     */
+    public JTextField textoRonda;
+    /**
+     * The Ronda.
+     */
+    int ronda = 0;
+    /**
+     * The constant instance.
+     */
+    public static MenusDeJuego instance;
+    /**
+     * The Cl.
+     */
+// SE CREA UN OBJETO ES UN MANAGER DE LAYOUTS, EN ESTE CASO CARDLAYOUT
 	CardLayout cl = new CardLayout();
 
 	// PARA LAS VACUNAS
 
-	protected int acciones = 4;
+    /**
+     * The Acciones.
+     */
+    protected int acciones = 4;
 
-	protected int lvlVacunaRoja = 0;
-	protected int lvlVacunaAmarilla = 0;
-	protected int lvlVacunaAzul = 0;
-	protected int lvlVacunaVerde = 0;
+    /**
+     * The Lvl vacuna roja.
+     */
+    protected int lvlVacunaRoja = 0;
+    /**
+     * The Lvl vacuna amarilla.
+     */
+    protected int lvlVacunaAmarilla = 0;
+    /**
+     * The Lvl vacuna azul.
+     */
+    protected int lvlVacunaAzul = 0;
+    /**
+     * The Lvl vacuna verde.
+     */
+    protected int lvlVacunaVerde = 0;
 
-	int puntos = 0;
+    /**
+     * The Puntos.
+     */
+    int puntos = 0;
 
-	public MenusDeJuego() throws IOException, FontFormatException {
+    /**
+     * Instantiates a new Menus de juego.
+     *
+     * @throws IOException         the io exception
+     * @throws FontFormatException the font format exception
+     */
+    public MenusDeJuego() throws IOException, FontFormatException {
 
 		// SE ESTABLECE EL TIPO DE LAYOUT EN EL PANEL DE CONTENIDO
 		panelCont.setLayout(cl);
@@ -119,10 +313,13 @@ public class MenusDeJuego {
 		buttonConfiguracion = crearBoton(100, 500, 387, 73, "Configuracion");
 		fondoMenu.add(buttonConfiguracion);// Se añade el botón al label FondoMenu
 
-		buttonInformacion = crearBoton(100, 600, 387, 73, "Informacion");
+		buttonRanking = crearBoton(100,600,387,73,"Ranking");
+		fondoMenu.add(buttonRanking);// Se añade el botón al label FondoMenu
+
+		buttonInformacion = crearBoton(100, 700, 387, 73, "Informacion");
 		fondoMenu.add(buttonInformacion);// Se añade el botón al label FondoMenu
 
-		buttonSalir = crearBoton(100, 700, 387, 73, "Salir");
+		buttonSalir = crearBoton(100, 800, 387, 73, "Salir");
 		fondoMenu.add(buttonSalir);// Se añade el botón al label FondoMenu
 
 		panelMenu.add(fondoMenu);
@@ -150,6 +347,13 @@ public class MenusDeJuego {
 		fondoRegistrarUsuario.add(buttonGuardarNombreUsuario);// Se añade el botón al label FondoMenu
 		panelRegistarUsuario.add(fondoRegistrarUsuario); // Lo añadimos al jpanel
 
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		// ELEMENTOS RANKING
+		JLabel fondoRanking = new JLabel(new ImageIcon(Objects.requireNonNull(getClass().getResource("assets/Ranking.png"))));
+		JButton buttonvolverMenuR = crearBoton(100,100,387,73,"Volver");
+		fondoRanking.add(buttonvolverMenuR);
+		panelRanking.add(fondoRanking);
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		// ELEMENTOS MENÚ MAPA JUGABLE
@@ -459,6 +663,7 @@ public class MenusDeJuego {
 		panelCont.add(panelMenuPausa, "MenuPausa");
 		panelCont.add(panelConfiguracion, "Configuracion");
 		panelCont.add(panelRegistarUsuario, "RegistrarUsuario");
+		panelCont.add(panelRanking,"Ranking");
 
 		// CARD LAYOUT EMPIEZA POR MOSTRAR EL PANEL 1 - MENU PRINCIPAL
 
@@ -567,7 +772,6 @@ public class MenusDeJuego {
 			public void actionPerformed(ActionEvent arg0) {
 
 				cl.show(panelCont, "RegistrarUsuario");
-
 			}
 		});
 
@@ -584,6 +788,13 @@ public class MenusDeJuego {
 					Usuario nombreusuario = new Usuario(nombreUsuario);
 
 					Ranking ranking = new Ranking(nombreusuario.nombre, 0);
+
+					ronda = 0;
+					puntos = 0;
+					lvlVacunaRoja = 0;
+					lvlVacunaAmarilla = 0;
+					lvlVacunaAzul = 0;
+					lvlVacunaVerde = 0;
 
 					cl.show(panelCont, "MapaJugable");
 
@@ -666,6 +877,20 @@ public class MenusDeJuego {
 			public void mouseExited(MouseEvent evt) { // Vuelve al color original una vez el raton se
 				// quita del texto
 				buttonInformacion.setForeground(Color.WHITE);
+			}
+		});
+
+		buttonRanking.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				cl.show(panelCont, "Ranking");
+			}
+		});
+
+		buttonvolverMenuR.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				cl.show(panelCont, "Menu");
 			}
 		});
 
@@ -830,7 +1055,7 @@ public class MenusDeJuego {
 		buttonVolverR.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				cl.show(panelCont, "Info");
+				cl.show(panelCont, "Menu");
 			}
 		});
 
@@ -843,6 +1068,18 @@ public class MenusDeJuego {
 			public void mouseExited(MouseEvent evt) { // Vuelve al color original una vez el raton se
 				// quita del texto
 				buttonVolverR.setForeground(Color.WHITE);
+			}
+		});
+
+		buttonRanking.addMouseListener(new MouseAdapter() { // Cambia el color de las letras en el
+			// momento que el raton pasa encima
+			public void mouseEntered(MouseEvent evt) {
+				buttonRanking.setForeground(Color.decode("#60B13A"));
+			}
+
+			public void mouseExited(MouseEvent evt) { // Vuelve al color original una vez el raton se
+				// quita del texto
+				buttonRanking.setForeground(Color.WHITE);
 			}
 		});
 
@@ -893,6 +1130,12 @@ public class MenusDeJuego {
 				Ranking ranking = new Ranking(nombreusuario, puntos);
 
 				ranking.insertWithStatement2();
+
+				GuardarPartida guardar = new GuardarPartida(nombreusuario,puntos,ronda);
+
+				guardar.insertWithStatement();
+
+
 				// TODO Auto-generated catch block
 
 			}
@@ -979,7 +1222,19 @@ public class MenusDeJuego {
 
 	}
 
-	// Le pasamos los parametros necesarios para crear un boton
+    /**
+     * Crear boton j button.
+     *
+     * @param x      the x
+     * @param y      the y
+     * @param width  the width
+     * @param height the height
+     * @param text   the text
+     * @return the j button
+     * @throws IOException         the io exception
+     * @throws FontFormatException the font format exception
+     */
+// Le pasamos los parametros necesarios para crear un boton
 	public JButton crearBoton(int x, int y, int width, int height, String text)
 			throws IOException, FontFormatException {
 
@@ -1000,7 +1255,19 @@ public class MenusDeJuego {
 
 	}
 
-	public JLabel crearLabel(int x, int y, int width, int height, String text) throws IOException, FontFormatException {
+    /**
+     * Crear label j label.
+     *
+     * @param x      the x
+     * @param y      the y
+     * @param width  the width
+     * @param height the height
+     * @param text   the text
+     * @return the j label
+     * @throws IOException         the io exception
+     * @throws FontFormatException the font format exception
+     */
+    public JLabel crearLabel(int x, int y, int width, int height, String text) throws IOException, FontFormatException {
 
 		JLabel label = new JLabel(text); // Texto
 		label.setFont(

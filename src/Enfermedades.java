@@ -4,23 +4,52 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
+/**
+ * The type Enfermedades.
+ */
 public class Enfermedades {
 
 	// Atributos
 
-	protected int alfa; // Enfermedad roja
-	protected int beta; // Enfermedad azul
-	protected int delta; // Enfermedad amarilla
-	protected int gamma; // Enfermedad verde
-	protected boolean infected; // Comprobaar si est� enfermo
+    /**
+     * The Alfa.
+     */
+    protected int alfa; // Enfermedad roja
+    /**
+     * The Beta.
+     */
+    protected int beta; // Enfermedad azul
+    /**
+     * The Delta.
+     */
+    protected int delta; // Enfermedad amarilla
+    /**
+     * The Gamma.
+     */
+    protected int gamma; // Enfermedad verde
+    /**
+     * The Infected.
+     */
+    protected boolean infected; // Comprobaar si est� enfermo
 
 	// Constructores
 
-	public Enfermedades() {
+    /**
+     * Instantiates a new Enfermedades.
+     */
+    public Enfermedades() {
 
 	}
 
-	public Enfermedades(int VirusAlfa, int VirusBeta, int VirusGamma, int VirusDelta) {
+    /**
+     * Instantiates a new Enfermedades.
+     *
+     * @param VirusAlfa  the virus alfa
+     * @param VirusBeta  the virus beta
+     * @param VirusGamma the virus gamma
+     * @param VirusDelta the virus delta
+     */
+    public Enfermedades(int VirusAlfa, int VirusBeta, int VirusGamma, int VirusDelta) {
 		this.alfa = VirusAlfa;
 		this.beta = VirusBeta;
 		this.gamma = VirusGamma;
@@ -29,48 +58,103 @@ public class Enfermedades {
 
 	// Getters Y setters
 
-	public void setAlfa(int VirusAlfa) {
+    /**
+     * Sets alfa.
+     *
+     * @param VirusAlfa the virus alfa
+     */
+    public void setAlfa(int VirusAlfa) {
 		alfa = VirusAlfa;
 	}
 
-	public int getAlfa() {
+    /**
+     * Gets alfa.
+     *
+     * @return the alfa
+     */
+    public int getAlfa() {
 		return alfa;
 	}
 
-	public void setBeta(int VirusBeta) {
+    /**
+     * Sets beta.
+     *
+     * @param VirusBeta the virus beta
+     */
+    public void setBeta(int VirusBeta) {
 		beta = VirusBeta;
 	}
 
-	public int getBeta() {
+    /**
+     * Gets beta.
+     *
+     * @return the beta
+     */
+    public int getBeta() {
 		return beta;
 	}
 
-	public void setGamma(int VirusGamma) {
+    /**
+     * Sets gamma.
+     *
+     * @param VirusGamma the virus gamma
+     */
+    public void setGamma(int VirusGamma) {
 		gamma = VirusGamma;
 	}
 
-	public int getGamma() {
+    /**
+     * Gets gamma.
+     *
+     * @return the gamma
+     */
+    public int getGamma() {
 		return gamma;
 	}
 
-	public void setDelta(int VirusDelta) {
+    /**
+     * Sets delta.
+     *
+     * @param VirusDelta the virus delta
+     */
+    public void setDelta(int VirusDelta) {
 		delta = VirusDelta;
 	}
 
-	public int getDelta() {
+    /**
+     * Gets delta.
+     *
+     * @return the delta
+     */
+    public int getDelta() {
 		return delta;
 	}
 
-	public void setInfected(boolean infected) {
+    /**
+     * Sets infected.
+     *
+     * @param infected the infected
+     */
+    public void setInfected(boolean infected) {
 		this.infected = infected;
 	}
 
-	public boolean getInfected() {
+    /**
+     * Gets infected.
+     *
+     * @return the infected
+     */
+    public boolean getInfected() {
 		return this.infected;
 
 	}
 
-	/* Metodo para las ciudades que se infectaran al inicio */
+    /**
+     * Aleatorio ciudades inicio string.
+     *
+     * @return the string
+     */
+    /* Metodo para las ciudades que se infectaran al inicio */
 	public String aleatorioCiudadesInicio() {
 
 		Enfermedades virus = new Enfermedades();
@@ -138,7 +222,10 @@ public class Enfermedades {
 
 	/* Metodo para las ciudades que se infectaran por ronda */
 
-	public void aleatorioCiudadesContinuar() {
+    /**
+     * Aleatorio ciudades continuar.
+     */
+    public void aleatorioCiudadesContinuar() {
 
 		CargarXML virusinicio = new CargarXML();
 
