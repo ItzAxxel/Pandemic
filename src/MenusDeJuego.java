@@ -10,6 +10,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Random;
@@ -72,6 +74,7 @@ public class MenusDeJuego {
      * The Historial.
      */
     JTextArea historial = new JTextArea();
+	JTextArea moviminetos = new JTextArea();
 
 	// LOS JBUTTONS DEL JUEGO
 
@@ -351,9 +354,15 @@ public class MenusDeJuego {
 
 		// ELEMENTOS RANKING
 		JLabel fondoRanking = new JLabel(new ImageIcon(Objects.requireNonNull(getClass().getResource("assets/Ranking.png"))));
-		JButton buttonvolverMenuR = crearBoton(100,100,387,73,"Volver");
+		JButton buttonvolverMenuR = crearBoton(755,800,387,73,"Volver");
+
+		Ranking txt = new Ranking();
+
+
 		fondoRanking.add(buttonvolverMenuR);
 		panelRanking.add(fondoRanking);
+
+
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		// ELEMENTOS MENÚ MAPA JUGABLE
@@ -493,13 +502,12 @@ public class MenusDeJuego {
 		/////////////////////////////////////////////////////////////////////
 
 		// SISTEMA DE HISTORIAL
-		historial.setBounds(428, 817, 700, 246);
+		historial.setBounds(552, 817, 700, 246);
 		historial.setEditable(false);
-		historial.setFont(
-				Font.createFont(Font.TRUETYPE_FONT, new File("src/assets/font/PostNoBillsColombo-ExtraBold.ttf"))); // Añadimos
+		historial.setFont(Font.createFont(Font.TRUETYPE_FONT, new File("src/assets/font/PostNoBillsColombo-ExtraBold.ttf"))); // Añadimos
 		Border border = BorderFactory.createLineBorder(Color.decode("#60B13A"), 5); // borde // fuente
 																					// personalizada
-		historial.setFont(historial.getFont().deriveFont(Font.PLAIN, 18)); // Ponemos el tamañlo de la fuente
+		historial.setFont(historial.getFont().deriveFont(Font.PLAIN, 25)); // Ponemos el tamañlo de la fuente
 		historial.setBorder(border);
 		historial.setBackground(Color.decode("#3F3E3E"));
 		historial.setForeground(Color.white);
@@ -539,9 +547,6 @@ public class MenusDeJuego {
 
 		panelMenuPausa.add(fondoMenuPausa);
 
-		JTextField cajaDeTexto = new JTextField();
-		cajaDeTexto.setText("CoDejaVu");
-		cajaDeTexto.setBounds(90, 60, 90, 23);
 
 		// ELEMENTOS MENU CONFIGURACION CON MODIFICADOR DE XML
 
@@ -679,12 +684,18 @@ public class MenusDeJuego {
 					acciones--;
 					System.out.println("AccionesJugador: " + acciones);
 					System.out.println("NivelVacunaRojo: " + lvlVacunaRoja);
+					historial.setText("El nivel de la vacuna roja es: " + lvlVacunaRoja);
+					historial.setText(" ");
+					historial.setText("Te quedan: " + acciones + " acciones");
 					if (lvlVacunaRoja == 12) {
 						puntos += 5;
-
+						JOptionPane.showMessageDialog(historial, "¡Has alcanzado el nivel máximo de esta vacuna!");
+						buttonVacunaRoja.setEnabled(false);
 					}
 				} else {
 					System.out.println("No tienes más acciones.");
+					historial.setText("No tienes más acciones.");
+
 					if (acciones == 0) {
 						MenusDeJuego.instance.textoRonda.setText("RONDA: " + ++MenusDeJuego.instance.ronda);
 					}
@@ -704,9 +715,14 @@ public class MenusDeJuego {
 					acciones--;
 					System.out.println("AccionesJugador: " + acciones);
 					System.out.println("NivelVacunaAmarilla: " + lvlVacunaAmarilla);
+					historial.setText("El nivel de la vacuna amarilla es: " + lvlVacunaAmarilla);
+					historial.setText(" ");
+					historial.setText("Te quedan: " + acciones + " acciones");
+
 					if (lvlVacunaAmarilla == 12) {
 						puntos += 5;
-
+						JOptionPane.showMessageDialog(historial, "¡Has alcanzado el nivel máximo de esta vacuna!");
+						buttonVacunaAmarilla.setEnabled(false);
 					}
 				} else {
 					System.out.println("No tienes más acciones.");
@@ -729,9 +745,13 @@ public class MenusDeJuego {
 					acciones--;
 					System.out.println("AccionesJugador: " + acciones);
 					System.out.println("NivelVacunaAzul: " + lvlVacunaAzul);
+					historial.setText("El nivel de las vacunas azules es: " + lvlVacunaAzul);
+					historial.setText(" ");
+					historial.setText("Te quedan: " + acciones + " acciones");
 					if (lvlVacunaAzul == 12) {
 						puntos += 5;
-
+						JOptionPane.showMessageDialog(historial, "¡Has alcanzado el nivel máximo de esta vacuna!");
+						buttonVacunaAzul.setEnabled(false);
 					}
 				} else {
 					System.out.println("No tienes más acciones.");
@@ -747,14 +767,18 @@ public class MenusDeJuego {
 		buttonVacunaVerde.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				if (acciones > 0) {
+				if (acciones >= 0) {
 					lvlVacunaVerde++;
 					acciones--;
 					System.out.println("AccionesJugador: " + acciones);
 					System.out.println("NivelVacunaVerde: " + lvlVacunaVerde);
+					historial.setText("El nivel de la vacuna verde es: " + lvlVacunaVerde);
+					historial.setText(" ");
+					historial.setText("Te quedan: " + acciones + " acciones");
 					if (lvlVacunaVerde == 12) {
 						puntos += 5;
-
+						JOptionPane.showMessageDialog(historial, "¡Has alcanzado el nivel máximo de esta vacuna!");
+						buttonVacunaVerde.setEnabled(false);
 					}
 				} else {
 					System.out.println("No tienes más acciones.");
@@ -772,6 +796,9 @@ public class MenusDeJuego {
 			public void actionPerformed(ActionEvent arg0) {
 
 				cl.show(panelCont, "RegistrarUsuario");
+
+
+
 			}
 		});
 
@@ -884,6 +911,8 @@ public class MenusDeJuego {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				cl.show(panelCont, "Ranking");
+				Ranking ranking = new Ranking();
+				ranking.selectWithStatement(ranking.makeConnection());
 			}
 		});
 
@@ -951,7 +980,7 @@ public class MenusDeJuego {
 		buttonCiudad.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				cl.show(panelCont, "MenuPausa");
+
 			}
 		});
 

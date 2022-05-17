@@ -1,6 +1,10 @@
+import javax.swing.*;
 import java.awt.FontFormatException;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.sql.*;
+import java.util.Objects;
 import java.util.Scanner;
 
 /**
@@ -28,6 +32,10 @@ public class Ranking {
 		nombre = nombreUsuario;
 		puntos = Puntos;
 		connection = makeConnection();
+
+	}
+
+	public Ranking(){
 
 	}
 
@@ -123,25 +131,34 @@ public class Ranking {
 
 	}
 
-	/*public void insertWithStatement3() {
+	public static void selectWithStatement(Connection con) {
 
 
+		String sql = "SELECT nombre, puntostotales FROM RANKING ORDER BY puntostotales DESC";
 
-		System.out.println(nombreusuario);
 
-		String sql = "UPDATE RANKING SET puntosTotales = '" + puntosusuario.puntos + "'WHERE nombre = '" + nombreusuario.nombre
-				+ "'";
+		Statement st = null;
 
 		try {
-			Statement statement = (Statement) connection.createStatement();
-			statement.execute(sql);
-			statement.close();
+			st = con.createStatement();
+
+			ResultSet rs = st.executeQuery(sql);
+
+			while (rs.next())
+			{
+				String nombre = rs.getString("nombre");
+				int puntostotales = rs.getInt("puntostotales");
+				System.out.println(" Nombre:" + nombre + " Puntuacion:" + puntostotales);
+
+			}
+
+			st.close();
 
 		} catch (SQLException e) {
-			System.out.println("The Insert had problems!! " + e);
+			System.out.println("The SELECT had problems!! " + e);
 
 		}
+	}
 
-	}*/
 
 }
