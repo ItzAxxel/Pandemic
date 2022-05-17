@@ -123,7 +123,7 @@ public class Ranking {
 
 	}
 
-	public void insertWithStatement3() {
+	/*public void insertWithStatement3() {
 
 
 
@@ -142,6 +142,6 @@ public class Ranking {
 
 		}
 
-	}
+	}*/
 
 }
