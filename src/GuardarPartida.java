@@ -4,28 +4,28 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
- * The type Guardar partida.
+ * la clase para Guardar partida.
  */
 public class GuardarPartida {
 	private static final String USER = "PND_HORRIBLES20";
 	private static final String PWD = "JAXS123";
 	private static final String URL = "jdbc:oracle:thin:@192.168.3.26:1521:xe";
 	private static String nombre;
-	protected static int puntos;
-	protected static int rondas;
-    /**
-     * The Connection.
-     */
-    static Connection connection = null;
 
-    /**
-     * Instantiates a new Guardar partida.
-     *
-     * @param nombreUsuario the nombre usuario
-     * @param Puntos        the puntos
-     * @param Rondas        the rondas
-     */
-    public GuardarPartida(String nombreUsuario, int Puntos, int Rondas) {
+	protected static int puntos;
+
+	protected static int rondas;
+
+	static Connection connection = null;
+
+	/**
+	 * Se inicia el constructor Guardar partida.
+	 *
+	 * @param nombreUsuario el nombre usuario
+	 * @param Puntos        los puntos
+	 * @param Rondas        las rondas
+	 */
+	public GuardarPartida(String nombreUsuario, int Puntos, int Rondas) {
 		nombre = nombreUsuario;
 		puntos = Puntos;
 		rondas = Rondas;
@@ -41,6 +41,7 @@ public class GuardarPartida {
 		GuardarPartida.puntos = puntos;
 	}
 
+
 	public static int getRondas() {
 		return rondas;
 	}
@@ -49,16 +50,11 @@ public class GuardarPartida {
 		GuardarPartida.rondas = rondas;
 	}
 
+
 	public GuardarPartida() {
 
 	}
-
-    /**
-     * Make connection connection.
-     *
-     * @return the connection
-     */
-    public static Connection makeConnection() {
+	public static Connection makeConnection() {
 
 		System.out.println("Connecting database...");
 
@@ -80,12 +76,7 @@ public class GuardarPartida {
 		return con;
 	}
 
-    /**
-     * Close connection.
-     *
-     * @param con the con
-     */
-    public static void closeConnection(Connection con) {
+	public static void closeConnection(Connection con) {
 		// cierra la conexi�n
 		try {
 			con.close();
@@ -96,10 +87,7 @@ public class GuardarPartida {
 		}
 	}
 
-    /**
-     * Insert with statement.
-     */
-    public void insertWithStatement() {
+	public void insertWithStatement() {
 
 		Usuario nombreusuario = new Usuario(nombre);
 

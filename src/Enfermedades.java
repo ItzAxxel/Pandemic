@@ -5,51 +5,37 @@ import java.io.IOException;
 import java.util.*;
 
 /**
- * The type Enfermedades.
+ * La clase Enfermedades sirve para gestionar las enfermedades
  */
 public class Enfermedades {
 
 	// Atributos
 
-    /**
-     * The Alfa.
-     */
-    protected int alfa; // Enfermedad roja
-    /**
-     * The Beta.
-     */
-    protected int beta; // Enfermedad azul
-    /**
-     * The Delta.
-     */
-    protected int delta; // Enfermedad amarilla
-    /**
-     * The Gamma.
-     */
-    protected int gamma; // Enfermedad verde
-    /**
-     * The Infected.
-     */
-    protected boolean infected; // Comprobaar si est� enfermo
+	protected int alfa; // Enfermedad roja
+
+	protected int beta; // Enfermedad azul
+
+	protected int delta; // Enfermedad amarilla
+
+	protected int gamma; // Enfermedad verde
+
+	protected boolean infected; // Comprobaar si est� enfermo
 
 	// Constructores
 
-    /**
-     * Instantiates a new Enfermedades.
-     */
-    public Enfermedades() {
+	public Enfermedades() {
 
 	}
 
-    /**
-     * Instantiates a new Enfermedades.
-     *
-     * @param VirusAlfa  the virus alfa
-     * @param VirusBeta  the virus beta
-     * @param VirusGamma the virus gamma
-     * @param VirusDelta the virus delta
-     */
-    public Enfermedades(int VirusAlfa, int VirusBeta, int VirusGamma, int VirusDelta) {
+	/**
+	 * Iniciamos el constructor.
+	 *
+	 * @param VirusAlfa  el virus alfa
+	 * @param VirusBeta  el virus beta
+	 * @param VirusGamma el virus gamma
+	 * @param VirusDelta el virus delta
+	 */
+	public Enfermedades(int VirusAlfa, int VirusBeta, int VirusGamma, int VirusDelta) {
 		this.alfa = VirusAlfa;
 		this.beta = VirusBeta;
 		this.gamma = VirusGamma;
@@ -58,103 +44,55 @@ public class Enfermedades {
 
 	// Getters Y setters
 
-    /**
-     * Sets alfa.
-     *
-     * @param VirusAlfa the virus alfa
-     */
-    public void setAlfa(int VirusAlfa) {
+
+	public void setAlfa(int VirusAlfa) {
 		alfa = VirusAlfa;
 	}
 
-    /**
-     * Gets alfa.
-     *
-     * @return the alfa
-     */
-    public int getAlfa() {
+
+	public int getAlfa() {
 		return alfa;
 	}
 
-    /**
-     * Sets beta.
-     *
-     * @param VirusBeta the virus beta
-     */
-    public void setBeta(int VirusBeta) {
+
+	public void setBeta(int VirusBeta) {
 		beta = VirusBeta;
 	}
 
-    /**
-     * Gets beta.
-     *
-     * @return the beta
-     */
-    public int getBeta() {
+
+	public int getBeta() {
 		return beta;
 	}
 
-    /**
-     * Sets gamma.
-     *
-     * @param VirusGamma the virus gamma
-     */
-    public void setGamma(int VirusGamma) {
+
+	public void setGamma(int VirusGamma) {
 		gamma = VirusGamma;
 	}
 
-    /**
-     * Gets gamma.
-     *
-     * @return the gamma
-     */
-    public int getGamma() {
+
+	public int getGamma() {
 		return gamma;
 	}
 
-    /**
-     * Sets delta.
-     *
-     * @param VirusDelta the virus delta
-     */
-    public void setDelta(int VirusDelta) {
+	public void setDelta(int VirusDelta) {
 		delta = VirusDelta;
 	}
 
-    /**
-     * Gets delta.
-     *
-     * @return the delta
-     */
-    public int getDelta() {
+	public int getDelta() {
 		return delta;
 	}
 
-    /**
-     * Sets infected.
-     *
-     * @param infected the infected
-     */
-    public void setInfected(boolean infected) {
+	public void setInfected(boolean infected) {
 		this.infected = infected;
 	}
 
-    /**
-     * Gets infected.
-     *
-     * @return the infected
-     */
-    public boolean getInfected() {
+	public boolean getInfected() {
 		return this.infected;
 
 	}
 
-    /**
-     * Aleatorio ciudades inicio string.
-     *
-     * @return the string
-     */
-    /* Metodo para las ciudades que se infectaran al inicio */
+
+	/* Metodo para las ciudades que se infectaran al inicio */
 	public String aleatorioCiudadesInicio() {
 
 		Enfermedades virus = new Enfermedades();
@@ -222,10 +160,7 @@ public class Enfermedades {
 
 	/* Metodo para las ciudades que se infectaran por ronda */
 
-    /**
-     * Aleatorio ciudades continuar.
-     */
-    public void aleatorioCiudadesContinuar() {
+	public void aleatorioCiudadesContinuar() {
 
 		CargarXML virusinicio = new CargarXML();
 

@@ -20,21 +20,21 @@ import java.util.EventObject;
 import java.util.Scanner;
 
 /**
- * The type Cargar xml.
+ * La clase Cargar XML sirve para cargar los datos del archivo XML
  */
 public class CargarXML {
 
-    /**
-     * Editar.
-     *
-     * @param texto                         the texto
-     * @param hijo                          the hijo
-     * @param numCiudadesInfectadasInicio   the num ciudades infectadas inicio
-     * @param numCuidadesInfectadasRonda    the num cuidades infectadas ronda
-     * @param numEnfermedadesActivasDerrota the num enfermedades activas derrota
-     * @param numBrotesDerrota              the num brotes derrota
-     */
-    public static void editar(Document texto, Node hijo, String numCiudadesInfectadasInicio,
+	/**
+	 * Editar.
+	 *
+	 * @param texto                         El texto del xml
+	 * @param hijo                          El hijo
+	 * @param numCiudadesInfectadasInicio  	El número de ciudades que se infectan en un inicio
+	 * @param numCuidadesInfectadasRonda    El número de ciudades que se infectarán por ronda
+	 * @param numEnfermedadesActivasDerrota El número de enfermedades activas para la derrota
+	 * @param numBrotesDerrota              El número de brotes para la derrota
+	 */
+	public static void editar(Document texto, Node hijo, String numCiudadesInfectadasInicio,
 			String numCuidadesInfectadasRonda, String numEnfermedadesActivasDerrota, String numBrotesDerrota) {
 
 		try {
@@ -71,12 +71,12 @@ public class CargarXML {
 
 	}
 
-    /**
-     * Obtener datos xml int [ ].
-     *
-     * @return the int [ ]
-     */
-    public int[] ObtenerDatosXML() {
+	/**
+	 * Obtener datos xml int [ ].
+	 *
+	 * @return devuelve el array de int [ ]
+	 */
+	public int[] ObtenerDatosXML() {
 		int[] Datos = new int[4];
 
 		Scanner tec = new Scanner(System.in);
@@ -134,15 +134,15 @@ public class CargarXML {
 	}
 
 
-    /**
-     * Pre cargar datos xml.
-     *
-     * @param D1 the d 1
-     * @param D2 the d 2
-     * @param D3 the d 3
-     * @param D4 the d 4
-     */
-    public void preCargarDatosXML(String D1, String D2, String D3, String D4) {
+	/**
+	 * Pre cargar datos xml.
+	 *
+	 * @param D1 El primer dato
+	 * @param D2 El segundo dato
+	 * @param D3 El tercer dato
+	 * @param D4 El cuarto dato
+	 */
+	public void preCargarDatosXML(String D1, String D2, String D3, String D4) {
 
 		String numCiudadesInfectadasInicio = null;
 

@@ -8,7 +8,7 @@ import java.util.Objects;
 import java.util.Scanner;
 
 /**
- * The type Ranking.
+ * La clase ranking sirve para hacer ranking
  */
 public class Ranking {
 
@@ -17,34 +17,23 @@ public class Ranking {
 	private static final String URL = "jdbc:oracle:thin:@192.168.3.26:1521:xe";
 	private static String nombre;
 	private static int puntos;
-    /**
-     * The Connection.
-     */
-    static Connection connection = null;
 
-    /**
-     * Instantiates a new Ranking.
-     *
-     * @param nombreUsuario the nombre usuario
-     * @param Puntos        the puntos
-     */
-    public Ranking(String nombreUsuario, int Puntos) {
+	static Connection connection = null;
+
+
+	public Ranking(String nombreUsuario, int Puntos) {
 		nombre = nombreUsuario;
 		puntos = Puntos;
 		connection = makeConnection();
 
 	}
 
+
 	public Ranking(){
 
 	}
 
-    /**
-     * Make connection connection.
-     *
-     * @return the connection
-     */
-    public static Connection makeConnection() {
+	public static Connection makeConnection() {
 
 		System.out.println("Connecting database...");
 
@@ -66,12 +55,7 @@ public class Ranking {
 		return con;
 	}
 
-    /**
-     * Close connection.
-     *
-     * @param con the con
-     */
-    public static void closeConnection(Connection con) {
+	public static void closeConnection(Connection con) {
 		// cierra la conexi�n
 		try {
 			con.close();
@@ -82,10 +66,10 @@ public class Ranking {
 		}
 	}
 
-    /**
-     * Insert with statement.
-     */
-    public void insertWithStatement() {
+	/**
+	 * El insert para poner el usuario dentro del ranking
+	 */
+	public void insertWithStatement() {
 
 		Usuario nombreusuario = new Usuario(nombre);
 
@@ -105,10 +89,10 @@ public class Ranking {
 		}
 	}
 
-    /**
-     * Insert with statement 2.
-     */
-    public void insertWithStatement2() {
+	/**
+	 * Insert para hacer un update en la parte de ranking
+	 */
+	public void insertWithStatement2() {
 
 		Usuario nombreusuario = new Usuario(nombre);
 		
@@ -131,6 +115,11 @@ public class Ranking {
 
 	}
 
+	/**
+	 * Hacemos el select del ranking para mostrarlo.
+	 *
+	 * @param con devuelve la conexión
+	 */
 	public static void selectWithStatement(Connection con) {
 
 

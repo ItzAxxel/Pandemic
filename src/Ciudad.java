@@ -208,73 +208,46 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * The type Ciudad.
+ * La clase de ciudad gestiona lo relevante a los virus
  */
 public class Ciudad {
 
-    /**
-     * The Ran.
-     */
-    Random ran = new Random();
-
-    /**
-     * The Nombre ciudad.
-     */
 // Atributos
     protected String nombreCiudad;
-    /**
-     * The Virus rojo.
-     */
+
     protected int virusRojo;
-    /**
-     * The Virus amarillo.
-     */
+
     protected int virusAmarillo;
-    /**
-     * The Virus azul.
-     */
+
     protected int virusAzul;
-    /**
-     * The Virus verde.
-     */
+
     protected int virusVerde;
-    /**
-     * The Coordenada x.
-     */
+
     protected int coordenadaX;
-    /**
-     * The Coordenada y.
-     */
+
     protected int coordenadaY;
-    /**
-     * The Ciudades vecinas.
-     */
+
     protected String[] CiudadesVecinas;
-    /**
-     * The Array ciudades.
-     */
+
     public ArrayList<Ciudad> ArrayCiudades = new ArrayList<>();
 
     // CONSTRUCTOR HECHO POR LA MAQUINA. ESTA FORMA SE DEBE A QUE LOS VALORES POR
 
-    /**
-     * Instantiates a new Ciudad.
-     */
     public Ciudad() {
 
     }
 
     /**
-     * Instantiates a new Ciudad.
+     * Iniciamos el constructor
      *
-     * @param nombreCiudad    the nombre ciudad
-     * @param coordX          the coord x
-     * @param coordY          the coord y
-     * @param Rojo            the rojo
-     * @param Amarillo        the amarillo
-     * @param Azul            the azul
-     * @param Verde           the verde
-     * @param CiudadesVecinas the ciudades vecinas
+     * @param nombreCiudad    el nombre ciudad
+     * @param coordX          la coord x
+     * @param coordY          la coord y
+     * @param Rojo            el virus rojo
+     * @param Amarillo        el virus amarillo
+     * @param Azul            el virus azul
+     * @param Verde           el virus verde
+     * @param CiudadesVecinas las ciudades vecinas
      */
     public Ciudad(String nombreCiudad, int coordX, int coordY, int Rojo, int Amarillo, int Azul, int Verde, String[] CiudadesVecinas) {
         this.nombreCiudad = nombreCiudad;
@@ -289,164 +262,77 @@ public class Ciudad {
 
     // �ESTO SON LOS GETTER Y LOS SETTERS DE ESTA CLASEEEEEE!
 
-    /**
-     * Gets nombre ciudad.
-     *
-     * @return the nombre ciudad
-     */
     public String getNombreCiudad() {
         return nombreCiudad;
     }
 
-    /**
-     * Sets nombre ciudad.
-     *
-     * @param nombreCiudad the nombre ciudad
-     */
     public void setNombreCiudad(String nombreCiudad) {
         this.nombreCiudad = nombreCiudad;
     }
 
-    /**
-     * Gets virus rojo.
-     *
-     * @return the virus rojo
-     */
     public int getVirusRojo() {
         return virusRojo;
     }
 
-    /**
-     * Sets virus rojo.
-     *
-     * @param virusRojo the virus rojo
-     */
     public void setVirusRojo(int virusRojo) {
         this.virusRojo = virusRojo;
     }
 
-    /**
-     * Gets virus amarillo.
-     *
-     * @return the virus amarillo
-     */
     public int getVirusAmarillo() {
         return virusAmarillo;
     }
 
-    /**
-     * Sets virus amarillo.
-     *
-     * @param virusAmarillo the virus amarillo
-     */
     public void setVirusAmarillo(int virusAmarillo) {
         this.virusAmarillo = virusAmarillo;
     }
 
-    /**
-     * Gets virus azul.
-     *
-     * @return the virus azul
-     */
     public int getVirusAzul() {
         return virusAzul;
     }
 
-    /**
-     * Sets virus azul.
-     *
-     * @param virusAzul the virus azul
-     */
     public void setVirusAzul(int virusAzul) {
         this.virusAzul = virusAzul;
     }
 
-    /**
-     * Gets virus verde.
-     *
-     * @return the virus verde
-     */
+
     public int getVirusVerde() {
         return virusVerde;
     }
 
-    /**
-     * Sets virus verde.
-     *
-     * @param virusVerde the virus verde
-     */
+
     public void setVirusVerde(int virusVerde) {
         this.virusVerde = virusVerde;
     }
 
-    /**
-     * Gets coordenada x.
-     *
-     * @return the coordenada x
-     */
     public int getCoordenadaX() {
         return coordenadaX;
     }
 
-    /**
-     * Sets coordenada x.
-     *
-     * @param coordenadaX the coordenada x
-     */
+
     public void setCoordenadaX(int coordenadaX) {
         this.coordenadaX = coordenadaX;
     }
 
-    /**
-     * Gets coordenada y.
-     *
-     * @return the coordenada y
-     */
     public int getCoordenadaY() {
         return coordenadaY;
     }
 
-    /**
-     * Sets coordenada y.
-     *
-     * @param coordenadaY the coordenada y
-     */
     public void setCoordenadaY(int coordenadaY) {
         this.coordenadaY = coordenadaY;
     }
 
-    /**
-     * Get ciudades vecinas string [ ].
-     *
-     * @return the string [ ]
-     */
     public String[] getCiudadesVecinas() {
         return CiudadesVecinas;
     }
 
-    /**
-     * Sets ciudades vecinas.
-     *
-     * @param CiudadesVecinas the ciudades vecinas
-     */
     public void setCiudadesVecinas(String[] CiudadesVecinas) {
         CiudadesVecinas = CiudadesVecinas;
     }
 
-    /**
-     * Gets array ciudades.
-     *
-     * @return the array ciudades
-     */
     public ArrayList<Ciudad> getArrayCiudades() {
         return ArrayCiudades;
     }
 
-    /**
-     * Sets array ciudades.
-     *
-     * @param arrayCiudades the array ciudades
-     */
     public void setArrayCiudades(ArrayList<Ciudad> arrayCiudades) {
         ArrayCiudades = arrayCiudades;
     }
@@ -456,15 +342,15 @@ public class Ciudad {
 
 
     /**
-     * Crear boton ciudad j button.
+     * Crea el boton para las ciudades
      *
-     * @param coordenadaX  the coordenada x
-     * @param coordenadaY  the coordenada y
-     * @param width        the width
-     * @param height       the height
-     * @param nombreCiudad the nombre ciudad
-     * @return the j button
-     * @throws IOException the io exception
+     * @param coordenadaX  la coordenada x
+     * @param coordenadaY  la coordenada y
+     * @param width        el ancho
+     * @param height       el alto
+     * @param nombreCiudad el nombre ciudad
+     * @return el botón
+     * @throws IOException la io exception
      */
     public static JButton crearBotonCiudad(int coordenadaX, int coordenadaY, int width, int height, String nombreCiudad)
             throws IOException {

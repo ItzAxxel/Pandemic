@@ -1,12 +1,12 @@
 import javax.swing.*;
 
 /**
- * The type Frame.
+ * La clase frame gestiona el frame
  */
 public class Frame extends JFrame {
 
     /**
-     * Instantiates a new Frame.
+     * Iniciamos el frame del juego
      */
     Frame() {
         setBounds(0, 0, 1920, 1080);//Tamaño Marco
