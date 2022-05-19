@@ -668,24 +668,6 @@ public class MenusDeJuego {
 		// ELEMENTOS PANEL VICTORIA
 
 		JLabel fondoVictoria = new JLabel(new ImageIcon(Objects.requireNonNull(getClass().getResource("assets/Victoria.png"))));
-		try {
-
-			// Se obtiene un Clip de sonido
-			Clip sonido = AudioSystem.getClip();
-
-			// Se carga con un fichero wav
-			sonido.open(AudioSystem.getAudioInputStream(new File("assets/audio.wav")));
-
-			// Comienza la reproducción
-			sonido.start();
-
-			// Se cierra el clip.
-			sonido.close();
-		} catch (Exception e) {
-			System.out.println("" + e);
-		}
-
-
 		panelVictoria.add(fondoVictoria);
 
 		// C O L O R E S PROVICIONALES D E L O S P A N E L E S //
